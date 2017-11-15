@@ -123,13 +123,13 @@ public:
 protected:
 
 };
-///////////////////////////////////////######## * PLAT OBJ * #########/////////////////////////////////////
+///////////////////////////////////////######## * Player * #########/////////////////////////////////////
 
 class Player: public QGraphicsRectItem{
 
 private:
 
-    int XSP;
+
     b2Body*Userbody;
     b2BodyDef bdefff ;
     b2World*world2;
@@ -141,14 +141,18 @@ public:
     ~Player();
 
 public:
+    //Прорисовка кадров
     void advance(int phase);
 
+private :
 
+private slots:
+    //void Generation2();
 protected:
     void keyPressEvent(QKeyEvent *event);
 
    void keyReleaseEvent(QKeyEvent *event);
-  void CreateObjFunc();
+
 
     // QGraphicsItem interface
 
@@ -168,6 +172,8 @@ public:
 
     Walls(b2World*world,QSizeF size,QPointF initPos,qreal angle );
     ~Walls();
+
+    void advance(int phase);
 
 public:
 

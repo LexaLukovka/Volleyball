@@ -23,7 +23,6 @@
 
 #include <Box2D/Box2D.h>
 
-
 #define SCALE 100;
 
 
@@ -78,11 +77,11 @@ private:
 
     Scene * Gscene;
 
-/* сйюгюрекэ яжемш */
+/* О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫ */
 
-    QTimer *ATimer; /*рюилеп дкъ йюдпнб  */
+    QTimer *ATimer; /*О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫  */
 
-    QTimer *GTimer; /*рюилеп дкъ яоюбмю  */
+    QTimer *GTimer; /*О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫  */
 
     QTimer *Rnd;
 
@@ -93,7 +92,7 @@ private:
 protected:
 
 
-    /*петюйрнпхмц днаюбкъел лернд мюфюрхъ лшьх  */
+    /*О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫  */
 };
 
 ///////////////////////////////////////######## * BASE OBJ * #########/////////////////////////////////////
@@ -101,7 +100,7 @@ protected:
 
 
 
-class BaseObj:public QGraphicsEllipseItem {
+class BaseObj:public QGraphicsPixmapItem{
 
 public:
 
@@ -125,7 +124,7 @@ protected:
 };
 ///////////////////////////////////////######## * Player * #########/////////////////////////////////////
 
-class Player: public QGraphicsRectItem{
+class Player: public QGraphicsPixmapItem{
 
 private:
 
@@ -141,7 +140,7 @@ public:
     ~Player();
 
 public:
-    //оПНПХЯНБЙЮ ЙЮДПНБ
+    //О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫
     void advance(int phase);
 
 private :

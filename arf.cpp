@@ -7,7 +7,7 @@ ArF::ArF(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ui->label->setPixmap(QPixmap(":/new/prefix1/Number1"));
+    ui->label->setPixmap(QPixmap(":/images/background.png"));
 ui->label->setScaledContents(true);
 
 

@@ -44,7 +44,7 @@ FORMS    += mainwindow.ui \
     arf.ui
 
 RESOURCES += \
-    resfile.qrc
+    res.qrc
 
 win32: LIBS += -L$$PWD/./ -lBOX2D
 
@@ -53,3 +53,5 @@ DEPENDPATH += $$PWD/.
 
 win32:!win32-g++: PRE_TARGETDEPS += $$PWD/./BOX2D.lib
 else:win32-g++: PRE_TARGETDEPS += $$PWD/./libBOX2D.a
+
+DISTFILES +=

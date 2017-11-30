@@ -7,29 +7,34 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
- showMaximized();
+    showMaximized();
 
-QPixmap Pix1(":/new/prefix1/1");
-ui->label->setPixmap(Pix1);
-ui->label->setScaledContents(true);
-
-
-//QMediaPlayer *player = new QMediaPlayer;
-//player->setMedia(QUrl::fromLocalFile(QDir::toNativeSeparators("E:\\K.mp3")));
-//player->setVolume(50);
-
-//player->play();
+    QPixmap Pix1(":/images/background.PNG");
+    ui->label->setPixmap(Pix1);
+    ui->label->setScaledContents(true);
+    this->statusBar()->setSizeGripEnabled(false);
 
 
 
-   /////////////////////////////////
+
+    //QMediaPlayer *player = new QMediaPlayer;
+    //player->setMedia(QUrl::fromLocalFile(QDir::toNativeSeparators("E:\\K.mp3")));
+    //player->setVolume(50);
+
+    //player->play();
+
+
+
+    /////////////////////////////////
 
     Gform=new GameScene();
     Gform2=new ArF();
     ////////////////////////////////
 
     connect(ui->pushButton,SIGNAL(clicked()),Gform,SLOT(show()));
-            connect(ui->pushButton_2,SIGNAL(clicked()),Gform2,SLOT(show()));
+    connect(ui->pushButton_2,SIGNAL(clicked()),Gform2,SLOT(show()));
+
+
 
 
 

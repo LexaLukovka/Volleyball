@@ -126,17 +126,19 @@ protected:
 
 class Player: public QGraphicsPixmapItem{
 
-private:
+public:
 
 
     b2Body*Userbody;
     b2BodyDef bdefff ;
     b2World*world2;
     QSizeF size2;
+    bool HeigthFlag = false;
+    int PlayerFlag ;
 
 public:
 
-    Player(b2World*world,QSizeF size,QPointF initPos,qreal angle );
+    Player(b2World*world,QSizeF size,QPointF initPos,qreal angle,int PlFlag );
     ~Player();
 
 public:
@@ -154,6 +156,14 @@ protected:
 
 
     // QGraphicsItem interface
+
+
+};
+
+class Player2:public Player{
+public:
+    Player2(b2World*world,QSizeF size,QPointF initPos,qreal angle,int PlFlag );
+
 
 
 };

@@ -55,12 +55,21 @@ GameScene::GameScene(QWidget *parent) :
 
 
 
-    Player *pl = new Player(world,QSizeF(0.75,0.9),QPointF(0,1),0);
+Player *pl = new Player(world,QSizeF(0.75,0.9),QPointF(2,4),0,1);
+
+    Player *pl2 = new Player(world,QSizeF(0.75,0.9),QPointF(6,4),0,2);
 
 
-    Gscene->addItem(pl);
 
-    Gscene->setStickyFocus(true);
+
+
+    Gscene->addItem(pl2);
+
+
+
+     Gscene->addItem(pl);
+
+
 
 
     ATimer = new QTimer(this);
@@ -173,8 +182,9 @@ void BaseObj::advance(int phase)
 
 ///////////////////////////////////////######## * Player * #########/////////////////////////////////////
 
-Player::Player(b2World*world,QSizeF size,QPointF initPos,qreal angle ) : QGraphicsPixmapItem(0)
+Player::Player(b2World*world,QSizeF size,QPointF initPos,qreal angle,int PlFlag ) : QGraphicsPixmapItem(0)
 {
+    PlayerFlag=PlFlag;
     // setBrush(QBrush(Qt::red));
     setPixmap(QPixmap(":/images/images/blobby.png"));
 
@@ -186,9 +196,9 @@ Player::Player(b2World*world,QSizeF size,QPointF initPos,qreal angle ) : QGraphi
     //QGraphicsPixmapItem pix;
 
     //////Comment*
-    setPos(fromB2(2),fromB2(4));
-
-    bdefff.position.Set(2,4);
+    setPos(fromB2(initPos.x()),fromB2(initPos.y()));
+//2 4
+    bdefff.position.Set(initPos.x(),initPos.y());
     bdefff.angle = 3.14*angle/180;
     bdefff.type = b2_kinematicBody;
 
@@ -226,7 +236,7 @@ void Player::advance(int phase)
 
         // setPos(fromB2(7),fromB2(XSP));
         setRotation(fromB2(Userbody->GetAngle()));
-        Userbody->SetAngularDamping(Userbody->GetAngularDamping());
+       Userbody->SetAngularDamping(Userbody->GetAngularDamping());
         Userbody->SetAngularVelocity(Userbody->GetAngularVelocity());
         setPos(fromB2(Userbody->GetPosition().x),fromB2(Userbody->GetPosition().y));
 
@@ -243,22 +253,36 @@ void Player::advance(int phase)
         //////Comment*
         if(pos.y>=4){
             vel.y=0;
-            pos.y=4;
+            HeigthFlag=false;
             Userbody->SetLinearVelocity(vel);
         }
         //////Comment*
         if(pos.y<=2){
             vel.y=2;
+            HeigthFlag = true;
             Userbody->SetLinearVelocity(vel);
         }
         if(pos.x<=0){
-            pos.x=0;
+
             vel.x=0;
+            Userbody->SetLinearVelocity(vel);
         }
         if(pos.x>=7.5){
-            pos.x=7.5;
-            vel.x=0;
+
+           vel.x=0;
+           Userbody->SetLinearVelocity(vel);
         }
+        if(pos.x>=3.2&&PlayerFlag==1){
+
+            vel.x=0;
+            Userbody->SetLinearVelocity(vel);
+        }
+        if(pos.x<=4&&PlayerFlag==2){
+
+            vel.x=0;
+            Userbody->SetLinearVelocity(vel);
+        }
+
     }
 }
 
@@ -266,6 +290,8 @@ void Player::keyPressEvent(QKeyEvent *event)
 {
     b2Vec2 pos = Userbody->GetPosition();
     b2Vec2 vel = Userbody->GetLinearVelocity();
+    if (PlayerFlag==1){
+
     switch (event->key()){
     case Qt::Key_Left:
         if(pos.x>=0)
@@ -273,26 +299,67 @@ void Player::keyPressEvent(QKeyEvent *event)
         break;
     case Qt::Key_Right:
         if(pos.x<=7.5)
-            vel.x=5;
+             if(pos.x<=3.2){
+            vel.x=5;}
         break;
     case Qt::Key_Up:
         //////Comment*
+
+         if(HeigthFlag==false){
+             HeigthFlag=true;
         if(pos.y>2&&(pos.x>=0||pos.x<=7.5)){ vel.y=-6; pos.y=2;}
+                         }
         break;
 
     }
     Userbody->SetLinearVelocity(vel);
+    }
+
+    if (PlayerFlag==2){
+
+    switch (event->key()){
+    case Qt::Key_A:
+        if(pos.x>=0)
+             if(pos.x>=4){
+            vel.x=-5;
+             }
+        break;
+    case Qt::Key_D:
+        if(pos.x<=7.5)
+
+            vel.x=5;
+        break;
+    case Qt::Key_W:
+        //////Comment*
+
+         if(HeigthFlag==false){
+             HeigthFlag=true;
+        if(pos.y>2&&(pos.x>=0||pos.x<=7.5)){ vel.y=-6; pos.y=2;}
+                         }
+        break;
+
+    }
+    Userbody->SetLinearVelocity(vel);
+    }
+
+
+
 }
 
 void Player::keyReleaseEvent(QKeyEvent *event)
 {
     b2Vec2 pos = Userbody->GetPosition();
     b2Vec2 vel = Userbody->GetLinearVelocity();
+
+    if (PlayerFlag==1){
+
+
     switch (event->key()){
     case Qt::Key_Left:
         vel.x=0;
         break;
     case Qt::Key_Right:
+
         vel.x=0;
         break;
     case Qt::Key_Up:
@@ -305,8 +372,38 @@ void Player::keyReleaseEvent(QKeyEvent *event)
         break;
     }
     Userbody->SetLinearVelocity(vel);
-    //CreateObjFunc();
+    }
+
+    if (PlayerFlag==2){
+
+
+    switch (event->key()){
+    case Qt::Key_A:
+        vel.x=0;
+        break;
+    case Qt::Key_D:
+
+        vel.x=0;
+        break;
+    case Qt::Key_W:
+        //////Comment*
+        if(pos.y<4){
+            pos.y=4;
+            vel.y=4;
+        }
+        else vel.y=0;
+        break;
+    }
+    Userbody->SetLinearVelocity(vel);
+    }
+
+
+
 }
+Player2::Player2(b2World*world,QSizeF size,QPointF initPos,qreal angle,int PlFlag ) :Player(world, size, initPos, angle, PlFlag ){
+
+}
+
 
 
 ///////////////////////////////////////######## * Walls* #########/////////////////////////////////////

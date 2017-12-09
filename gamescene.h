@@ -40,6 +40,7 @@ class Scene : public QGraphicsScene {
 public :
     Scene (qreal x,qreal y ,qreal width,qreal height,b2World *world);
 
+
 public slots :
     void advance();
 private:
@@ -78,7 +79,8 @@ public:
 private slots:
     void Generation();
 
-    void MaxB();
+
+
 
 
 private:
@@ -95,6 +97,7 @@ private:
     QTimer *GTimer; /*������ ��� ������  */
 
     QTimer *Rnd;
+
 
     b2World*world;
 
@@ -116,11 +119,14 @@ class BaseObj:public QGraphicsPixmapItem{
 public:
 
     BaseObj(b2World *world,qreal Radius,QPointF initPos);
+   void qSleep(int ms);
+
     ~BaseObj();
 
 private:
     QTimer *DTimer;
     b2Body*body;
+
 
 
 public:

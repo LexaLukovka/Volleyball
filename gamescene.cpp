@@ -7,11 +7,20 @@
 #include <ctime>
 #include <QTime>
 #include <QTimer>
+#include <QMutex>
+#ifdef Q_OS_WIN
+#include <windows.h> // for Sleep
+#endif
 
 
 
 #define  Platdorm_Move_SP 6;
 #define RAD 0.4;
+
+ int GoalFlag = 1;
+
+
+
 b2Body*Userbody;
 b2BodyDef bdefff ;
 b2World*world2;
@@ -32,6 +41,8 @@ qreal toB2(qreal value){
 
     return value/SCALE;
 }
+
+
 
 
 GameScene::GameScene(QWidget *parent) :
@@ -60,7 +71,7 @@ GameScene::GameScene(QWidget *parent) :
     //////Comment*
     /*Left*/   Gscene->addItem(new Walls(world,QSizeF(20, 0),QPointF(0,3),90));
     /*Right*/ Gscene->addItem(new Walls(world,QSizeF(20, 0),QPointF(8,3),90));
-    //    /*Bottom*/  Gscene->addItem(new Walls(world,QSizeF(10,0.1),QPointF(7,7.5),0));
+        /*Bottom*/  Gscene->addItem(new Walls(world,QSizeF(20,0),QPointF(4,5),0));
     /*Top*/   Gscene->addItem(new Walls(world,QSizeF(20,0),QPointF(4,0),0));
     /*Center*/ Gscene->addItem(new Walls(world,QSizeF(4,0.1),QPointF(4,4.75),90));
     //    Gscene->addItem(new Walls(world,QSizeF(4,0.1),QPointF(7,6),90));
@@ -86,12 +97,17 @@ GameScene::GameScene(QWidget *parent) :
 
 
 
-    connect (ui->pushButton,SIGNAL(clicked()),Gscene,SLOT(MaxB()));
+
 
 
     Rnd = new QTimer(this);
-    //connect(Rnd,SIGNAL(timeout()),this,SLOT(Generation()));
-    Rnd->start(1000);
+    connect(Rnd,SIGNAL(timeout()),this,SLOT(Generation()));
+    Rnd->start(5000);
+
+
+
+
+
     setFocus();
     //    focusPolicy();
 
@@ -106,14 +122,26 @@ GameScene::~GameScene()
 
 
 void GameScene::Generation()
-{
+{ QMutex mutex;
+
+   // BaseObj* check = ( new BaseObj(world,0.4,QPointF(2,1)));
+
+    if(GoalFlag==1){
+    Gscene->addItem(new BaseObj(world,0.4,QPointF(2,1)));
+    mutex.lock();
+    }
+    if(GoalFlag==2){
+
+    Gscene->addItem(new BaseObj(world,0.4,QPointF(6,1)));
+    mutex.lock();
+   }
+
+
 
 }
 
-void GameScene::MaxB()
-{
-    showMaximized();
-}
+
+
 
 
 ///////////////////////////////////////######## * BASE OBJ * #########/////////////////////////////////////
@@ -154,6 +182,17 @@ BaseObj::BaseObj(b2World *world,qreal Radius,QPointF initPos):QGraphicsPixmapIte
     if (vel.Length()>7) body->SetLinearVelocity(7/vel.Length() * vel );
 
 }
+void BaseObj::qSleep(int ms)
+{
+    //QTEST_ASSERT(ms > 0);
+
+#ifdef Q_OS_WIN
+    Sleep(uint(ms));
+#else
+    struct timespec ts = { ms / 1000, (ms % 1000) * 1000 * 1000 };
+    nanosleep(&ts, NULL);
+#endif
+}
 
 
 BaseObj::~BaseObj()
@@ -170,15 +209,16 @@ void BaseObj::advance(int phase){
 
     if (phase){
         setPos(fromB2( body->GetPosition().x),fromB2(body->GetPosition().y));
-        if(pos.y>=4.25){
-            setPos(fromB2( body->GetPosition().x),fromB2(4.25));
-           // timer = new QTimer();
-            //    QTimer::connect(this->timer, SIGNAL(timeout()), this, SLOT(deleteball()));
-             //   timer->start(1000); // ? ???????? ??????
+        if (data(0).toBool()&&pos.y>=4.5){
+            qSleep(1000);
+            if(pos.x>=3.2){GoalFlag=1;}
+            else {GoalFlag=2;}
             delete this;
-            //vel.y = -0.25;
 
         }
+
+
+
     }
 }
 
@@ -558,12 +598,12 @@ Walls::~Walls()
 
 void Walls::advance(int phase)
 {
-    //  if(!phase){
+      if(!phase){
 
-    //  foreach (QGraphicsItem*item,collidingItems()) {
-    //    item->setData(0,true);
-    //  }
-    // }
+     foreach (QGraphicsItem*item,collidingItems()) {
+        item->setData(0,true);
+      }
+     }
 
 }
 
@@ -587,6 +627,8 @@ Scene::Scene(qreal x, qreal y, qreal width, qreal height, b2World *world)
 void Scene::advance()
 {
     //srand(time(0));
+
+
     world->Step(1.00f/60.00,8,3);
     QGraphicsScene::advance();
 
@@ -596,7 +638,7 @@ void Scene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     //addItem(new BaseObj(world,0.2,QPointF(toB2(event->scenePos().x()),toB2(event->scenePos().y()))));
     // addItem(new PlatObj(world,QSizeF(6,0.2),QPointF(toB2(event->scenePos().x()),toB2(event->scenePos().y())),0));
-    addItem(new BaseObj(world,0.4,QPointF(toB2(event->scenePos().x()),toB2(event->scenePos().y()))));
+   // addItem(new BaseObj(world,0.4,QPointF(toB2(event->scenePos().x()),toB2(event->scenePos().y()))));
 
 }
 

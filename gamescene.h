@@ -121,12 +121,11 @@ public:
 private:
     QTimer *DTimer;
     b2Body*body;
-public slots:
-    void deleteball();
+
 
 public:
     void advance(int phase);
-    QTimer *timer;
+
     int YSP=2;
     int XSP=0;
 

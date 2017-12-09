@@ -163,9 +163,6 @@ BaseObj::~BaseObj()
     body->GetWorld()->DestroyBody(body);
 
 }
-void BaseObj::deleteball(){
-    delete this;
-}
 
 void BaseObj::advance(int phase){
     b2Vec2 pos = body->GetPosition();
@@ -175,9 +172,9 @@ void BaseObj::advance(int phase){
         setPos(fromB2( body->GetPosition().x),fromB2(body->GetPosition().y));
         if(pos.y>=4.25){
             setPos(fromB2( body->GetPosition().x),fromB2(4.25));
-            timer = new QTimer();
-                QTimer::connect(this->timer, SIGNAL(timeout()), this, SLOT(deleteball()));
-                timer->start(1000); // ? ???????? ??????
+           // timer = new QTimer();
+            //    QTimer::connect(this->timer, SIGNAL(timeout()), this, SLOT(deleteball()));
+             //   timer->start(1000); // ? ???????? ??????
             delete this;
             //vel.y = -0.25;
 

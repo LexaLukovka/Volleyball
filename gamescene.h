@@ -19,6 +19,7 @@
 #include <QImage>
 #include <QString>
 #include <QTimer>
+#include <QTime>
 #include <ctime>
 
 #include <Box2D/Box2D.h>
@@ -29,17 +30,22 @@
 
 namespace Ui {
 class GameScene;
+
 }
+
 
 
 class Scene : public QGraphicsScene {
     Q_OBJECT
 public :
     Scene (qreal x,qreal y ,qreal width,qreal height,b2World *world);
+
 public slots :
     void advance();
 private:
     b2World*world;
+
+
 
 
     // QGraphicsScene interface
@@ -63,21 +69,26 @@ class GameScene : public QWidget
     Q_OBJECT
 
 public:
+
     explicit GameScene(QWidget *parent = 0);
     ~GameScene();
+    void keyPressEvent(QKeyEvent *event);
+    void keyReleaseEvent(QKeyEvent *event);
 
 private slots:
-   void Generation();
+    void Generation();
 
-  void MaxB();
+    void MaxB();
 
 
 private:
     Ui::GameScene *ui;
 
     Scene * Gscene;
+    Scene * Gscene2;
 
-/* ��������� ����� */
+
+    /* ��������� ����� */
 
     QTimer *ATimer; /*������ ��� ������  */
 
@@ -104,20 +115,20 @@ class BaseObj:public QGraphicsPixmapItem{
 
 public:
 
-     BaseObj(b2World *world,qreal Radius,QPointF initPos);
-     ~BaseObj();
+    BaseObj(b2World *world,qreal Radius,QPointF initPos);
+    ~BaseObj();
 
 private:
-     QTimer *DTimer;
-     b2Body*body;
+    QTimer *DTimer;
+    b2Body*body;
+public slots:
+    void deleteball();
 
 public:
-  void advance(int phase);
-
-
-
-  int YSP=2;
-  int XSP=0;
+    void advance(int phase);
+    QTimer *timer;
+    int YSP=2;
+    int XSP=0;
 
 protected:
 
@@ -128,31 +139,20 @@ class Player: public QGraphicsPixmapItem{
 
 public:
 
-
-    b2Body*Userbody;
-    b2BodyDef bdefff ;
-    b2World*world2;
-    QSizeF size2;
-    bool HeigthFlag = false;
-    int PlayerFlag ;
-
-public:
-
     Player(b2World*world,QSizeF size,QPointF initPos,qreal angle,int PlFlag );
     ~Player();
+    void advance(int phase);
 
 public:
+
     //���������� ������
-    void advance(int phase);
+
 
 private :
 
 private slots:
     //void Generation2();
 protected:
-    void keyPressEvent(QKeyEvent *event);
-
-   void keyReleaseEvent(QKeyEvent *event);
 
 
     // QGraphicsItem interface
@@ -160,11 +160,13 @@ protected:
 
 };
 
-class Player2:public Player{
+class Player2:public QGraphicsPixmapItem{
+private:
+
 public:
-    Player2(b2World*world,QSizeF size,QPointF initPos,qreal angle,int PlFlag );
-
-
+    Player2(b2World*world,QSizeF size,QPointF initPos,qreal angle, int PFlag);
+    ~Player2();
+    void advance(int phase);
 
 };
 

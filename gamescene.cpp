@@ -5,11 +5,23 @@
 #include <qkeysequence.h>
 #include <QGraphicsSceneMouseEvent>
 #include <ctime>
+#include <QTime>
+#include <QTimer>
 
 
 
 #define  Platdorm_Move_SP 6;
 #define RAD 0.4;
+b2Body*Userbody;
+b2BodyDef bdefff ;
+b2World*world2;
+QSizeF size2;
+bool HeigthFlag = false;
+bool HeigthFlag2 = false;
+
+int PlayerFlag;
+b2Body*Userbody2;
+b2BodyDef bdefff2;
 
 qreal fromB2(qreal value){
     return value*SCALE;
@@ -34,6 +46,7 @@ GameScene::GameScene(QWidget *parent) :
 
     //  Gscene = new QGraphicsScene(0,0,1400,600,this);
     Gscene = new Scene(0,0,8,6,world);
+
     ui->graphicsView->setScene(Gscene);
 
     // ui->graphicsView->setStyleSheet("background-image: url(:/new/prefix1/Back)center;"
@@ -55,22 +68,17 @@ GameScene::GameScene(QWidget *parent) :
 
 
 
-Player *pl = new Player(world,QSizeF(0.75,0.9),QPointF(2,4),0,1);
+    Player *pl = new Player(world,QSizeF(0.75,0.9),QPointF(2,4),0,1);
 
-    Player *pl2 = new Player(world,QSizeF(0.75,0.9),QPointF(6,4),0,2);
-
-
+    Player2 *pl2 = new Player2(world,QSizeF(0.75,0.9),QPointF(6,4),0,2);
 
 
 
+
+    //    QGraphicsItem::setFlag(QGraphicsItem::ItemIsFocusable);
+
+    Gscene->addItem(pl);
     Gscene->addItem(pl2);
-
-
-
-     Gscene->addItem(pl);
-
-
-
 
     ATimer = new QTimer(this);
     connect(ATimer,SIGNAL(timeout()),Gscene,SLOT(advance()));
@@ -84,6 +92,9 @@ Player *pl = new Player(world,QSizeF(0.75,0.9),QPointF(2,4),0,1);
     Rnd = new QTimer(this);
     //connect(Rnd,SIGNAL(timeout()),this,SLOT(Generation()));
     Rnd->start(1000);
+    setFocus();
+    //    focusPolicy();
+
 
 
 }
@@ -152,29 +163,25 @@ BaseObj::~BaseObj()
     body->GetWorld()->DestroyBody(body);
 
 }
+void BaseObj::deleteball(){
+    delete this;
+}
 
-
-
-void BaseObj::advance(int phase)
-{ b2Vec2 pos = body->GetPosition();
+void BaseObj::advance(int phase){
+    b2Vec2 pos = body->GetPosition();
+    b2Vec2 vel = body->GetLinearVelocity();
 
     if (phase){
-
         setPos(fromB2( body->GetPosition().x),fromB2(body->GetPosition().y));
-        if(pos.y>=5){
-
-            // body->GetWorld()->DestroyBody(body);
-
+        if(pos.y>=4.25){
+            setPos(fromB2( body->GetPosition().x),fromB2(4.25));
+            timer = new QTimer();
+                QTimer::connect(this->timer, SIGNAL(timeout()), this, SLOT(deleteball()));
+                timer->start(1000); // ? ???????? ??????
             delete this;
+            //vel.y = -0.25;
 
         }
-
-        //  if(data(0).toBool()){
-
-        //    delete this;
-
-
-        //}
     }
 }
 
@@ -197,9 +204,9 @@ Player::Player(b2World*world,QSizeF size,QPointF initPos,qreal angle,int PlFlag 
 
     //////Comment*
     setPos(fromB2(initPos.x()),fromB2(initPos.y()));
-//2 4
+    //2 4
     bdefff.position.Set(initPos.x(),initPos.y());
-    bdefff.angle = 3.14*angle/180;
+    bdefff.angle = 3.14*angle/180 ;
     bdefff.type = b2_kinematicBody;
 
 
@@ -208,19 +215,45 @@ Player::Player(b2World*world,QSizeF size,QPointF initPos,qreal angle,int PlFlag 
     // c.m_p.Set(0,13/30.f);
     b2PolygonShape shape;
     shape.SetAsBox(size.width()/2,size.height()/2);
-
     Userbody = world2->CreateBody(&bdefff);
     Userbody->CreateFixture(&shape,5);
-    // c.m_radius=25/30.f;
-    //  c.m_p.Set(0,-20/30.f);
     Userbody->CreateFixture(&c,1.0f);
     Userbody->SetFixedRotation(true);
+}
 
-    setFlag(QGraphicsItem::ItemIsFocusable);
-    setFocus();
+Player2::Player2(b2World*world, QSizeF size, QPointF initPos, qreal angle, int PFlag):QGraphicsPixmapItem(0)
+{
+    PlayerFlag=PFlag;
+    // setBrush(QBrush(Qt::red));
+    setPixmap(QPixmap(":/images/images/blobby.png"));
+
+    size2=size;
+    //   setRect(-fromB2(size.width()/2 ),-fromB2(size.height()/2),fromB2(size.width()),fromB2(size.height()));
+    world2=world;
+    //setPixmap(QPixmap(":/new/prefix1/Plat"));
+    // setPos(rand()%(OsX - pixmap().width()),0);
+    //QGraphicsPixmapItem pix;
+
+    //////Comment*
+    setPos(fromB2(initPos.x()),fromB2(initPos.y()));
+    //2 4
+    bdefff2.position.Set(initPos.x(),initPos.y());
+    bdefff2.angle = 3.14*angle/180;
+    bdefff2.type = b2_kinematicBody;
 
 
+    b2CircleShape c;
+    // c.m_radius=RAD;
+    // c.m_p.Set(0,13/30.f);
+    b2PolygonShape shape;
+    shape.SetAsBox(size.width()/2,size.height()/2);
 
+    Userbody2 = world2->CreateBody(&bdefff2);
+    Userbody2->CreateFixture(&shape,5);
+    // c.m_radius=25/30.f;
+    //  c.m_p.Set(0,-20/30.f);
+    Userbody2->CreateFixture(&c,1.0f);
+    Userbody2->SetFixedRotation(true);
 }
 
 Player::~Player()
@@ -228,6 +261,10 @@ Player::~Player()
     Userbody->GetWorld()->DestroyBody(Userbody);
 }
 
+Player2::~Player2()
+{
+    Userbody2->GetWorld()->DestroyBody(Userbody2);
+}
 
 
 void Player::advance(int phase)
@@ -236,7 +273,7 @@ void Player::advance(int phase)
 
         // setPos(fromB2(7),fromB2(XSP));
         setRotation(fromB2(Userbody->GetAngle()));
-       Userbody->SetAngularDamping(Userbody->GetAngularDamping());
+        Userbody->SetAngularDamping(Userbody->GetAngularDamping());
         Userbody->SetAngularVelocity(Userbody->GetAngularVelocity());
         setPos(fromB2(Userbody->GetPosition().x),fromB2(Userbody->GetPosition().y));
 
@@ -269,29 +306,77 @@ void Player::advance(int phase)
         }
         if(pos.x>=7.5){
 
-           vel.x=0;
-           Userbody->SetLinearVelocity(vel);
+            vel.x=0;
+            Userbody->SetLinearVelocity(vel);
         }
-        if(pos.x>=3.2&&PlayerFlag==1){
+        if(pos.x>=3.2){
 
             vel.x=0;
             Userbody->SetLinearVelocity(vel);
         }
-        if(pos.x<=4&&PlayerFlag==2){
 
-            vel.x=0;
-            Userbody->SetLinearVelocity(vel);
-        }
 
     }
 }
 
-void Player::keyPressEvent(QKeyEvent *event)
+void Player2::advance(int phase)
 {
+    if(phase){
+        // setPos(fromB2(7),fromB2(XSP));
+        setRotation(fromB2(Userbody2->GetAngle()));
+        Userbody2->SetAngularDamping(Userbody2->GetAngularDamping());
+        Userbody2->SetAngularVelocity(Userbody2->GetAngularVelocity());
+        setPos(fromB2(Userbody2->GetPosition().x),fromB2(Userbody2->GetPosition().y));
+
+
+        // moveBy(XSP,0);
+
+
+        foreach(QGraphicsItem *Item,  collidingItems()){
+            // Item->setData(0,true);
+        }
+
+        b2Vec2 vel2 = Userbody2->GetLinearVelocity();
+        b2Vec2 pos2 = Userbody2->GetPosition();
+        //////Comment*
+        if(pos2.y>=4){
+            vel2.y=0;
+            HeigthFlag2=false;
+            Userbody2->SetLinearVelocity(vel2);
+        }
+        //////Comment*
+        if(pos2.y<=2){
+            vel2.y=2;
+            HeigthFlag2 = true;
+            Userbody2->SetLinearVelocity(vel2);
+        }
+        if(pos2.x<=0){
+
+            vel2.x=0;
+            Userbody2->SetLinearVelocity(vel2);
+        }
+        if(pos2.x>=7.5){
+
+            vel2.x=0;
+            Userbody2->SetLinearVelocity(vel2);
+        }
+        if(pos2.x<=4){
+
+            vel2.x=0;
+            Userbody2->SetLinearVelocity(vel2);
+        }
+
+
+    }
+}
+
+void GameScene::keyPressEvent(QKeyEvent *event)
+{
+    //    setFocus();
     b2Vec2 pos = Userbody->GetPosition();
     b2Vec2 vel = Userbody->GetLinearVelocity();
-    if (PlayerFlag==1){
-
+    b2Vec2 pos2 = Userbody2->GetPosition();
+    b2Vec2 vel2 = Userbody2->GetLinearVelocity();
     switch (event->key()){
     case Qt::Key_Left:
         if(pos.x>=0)
@@ -299,61 +384,49 @@ void Player::keyPressEvent(QKeyEvent *event)
         break;
     case Qt::Key_Right:
         if(pos.x<=7.5)
-             if(pos.x<=3.2){
-            vel.x=5;}
+            if(pos.x<=3.2){
+                vel.x=5;}
         break;
     case Qt::Key_Up:
         //////Comment*
 
-         if(HeigthFlag==false){
-             HeigthFlag=true;
-        if(pos.y>2&&(pos.x>=0||pos.x<=7.5)){ vel.y=-6; pos.y=2;}
-                         }
+        if(HeigthFlag==false){
+            HeigthFlag=true;
+            if(pos.y>2&&(pos.x>=0||pos.x<=7.5)){ vel.y=-6; pos.y=2;}
+        }
         break;
-
-    }
-    Userbody->SetLinearVelocity(vel);
-    }
-
-    if (PlayerFlag==2){
-
-    switch (event->key()){
     case Qt::Key_A:
-        if(pos.x>=0)
-             if(pos.x>=4){
-            vel.x=-5;
-             }
+        if(pos2.x>=0)
+            if(pos2.x>=4){
+                vel2.x=-5;
+            }
         break;
     case Qt::Key_D:
-        if(pos.x<=7.5)
+        if(pos2.x<=7.5)
 
-            vel.x=5;
+            vel2.x=5;
         break;
     case Qt::Key_W:
         //////Comment*
 
-         if(HeigthFlag==false){
-             HeigthFlag=true;
-        if(pos.y>2&&(pos.x>=0||pos.x<=7.5)){ vel.y=-6; pos.y=2;}
-                         }
+        if(HeigthFlag2==false){
+            HeigthFlag2=true;
+            if(pos2.y>2&&(pos2.x>=0||pos2.x<=7.5)){ vel2.y=-6; pos2.y=2;}
+        }
         break;
 
     }
     Userbody->SetLinearVelocity(vel);
-    }
-
-
-
+    Userbody2->SetLinearVelocity(vel2);
 }
 
-void Player::keyReleaseEvent(QKeyEvent *event)
+void GameScene::keyReleaseEvent(QKeyEvent *event)
 {
+    setFocus();
     b2Vec2 pos = Userbody->GetPosition();
     b2Vec2 vel = Userbody->GetLinearVelocity();
-
-    if (PlayerFlag==1){
-
-
+    b2Vec2 pos2 = Userbody2->GetPosition();
+    b2Vec2 vel2 = Userbody2->GetLinearVelocity();
     switch (event->key()){
     case Qt::Key_Left:
         vel.x=0;
@@ -370,39 +443,84 @@ void Player::keyReleaseEvent(QKeyEvent *event)
         }
         else vel.y=0;
         break;
-    }
-    Userbody->SetLinearVelocity(vel);
-    }
-
-    if (PlayerFlag==2){
-
-
-    switch (event->key()){
     case Qt::Key_A:
-        vel.x=0;
+        vel2.x=0;
         break;
     case Qt::Key_D:
 
-        vel.x=0;
+        vel2.x=0;
         break;
     case Qt::Key_W:
         //////Comment*
-        if(pos.y<4){
-            pos.y=4;
-            vel.y=4;
+        if(pos2.y<4){
+            pos2.y=4;
+            vel2.y=4;
         }
-        else vel.y=0;
+        else vel2.y=0;
         break;
+
     }
     Userbody->SetLinearVelocity(vel);
-    }
-
-
+    Userbody2->SetLinearVelocity(vel2);
 
 }
-Player2::Player2(b2World*world,QSizeF size,QPointF initPos,qreal angle,int PlFlag ) :Player(world, size, initPos, angle, PlFlag ){
 
-}
+//void Player2::keyPressEvent(QKeyEvent *event)
+//{
+//    b2Vec2 pos = Userbody->GetPosition();
+//    b2Vec2 vel = Userbody->GetLinearVelocity();
+
+//    switch (event->key()){
+//    case Qt::Key_A:
+//        if(pos.x>=0)
+//             if(pos.x>=4){
+//            vel.x=-5;
+//             }
+//        break;
+//    case Qt::Key_D:
+//        if(pos.x<=7.5)
+
+//            vel.x=5;
+//        break;
+//    case Qt::Key_W:
+//        //////Comment*
+
+//         if(HeigthFlag==false){
+//             HeigthFlag=true;
+//        if(pos.y>2&&(pos.x>=0||pos.x<=7.5)){ vel.y=-6; pos.y=2;}
+//                         }
+//        break;
+
+//    }
+//    Userbody->SetLinearVelocity(vel);
+//}
+
+//void Player2::keyReleaseEvent(QKeyEvent *event)
+//{
+//    b2Vec2 pos = Userbody->GetPosition();
+//    b2Vec2 vel = Userbody->GetLinearVelocity();
+
+//    switch (event->key()){
+//    case Qt::Key_A:
+//        vel.x=0;
+//        break;
+//    case Qt::Key_D:
+
+//        vel.x=0;
+//        break;
+//    case Qt::Key_W:
+//        //////Comment*
+//        if(pos.y<4){
+//            pos.y=4;
+//            vel.y=4;
+//        }
+//        else vel.y=0;
+//        break;
+//    }
+//    Userbody->SetLinearVelocity(vel);
+//}
+
+
 
 
 
@@ -482,6 +600,7 @@ void Scene::mousePressEvent(QGraphicsSceneMouseEvent *event)
     //addItem(new BaseObj(world,0.2,QPointF(toB2(event->scenePos().x()),toB2(event->scenePos().y()))));
     // addItem(new PlatObj(world,QSizeF(6,0.2),QPointF(toB2(event->scenePos().x()),toB2(event->scenePos().y())),0));
     addItem(new BaseObj(world,0.4,QPointF(toB2(event->scenePos().x()),toB2(event->scenePos().y()))));
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

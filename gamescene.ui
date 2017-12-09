@@ -54,7 +54,6 @@
    </property>
    <property name="styleSheet">
     <string notr="true">background-image: url(&quot;:/images/images/background.PNG&quot;);
-background-size: 800px 600px;
 background-repeat: no-repeat;
 </string>
    </property>

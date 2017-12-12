@@ -102,14 +102,14 @@ GameScene::GameScene(QWidget *parent) :
 
     Rnd = new QTimer(this);
     connect(Rnd,SIGNAL(timeout()),this,SLOT(Generation()));
-    Rnd->start(5000);
+    Rnd->start(8000);
 
 
 
 
 
     setFocus();
-    //    focusPolicy();
+       focusPolicy();
 
 
 
@@ -122,18 +122,18 @@ GameScene::~GameScene()
 
 
 void GameScene::Generation()
-{ QMutex mutex;
+{
 
    // BaseObj* check = ( new BaseObj(world,0.4,QPointF(2,1)));
 
     if(GoalFlag==1){
     Gscene->addItem(new BaseObj(world,0.4,QPointF(2,1)));
-    mutex.lock();
+
     }
     if(GoalFlag==2){
 
     Gscene->addItem(new BaseObj(world,0.4,QPointF(6,1)));
-    mutex.lock();
+
    }
 
 
@@ -210,7 +210,7 @@ void BaseObj::advance(int phase){
     if (phase){
         setPos(fromB2( body->GetPosition().x),fromB2(body->GetPosition().y));
         if (data(0).toBool()&&pos.y>=4.5){
-            qSleep(1000);
+            qSleep(500);
             if(pos.x>=3.2){GoalFlag=1;}
             else {GoalFlag=2;}
             delete this;

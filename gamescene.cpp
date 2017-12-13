@@ -20,6 +20,7 @@
 
 int GoalFlag = 1;
 static int goal1=-1,goal2 =0;
+static int PartGoal1=0,PartGoal2 =0;
 
 
 b2Body*Userbody;
@@ -76,7 +77,7 @@ GameScene::GameScene(QWidget *parent) :
     /*Right*/ Gscene->addItem(new Walls(world,QSizeF(20, 0),QPointF(8,3),90));
     /*Bottom*/  Gscene->addItem(new Walls(world,QSizeF(20,0),QPointF(4,5),0));
     /*Top*/   Gscene->addItem(new Walls(world,QSizeF(20,0),QPointF(4,0),0));
-    /*Center*/ Gscene->addItem(new Walls(world,QSizeF(4,0.25),QPointF(4,4.75),90));
+    /*Center*/ Gscene->addItem(new Walls(world,QSizeF(4,0.1),QPointF(3.6,4.75),90));
 
     //    Gscene->addItem(new Walls(world,QSizeF(4,0.1),QPointF(7,6),90));
 
@@ -127,6 +128,7 @@ GameScene::~GameScene()
 void GameScene::Generation()
 {
 
+
     // BaseObj* check = ( new BaseObj(world,0.4,QPointF(2,1)));
 
     if(GoalFlag==1&&isCreated==false){
@@ -139,9 +141,21 @@ void GameScene::Generation()
         isCreated = true;
         goal2++;
     }
+    if(goal1>=3){
+        goal1=0;
+        PartGoal2++;
+        ui->player1->setText(QString::number(PartGoal2));
+    }
+    if(goal2>=3){
+        goal2=0;
+        PartGoal1++;
+        ui->player2->setText(QString::number(PartGoal1));
+    }
     QString sgoal1 = QString::number(goal1);
     QString sgoal2 = QString::number(goal2);
     ui->label->setText(sgoal1+":"+sgoal2);
+
+
 }
 
 
@@ -220,6 +234,8 @@ void BaseObj::advance(int phase){
             else {GoalFlag=2;}
             isCreated=false;
             delete this;
+
+
 
         }
     }

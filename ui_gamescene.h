@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'gamescene.ui'
 **
-** Created by: Qt User Interface Compiler version 5.8.0
+** Created by: Qt User Interface Compiler version 5.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -15,7 +15,7 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QHeaderView>
-#include <QtWidgets/QPushButton>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -24,7 +24,9 @@ class Ui_GameScene
 {
 public:
     QGraphicsView *graphicsView;
-    QPushButton *pushButton;
+    QLabel *label;
+    QLabel *player1;
+    QLabel *player2;
 
     void setupUi(QWidget *GameScene)
     {
@@ -44,8 +46,7 @@ public:
         graphicsView->setBaseSize(QSize(0, 0));
         graphicsView->setLayoutDirection(Qt::LeftToRight);
         graphicsView->setAutoFillBackground(false);
-        graphicsView->setStyleSheet(QLatin1String("background-image: url(\":/images/images/background.PNG\");\n"
-"background-size: 800px 600px;\n"
+        graphicsView->setStyleSheet(QLatin1String("background-image: url(\":/images/images/background.png\");\n"
 "background-repeat: no-repeat;\n"
 ""));
         graphicsView->setFrameShape(QFrame::NoFrame);
@@ -54,23 +55,41 @@ public:
         graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         graphicsView->setTransformationAnchor(QGraphicsView::AnchorViewCenter);
-        pushButton = new QPushButton(GameScene);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(20, 20, 61, 31));
-        pushButton->setStyleSheet(QLatin1String("background-image: url(:/new/prefix1/Button);\n"
-"color: rgb(255, 255, 255);\n"
-"font: 14pt \"Book Antiqua\";"));
+        label = new QLabel(GameScene);
+        label->setObjectName(QStringLiteral("label"));
+        label->setGeometry(QRect(336, 40, 131, 61));
+        QFont font;
+        font.setFamily(QStringLiteral("Ravie"));
+        font.setPointSize(26);
+        label->setFont(font);
+        label->setStyleSheet(QStringLiteral("color: #f0f0f0"));
+        label->setTextFormat(Qt::RichText);
+        label->setAlignment(Qt::AlignCenter);
+        player1 = new QLabel(GameScene);
+        player1->setObjectName(QStringLiteral("player1"));
+        player1->setGeometry(QRect(130, 10, 101, 20));
+        QFont font1;
+        font1.setFamily(QStringLiteral("Ravie"));
+        font1.setPointSize(12);
+        player1->setFont(font1);
+        player1->setStyleSheet(QStringLiteral("color: #ffffff"));
+        player2 = new QLabel(GameScene);
+        player2->setObjectName(QStringLiteral("player2"));
+        player2->setGeometry(QRect(570, 10, 101, 20));
+        player2->setFont(font1);
+        player2->setStyleSheet(QStringLiteral("color:  #ffffff"));
 
         retranslateUi(GameScene);
-        QObject::connect(pushButton, SIGNAL(clicked()), GameScene, SLOT(showMaximized()));
 
         QMetaObject::connectSlotsByName(GameScene);
     } // setupUi
 
     void retranslateUi(QWidget *GameScene)
     {
-        GameScene->setWindowTitle(QApplication::translate("GameScene", "Form", Q_NULLPTR));
-        pushButton->setText(QApplication::translate("GameScene", "MAX", Q_NULLPTR));
+        GameScene->setWindowTitle(QApplication::translate("GameScene", "Form", 0));
+        label->setText(QApplication::translate("GameScene", "0:0", 0));
+        player1->setText(QApplication::translate("GameScene", "Player1", 0));
+        player2->setText(QApplication::translate("GameScene", "Player2", 0));
     } // retranslateUi
 
 };

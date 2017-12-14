@@ -86,7 +86,7 @@ public:
 
     void retranslateUi(QWidget *GameScene)
     {
-        GameScene->setWindowTitle(QApplication::translate("GameScene", "Form", 0));
+        GameScene->setWindowTitle(QApplication::translate("GameScene", "Game", 0));
         label->setText(QApplication::translate("GameScene", "0:0", 0));
         player1->setText(QApplication::translate("GameScene", "Player1", 0));
         player2->setText(QApplication::translate("GameScene", "Player2", 0));

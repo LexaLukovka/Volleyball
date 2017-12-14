@@ -1,14 +1,18 @@
 <RCC>
     <qresource prefix="/images">
         <file>images/background.PNG</file>
-        <file>images/ball.png</file>
         <file>images/ball1.png</file>
         <file>images/player1.png</file>
-        <file>images/player2.png</file>
         <file>images/background.png</file>
-        <file>images/background1.PNG</file>
+        <file>images/background-menu3.png</file>
+        <file>images/no-volume.png</file>
+        <file>images/player2.png</file>
+        <file>images/volume.png</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>font/7fonts.ru_sharkheavyabc.ttf</file>
+    </qresource>
+    <qresource prefix="/music">
+        <file>music.mp3</file>
     </qresource>
 </RCC>

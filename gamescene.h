@@ -17,6 +17,7 @@
 #include <QAction>
 #include <QLabel>
 #include <QImage>
+#include <QMovie>
 #include <QString>
 #include <QTimer>
 #include <QTime>

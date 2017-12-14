@@ -77,7 +77,7 @@ GameScene::GameScene(QWidget *parent) :
     /*Right*/ Gscene->addItem(new Walls(world,QSizeF(20, 0),QPointF(8,3),90));
     /*Bottom*/  Gscene->addItem(new Walls(world,QSizeF(20,0),QPointF(4,5),0));
     /*Top*/   Gscene->addItem(new Walls(world,QSizeF(20,0),QPointF(4,0),0));
-    /*Center*/ Gscene->addItem(new Walls(world,QSizeF(4,0.1),QPointF(3.6,4.75),90));
+    /*Center*/ Gscene->addItem(new Walls(world,QSizeF(4,0.1),QPointF(3.6,4.35),90));
 
     //    Gscene->addItem(new Walls(world,QSizeF(4,0.1),QPointF(7,6),90));
 
@@ -134,7 +134,7 @@ void GameScene::Generation()
     Walls *platform;
 
     if(GoalFlag==1&&isCreated==false){
-        ball = new BaseObj(world,0.25,QPointF(1.5,3.1));
+        ball = new BaseObj(world,0.25,QPointF(1.5,3));
         platform = new Walls(world,QSizeF(0,0),QPointF(1.5,3.5),0);
 
         Gscene->addItem(ball);
@@ -153,9 +153,7 @@ void GameScene::Generation()
         isCreated = true;
         goal2++;
     }
-    if(ball->ballpos(ball)<3){
-        platform->deletewall();
-    }
+
     if(goal1>=5){
         goal1=0;
         goal2=0;
@@ -246,7 +244,7 @@ void BaseObj::advance(int phase){
     if (phase){
         setPos(fromB2( body->GetPosition().x),fromB2(body->GetPosition().y));
         if (data(0).toBool()&&pos.y>=4.5){
-            qSleep(500);
+           // qSleep(500);
             if(pos.x>=3.2){GoalFlag=1;}
             else {GoalFlag=2;}
             isCreated=false;
@@ -378,7 +376,7 @@ void Player::advance(int phase)
             vel.x=0;
             Userbody->SetLinearVelocity(vel);
         }
-        if(pos.x>=7.5){
+        if(pos.x>=7.3){
 
             vel.x=0;
             Userbody->SetLinearVelocity(vel);
@@ -429,7 +427,7 @@ void Player2::advance(int phase)
             vel2.x=0;
             Userbody2->SetLinearVelocity(vel2);
         }
-        if(pos2.x>=7.5){
+        if(pos2.x>=7.3){
 
             vel2.x=0;
             Userbody2->SetLinearVelocity(vel2);
@@ -457,7 +455,7 @@ void GameScene::keyPressEvent(QKeyEvent *event)
             vel.x=-5;
         break;
     case Qt::Key_D:
-        if(pos.x<=7.5)
+        if(pos.x<=7.3)
             if(pos.x<=3){
                 vel.x=5;
             }
@@ -467,7 +465,7 @@ void GameScene::keyPressEvent(QKeyEvent *event)
 
         if(HeigthFlag==false){
             HeigthFlag=true;
-            if(pos.y>2&&(pos.x>=0||pos.x<=7.5)){ vel.y=-6; pos.y=2;}
+            if(pos.y>2&&(pos.x>=0||pos.x<=7.3)){ vel.y=-6; pos.y=2;}
         }
         break;
     case Qt::Key_Left:
@@ -475,7 +473,7 @@ void GameScene::keyPressEvent(QKeyEvent *event)
             vel2.x=-5;
         break;
     case Qt::Key_Right:
-        if(pos2.x<=7.5)
+        if(pos2.x<=7.3)
 
             vel2.x=5;
         break;
@@ -484,7 +482,7 @@ void GameScene::keyPressEvent(QKeyEvent *event)
 
         if(HeigthFlag2==false){
             HeigthFlag2=true;
-            if(pos2.y>2&&(pos2.x>=0||pos2.x<=7.5)){ vel2.y=-6; pos2.y=2;}
+            if(pos2.y>2&&(pos2.x>=0||pos2.x<=7.3)){ vel2.y=-6; pos2.y=2;}
         }
         break;
 
@@ -551,7 +549,7 @@ void GameScene::keyReleaseEvent(QKeyEvent *event)
 //             }
 //        break;
 //    case Qt::Key_D:
-//        if(pos.x<=7.5)
+//        if(pos.x<=7.3)
 
 //            vel.x=5;
 //        break;
@@ -560,7 +558,7 @@ void GameScene::keyReleaseEvent(QKeyEvent *event)
 
 //         if(HeigthFlag==false){
 //             HeigthFlag=true;
-//        if(pos.y>2&&(pos.x>=0||pos.x<=7.5)){ vel.y=-6; pos.y=2;}
+//        if(pos.y>2&&(pos.x>=0||pos.x<=7.3)){ vel.y=-6; pos.y=2;}
 //                         }
 //        break;
 

@@ -7,7 +7,7 @@
 #include <QGraphicsItem>
 
 #include <QtMultimedia/QAudioOutput>
-//#include <QMediaPlayer>
+#include <QMediaPlayer>
 #include <QDir>
 #include <QUrl>
 
@@ -20,6 +20,7 @@
 #include <QAction>
 #include <QLabel>
 #include <QImage>
+#include <QObject>
 #include <QString>
 #include "gamescene.h"
 #include "arf.h"
@@ -34,10 +35,15 @@ class MainWindow : public QMainWindow
     Q_OBJECT
   GameScene * Gform;
   ArF * Gform2;
+  QMediaPlayer *music;
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+public slots:
+  void volume();
+
+private slots:
 
 private:
     Ui::MainWindow *ui;

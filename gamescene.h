@@ -120,18 +120,13 @@ public:
 
     BaseObj(b2World *world,qreal Radius,QPointF initPos);
    void qSleep(int ms);
-
     ~BaseObj();
-
 private:
     QTimer *DTimer;
     b2Body*body;
-
-
-
 public:
     void advance(int phase);
-
+    int ballpos(BaseObj *obj);
     int YSP=2;
     int XSP=0;
 
@@ -180,23 +175,15 @@ public:
 class Walls: public QGraphicsRectItem{
 
 private:
-
-
     b2Body*body;
-
 public:
-
-    Walls(b2World*world,QSizeF size,QPointF initPos,qreal angle );
-    ~Walls();
-
+    Walls(b2World*world,QSizeF size,QPointF initPos,qreal angle);
     void advance(int phase);
-
+    void deletewall();
+    ~Walls();
 public:
-
 
 protected:
-
-
     // QGraphicsItem interface
 
 

@@ -130,23 +130,40 @@ void GameScene::Generation()
 
 
     // BaseObj* check = ( new BaseObj(world,0.4,QPointF(2,1)));
+    BaseObj *ball;
+    Walls *platform;
 
     if(GoalFlag==1&&isCreated==false){
-        Gscene->addItem(new BaseObj(world,0.32,QPointF(1,1)));
+        ball = new BaseObj(world,0.25,QPointF(1.5,3.1));
+        platform = new Walls(world,QSizeF(0,0),QPointF(1.5,3.5),0);
+
+        Gscene->addItem(ball);
+        Gscene->addItem(platform);
+
         isCreated = true;
         goal1++;
+
     }
+
     if(GoalFlag==2&&isCreated==false){
-        Gscene->addItem(new BaseObj(world,0.32,QPointF(6,1)));
+        ball = new BaseObj(world,0.25,QPointF(5.5,1));
+        platform = new Walls(world,QSizeF(0,0),QPointF(5.5,3.5),0);
+        Gscene->addItem(ball);
+        Gscene->addItem(platform);
         isCreated = true;
         goal2++;
     }
-    if(goal1>=3){
+    if(ball->ballpos(ball)<3){
+        platform->deletewall();
+    }
+    if(goal1>=5){
         goal1=0;
+        goal2=0;
         PartGoal2++;
         ui->player1->setText(QString::number(PartGoal2));
     }
-    if(goal2>=3){
+    if(goal2>=5){
+        goal1=0;
         goal2=0;
         PartGoal1++;
         ui->player2->setText(QString::number(PartGoal1));
@@ -234,11 +251,12 @@ void BaseObj::advance(int phase){
             else {GoalFlag=2;}
             isCreated=false;
             delete this;
-
-
-
         }
     }
+}
+
+int BaseObj::ballpos(BaseObj *obj){
+    return this->body->GetPosition().y;
 }
 
 
@@ -583,8 +601,6 @@ void GameScene::keyReleaseEvent(QKeyEvent *event)
 
 Walls::Walls(b2World*world,QSizeF size,QPointF initPos,qreal angle ) : QGraphicsRectItem(0)
 {
-
-
     setRect(-fromB2(size.width()/2),-fromB2(size.height()/2),fromB2(size.width()),fromB2(size.height()));
     setBrush(QBrush(Qt::transparent));
     setPen(QPen(Qt::transparent));
@@ -603,10 +619,10 @@ Walls::Walls(b2World*world,QSizeF size,QPointF initPos,qreal angle ) : QGraphics
     shape.SetAsBox(size.width()/2,size.height()/2);
 
     body->CreateFixture(&shape,1.0f);
+}
 
-
-
-
+void Walls::deletewall(){
+    delete this;
 }
 
 Walls::~Walls()

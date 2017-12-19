@@ -21,10 +21,11 @@
 #define  Platdorm_Move_SP 6;
 #define RAD 0.4;
 
+Player *pl;
+Player2 *pl2;
+
 int GoalFlag = 1;
 static int goal1=-1,goal2 =0;
-
-
 
 b2Body*Userbody;
 b2BodyDef bdefff ;
@@ -64,25 +65,20 @@ GameScene::GameScene(QWidget *parent) :
 
     ui->graphicsView->setScene(Gscene);
 
-    // ui->graphicsView->setStyleSheet("background-image: url(:/new/prefix1/Back)center;"
-    //                                " background-repeat:no-repeat");
-
-
     // ui->graphicsView->setStyleSheet("background-image: url(:/images/"); //button back
 
     // Gscene->addRect(Gscene->sceneRect());
 
-    //////Comment*
     /*Left*/   Gscene->addItem(new Walls(world,QSizeF(20, 0),QPointF(0,3),90));
-    /*Right*/ Gscene->addItem(new Walls(world,QSizeF(20, 0),QPointF(8,3),90));
+    /*Right*/ Gscene->addItem(new Walls(world,QSizeF(20, 0),QPointF(7.5,3),90));
     /*Bottom*/  Gscene->addItem(new Walls(world,QSizeF(20,0),QPointF(4,5),0));
     /*Top*/   Gscene->addItem(new Walls(world,QSizeF(20,0),QPointF(4,0),0));
-    /*Center*/ Gscene->addItem(new Walls(world,QSizeF(4,0.1),QPointF(3.6,4.35),90));
+    /*Center*/ Gscene->addItem(new Walls(world,QSizeF(4,0.15),QPointF(3.6,4.35),90));
 
     //    Gscene->addItem(new Walls(world,QSizeF(4,0.1),QPointF(7,6),90));
 
-    Player *pl = new Player(world,QSizeF(0.75,0.75),QPointF(1,4),0,1);
-    Player2 *pl2 = new Player2(world,QSizeF(0.75,0.75),QPointF(6,4),0,2);
+    pl = new Player(world,QSizeF(0.75,0.75),QPointF(1,4),0,1);
+    pl2 = new Player2(world,QSizeF(0.75,0.75),QPointF(6,4),0,2);
 
     //    QGraphicsItem::setFlag(QGraphicsItem::ItemIsFocusable);
 
@@ -93,12 +89,16 @@ GameScene::GameScene(QWidget *parent) :
     connect(ATimer,SIGNAL(timeout()),Gscene,SLOT(advance()));
     ATimer->start(1000/60);
 
-
     Rnd = new QTimer(this);
     connect(Rnd,SIGNAL(timeout()),this,SLOT(Generation()));
     Rnd->start(2000);
 
+    TimerAnimate = new QTimer(this);
+    connect(TimerAnimate,SIGNAL(timeout()),this,SLOT(animate()));
+    TimerAnimate->start(250);
 
+    TimerDeletePlatform = new QTimer(this);
+    TimerDeletePlatform->start(200);
 
     setFocus();
     focusPolicy();
@@ -108,32 +108,43 @@ GameScene::~GameScene()
 {
     delete ui;
 }
+BaseObj *ball;
+void GameScene::animate(){
+    pl->setPixmap(QPixmap(":/images/images/player1.png"));
+    pl2->setPixmap(QPixmap(":/images/images/player2.png"));
+}
+
+int GameScene::deletePlatform(){
+    return ball->ball->GetPosition().y;
+}
 
 void GameScene::Generation()
 {
 
     // BaseObj* check = ( new BaseObj(world,0.4,QPointF(2,1)));
-    BaseObj *ball;
+
     Walls *platform;
     if(GoalFlag==1&&isCreated==false){
         ball = new BaseObj(world,0.25,QPointF(1.5,3));
         platform = new Walls(world,QSizeF(0,0),QPointF(1.5,3.5),0);
-
         Gscene->addItem(ball);
         Gscene->addItem(platform);
-
         isCreated = true;
         goal1++;
-
+        TimerDeletePlatform->setInterval(200);
+        int x = deletePlatform();
+        if(x<3)
+        delete platform;
     }
 
     if(GoalFlag==2&&isCreated==false){
-        ball = new BaseObj(world,0.25,QPointF(5.5,1));
-        platform = new Walls(world,QSizeF(0,0),QPointF(5.5,3.5),0);
+        ball = new BaseObj(world,0.25,QPointF(5.5,3));
+        platform = new Walls(world,QSizeF(0,0),QPointF(5.5,3.5),0);        
         Gscene->addItem(ball);
         Gscene->addItem(platform);
         isCreated = true;
-        goal2++;
+        goal2++;        
+
     }
 
     if(goal1>=5){
@@ -142,8 +153,6 @@ void GameScene::Generation()
         goal1=0;
         goal2=0;
         PartGoal2++;
-
-        ui->label_2->setText(QString::number(PartGoal2));
     }
     if(goal2>=5){
         Goal_1+=goal1;
@@ -151,13 +160,14 @@ void GameScene::Generation()
         goal1=0;
         goal2=0;
         PartGoal1++;
-        ui->label_3->setText(QString::number(PartGoal1));
     }
-    QString sgoal1 = QString::number(goal1);
-    QString sgoal2 = QString::number(goal2);
-    ui->label->setText(sgoal1+":"+sgoal2);
 
+    ui->label->setText(QString::number(goal1)+":"+QString::number(goal2));
 
+    if(PartGoal1==1)  ui->pl2_score_2->setPixmap(QPixmap(":/images/images/cocktail-full.png"));
+    if(PartGoal1==2)  ui->pl2_score_1->setPixmap(QPixmap(":/images/images/cocktail-full.png"));
+    if(PartGoal2==1)  ui->pl1_score_1->setPixmap(QPixmap(":/images/images/cocktail-full.png"));
+    if(PartGoal2==2)  ui->pl1_score_2->setPixmap(QPixmap(":/images/images/cocktail-full.png"));
 
     if(PartGoal1==2||PartGoal2==2)
     {
@@ -167,8 +177,10 @@ void GameScene::Generation()
         PartGoal2=0;
         Goal_1=0;
         Goal_2=0;
-        ui->label_2->setText(QString::number(PartGoal1));
-        ui->label_3->setText(QString::number(PartGoal2));
+        ui->pl1_score_1->setPixmap(QPixmap(":/images/images/cocktail-empty.png"));
+        ui->pl1_score_2->setPixmap(QPixmap(":/images/images/cocktail-empty.png"));
+        ui->pl2_score_1->setPixmap(QPixmap(":/images/images/cocktail-empty.png"));
+        ui->pl2_score_2->setPixmap(QPixmap(":/images/images/cocktail-empty.png"));
 
     }
 }
@@ -200,7 +212,6 @@ BaseObj::BaseObj(b2World *world,qreal Radius,QPointF initPos):QGraphicsPixmapIte
 
 
     body = world->CreateBody(&bodyDef);
-
 
     b2CircleShape shape;
     shape.m_radius=Radius;
@@ -245,19 +256,13 @@ void BaseObj::advance(int phase){
         setPos(fromB2( body->GetPosition().x),fromB2(body->GetPosition().y));
         if (data(0).toBool()&&pos.y>=4.5){
            // qSleep(500);
-            if(pos.x>=3.2){GoalFlag=1;}
+            if(pos.x>=3.5){GoalFlag=1;}
             else {GoalFlag=2;}
             isCreated=false;
             delete this;
         }
     }
 }
-
-int BaseObj::ballpos(BaseObj *obj){
-    return this->body->GetPosition().y;
-}
-
-
 
 ///////////////////////////////////////######## * Player * #########/////////////////////////////////////
 
@@ -451,13 +456,16 @@ void GameScene::keyPressEvent(QKeyEvent *event)
     b2Vec2 vel2 = Userbody2->GetLinearVelocity();
     switch (event->key()){
     case Qt::Key_A:
-        if(pos.x>=0)
+        if(pos.x>=0){
             vel.x=-5;
+            pl->setPixmap(QPixmap(":/images/images/player1-2.png"));
+        }
         break;
     case Qt::Key_D:
         if(pos.x<=7.3)
             if(pos.x<=3){
                 vel.x=5;
+                pl->setPixmap(QPixmap(":/images/images/player1-2.png"));
             }
         break;
     case Qt::Key_W:
@@ -465,23 +473,30 @@ void GameScene::keyPressEvent(QKeyEvent *event)
 
         if(HeigthFlag==false){
             HeigthFlag=true;
+            pl->setPixmap(QPixmap(":/images/images/player1.png"));
             if(pos.y>2&&(pos.x>=0||pos.x<=7.3)){ vel.y=-6; pos.y=2;}
         }
         break;
     case Qt::Key_Left:
-        if(pos2.x>=4.17)
+
+        if(pos2.x>=4.17){
             vel2.x=-5;
+            pl2->setPixmap(QPixmap(":/images/images/player2-2.png"));
+        }
         break;
     case Qt::Key_Right:
-        if(pos2.x<=7.3)
 
+        if(pos2.x<=7.3){
+            pl2->setPixmap(QPixmap(":/images/images/player2-2.png"));
             vel2.x=5;
+        }
         break;
     case Qt::Key_Up:
         //////Comment*
 
         if(HeigthFlag2==false){
             HeigthFlag2=true;
+            pl2->setPixmap(QPixmap(":/images/images/player2.png"));
             if(pos2.y>2&&(pos2.x>=0||pos2.x<=7.3)){ vel2.y=-6; pos2.y=2;}
         }
         break;
@@ -501,13 +516,15 @@ void GameScene::keyReleaseEvent(QKeyEvent *event)
     switch (event->key()){
     case Qt::Key_A:
         vel.x=0;
+        pl->setPixmap(QPixmap(":/images/images/player1-2.png"));
         break;
     case Qt::Key_D:
-
         vel.x=0;
+        pl->setPixmap(QPixmap(":/images/images/player1-2.png"));
         break;
     case Qt::Key_W:
         //////Comment*
+        pl->setPixmap(QPixmap(":/images/images/player1.png"));
         if(pos.y<4){
             pos.y=4;
             vel.y=4;
@@ -516,13 +533,16 @@ void GameScene::keyReleaseEvent(QKeyEvent *event)
         break;
     case Qt::Key_Left:
         vel2.x=0;
+        pl2->setPixmap(QPixmap(":/images/images/player2-2.png"));
+
         break;
     case Qt::Key_Right:
-
+        pl2->setPixmap(QPixmap(":/images/images/player2-2.png"));
         vel2.x=0;
         break;
     case Qt::Key_Up:
         //////Comment*
+        pl2->setPixmap(QPixmap(":/images/images/player2.png"));
         if(pos2.y<4){
             pos2.y=4;
             vel2.y=4;
@@ -535,65 +555,6 @@ void GameScene::keyReleaseEvent(QKeyEvent *event)
     Userbody2->SetLinearVelocity(vel2);
 
 }
-
-//void Player2::keyPressEvent(QKeyEvent *event)
-//{
-//    b2Vec2 pos = Userbody->GetPosition();
-//    b2Vec2 vel = Userbody->GetLinearVelocity();
-
-//    switch (event->key()){
-//    case Qt::Key_A:
-//        if(pos.x>=0)
-//             if(pos.x>=4){
-//            vel.x=-5;
-//             }
-//        break;
-//    case Qt::Key_D:
-//        if(pos.x<=7.3)
-
-//            vel.x=5;
-//        break;
-//    case Qt::Key_W:
-//        //////Comment*
-
-//         if(HeigthFlag==false){
-//             HeigthFlag=true;
-//        if(pos.y>2&&(pos.x>=0||pos.x<=7.3)){ vel.y=-6; pos.y=2;}
-//                         }
-//        break;
-
-//    }
-//    Userbody->SetLinearVelocity(vel);
-//}
-
-//void Player2::keyReleaseEvent(QKeyEvent *event)
-//{
-//    b2Vec2 pos = Userbody->GetPosition();
-//    b2Vec2 vel = Userbody->GetLinearVelocity();
-
-//    switch (event->key()){
-//    case Qt::Key_A:
-//        vel.x=0;
-//        break;
-//    case Qt::Key_D:
-
-//        vel.x=0;
-//        break;
-//    case Qt::Key_W:
-//        //////Comment*
-//        if(pos.y<4){
-//            pos.y=4;
-//            vel.y=4;
-//        }
-//        else vel.y=0;
-//        break;
-//    }
-//    Userbody->SetLinearVelocity(vel);
-//}
-
-
-
-
 
 ///////////////////////////////////////######## * Walls* #########/////////////////////////////////////
 

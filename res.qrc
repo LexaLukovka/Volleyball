@@ -8,6 +8,10 @@
         <file>images/no-volume.png</file>
         <file>images/player2.png</file>
         <file>images/volume.png</file>
+        <file>images/player1-2.png</file>
+        <file>images/player2-2.png</file>
+        <file>images/cocktail-empty.png</file>
+        <file>images/cocktail-full.png</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>font/7fonts.ru_sharkheavyabc.ttf</file>

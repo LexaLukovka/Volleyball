@@ -109,8 +109,8 @@ int Scene::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     return _id;
 }
 struct qt_meta_stringdata_GameScene_t {
-    QByteArrayData data[7];
-    char stringdata0[72];
+    QByteArrayData data[8];
+    char stringdata0[80];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -124,12 +124,14 @@ QT_MOC_LITERAL(1, 10, 11), // "firstWindow"
 QT_MOC_LITERAL(2, 22, 0), // ""
 QT_MOC_LITERAL(3, 23, 10), // "Generation"
 QT_MOC_LITERAL(4, 34, 21), // "on_pushButton_clicked"
-QT_MOC_LITERAL(5, 56, 11), // "recieveData"
-QT_MOC_LITERAL(6, 68, 3) // "str"
+QT_MOC_LITERAL(5, 56, 7), // "animate"
+QT_MOC_LITERAL(6, 64, 11), // "recieveData"
+QT_MOC_LITERAL(7, 76, 3) // "str"
 
     },
     "GameScene\0firstWindow\0\0Generation\0"
-    "on_pushButton_clicked\0recieveData\0str"
+    "on_pushButton_clicked\0animate\0recieveData\0"
+    "str"
 };
 #undef QT_MOC_LITERAL
 
@@ -139,7 +141,7 @@ static const uint qt_meta_data_GameScene[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -147,12 +149,13 @@ static const uint qt_meta_data_GameScene[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   34,    2, 0x06 /* Public */,
+       1,    0,   39,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       3,    0,   35,    2, 0x08 /* Private */,
-       4,    0,   36,    2, 0x08 /* Private */,
-       5,    1,   37,    2, 0x0a /* Public */,
+       3,    0,   40,    2, 0x08 /* Private */,
+       4,    0,   41,    2, 0x08 /* Private */,
+       5,    0,   42,    2, 0x08 /* Private */,
+       6,    1,   43,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void,
@@ -160,7 +163,8 @@ static const uint qt_meta_data_GameScene[] = {
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,    6,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,    7,
 
        0        // eod
 };
@@ -174,7 +178,8 @@ void GameScene::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 0: _t->firstWindow(); break;
         case 1: _t->Generation(); break;
         case 2: _t->on_pushButton_clicked(); break;
-        case 3: _t->recieveData((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 3: _t->animate(); break;
+        case 4: _t->recieveData((*reinterpret_cast< QString(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -215,13 +220,13 @@ int GameScene::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 5)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 4;
+        _id -= 5;
     }
     return _id;
 }

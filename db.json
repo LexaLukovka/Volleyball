@@ -46,6 +46,30 @@
         "Player_2": "Vanya",
         "Score_1": 12,
         "Score_2": 5
+    },
+    {
+        "Player_1": "Player1",
+        "Player_2": "Player2",
+        "Score_1": 12,
+        "Score_2": 6
+    },
+    {
+        "Player_1": "Player1",
+        "Player_2": "Player2",
+        "Score_1": 10,
+        "Score_2": 0
+    },
+    {
+        "Player_1": "Player1",
+        "Player_2": "Player2",
+        "Score_1": 10,
+        "Score_2": 0
+    },
+    {
+        "Player_1": "Player1",
+        "Player_2": "Player2",
+        "Score_1": 10,
+        "Score_2": 0
     }
 ]
 }

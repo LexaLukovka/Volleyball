@@ -29,8 +29,12 @@ public:
     QLabel *player1;
     QLabel *player2;
     QPushButton *pushButton;
-    QLabel *label_2;
-    QLabel *label_3;
+    QLabel *pl1_score_2;
+    QLabel *pl1_score_1;
+    QLabel *pl2_score_1;
+    QLabel *label_5;
+    QLabel *label_7;
+    QLabel *pl2_score_2;
 
     void setupUi(QWidget *GameScene)
     {
@@ -85,16 +89,36 @@ public:
         pushButton = new QPushButton(GameScene);
         pushButton->setObjectName(QStringLiteral("pushButton"));
         pushButton->setGeometry(QRect(0, 0, 75, 23));
-        label_2 = new QLabel(GameScene);
-        label_2->setObjectName(QStringLiteral("label_2"));
-        label_2->setGeometry(QRect(220, 10, 51, 16));
+        pl1_score_2 = new QLabel(GameScene);
+        pl1_score_2->setObjectName(QStringLiteral("pl1_score_2"));
+        pl1_score_2->setGeometry(QRect(280, 40, 50, 55));
         QFont font2;
         font2.setPointSize(10);
-        label_2->setFont(font2);
-        label_3 = new QLabel(GameScene);
-        label_3->setObjectName(QStringLiteral("label_3"));
-        label_3->setGeometry(QRect(506, 10, 51, 20));
-        label_3->setFont(font2);
+        pl1_score_2->setFont(font2);
+        pl1_score_2->setPixmap(QPixmap(QString::fromUtf8(":/images/images/cocktail-empty.png")));
+        pl1_score_1 = new QLabel(GameScene);
+        pl1_score_1->setObjectName(QStringLiteral("pl1_score_1"));
+        pl1_score_1->setGeometry(QRect(220, 40, 50, 55));
+        pl1_score_1->setFont(font2);
+        pl1_score_1->setPixmap(QPixmap(QString::fromUtf8(":/images/images/cocktail-empty.png")));
+        pl2_score_1 = new QLabel(GameScene);
+        pl2_score_1->setObjectName(QStringLiteral("pl2_score_1"));
+        pl2_score_1->setGeometry(QRect(470, 40, 50, 55));
+        pl2_score_1->setFont(font2);
+        pl2_score_1->setPixmap(QPixmap(QString::fromUtf8(":/images/images/cocktail-empty.png")));
+        label_5 = new QLabel(GameScene);
+        label_5->setObjectName(QStringLiteral("label_5"));
+        label_5->setGeometry(QRect(750, 280, 51, 50));
+        label_5->setFont(font2);
+        label_7 = new QLabel(GameScene);
+        label_7->setObjectName(QStringLiteral("label_7"));
+        label_7->setGeometry(QRect(690, 280, 51, 50));
+        label_7->setFont(font2);
+        pl2_score_2 = new QLabel(GameScene);
+        pl2_score_2->setObjectName(QStringLiteral("pl2_score_2"));
+        pl2_score_2->setGeometry(QRect(530, 40, 50, 55));
+        pl2_score_2->setFont(font2);
+        pl2_score_2->setPixmap(QPixmap(QString::fromUtf8(":/images/images/cocktail-empty.png")));
 
         retranslateUi(GameScene);
 
@@ -108,8 +132,12 @@ public:
         player1->setText(QApplication::translate("GameScene", "Player1", 0));
         player2->setText(QApplication::translate("GameScene", "Player2", 0));
         pushButton->setText(QApplication::translate("GameScene", "Back", 0));
-        label_2->setText(QApplication::translate("GameScene", "TextLabel", 0));
-        label_3->setText(QApplication::translate("GameScene", "TextLabel", 0));
+        pl1_score_2->setText(QString());
+        pl1_score_1->setText(QString());
+        pl2_score_1->setText(QString());
+        label_5->setText(QString());
+        label_7->setText(QString());
+        pl2_score_2->setText(QString());
     } // retranslateUi
 
 };

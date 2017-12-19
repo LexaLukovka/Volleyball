@@ -38,10 +38,14 @@ public:
         pushButton->setGeometry(QRect(0, 0, 75, 23));
         pushButton_2 = new QPushButton(Record);
         pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
-        pushButton_2->setGeometry(QRect(80, 60, 75, 23));
+        pushButton_2->setGeometry(QRect(30, 60, 151, 23));
+        QFont font;
+        font.setPointSize(10);
+        pushButton_2->setFont(font);
         pushButton_3 = new QPushButton(Record);
         pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
-        pushButton_3->setGeometry(QRect(260, 60, 75, 23));
+        pushButton_3->setGeometry(QRect(260, 60, 131, 23));
+        pushButton_3->setFont(font);
         tableView = new QTableView(Record);
         tableView->setObjectName(QStringLiteral("tableView"));
         tableView->setGeometry(QRect(90, 110, 256, 192));
@@ -55,8 +59,8 @@ public:
     {
         Record->setWindowTitle(QApplication::translate("Record", "Form", 0));
         pushButton->setText(QApplication::translate("Record", "Back", 0));
-        pushButton_2->setText(QApplication::translate("Record", "Show MYSQL", 0));
-        pushButton_3->setText(QApplication::translate("Record", "Show JSON", 0));
+        pushButton_2->setText(QApplication::translate("Record", "Show parties (MYSQL)", 0));
+        pushButton_3->setText(QApplication::translate("Record", "Show Scors (JSON)", 0));
     } // retranslateUi
 
 };

@@ -98,13 +98,14 @@ public:
     explicit GameScene(QWidget *parent = 0);
     void writeToSql();
     void writeToJson();
-    ~GameScene();
     void keyPressEvent(QKeyEvent *event);
     void keyReleaseEvent(QKeyEvent *event);
+    ~GameScene();
 
 private slots:
     void Generation();
     void on_pushButton_clicked();
+    void animate();
 
 signals:
     void firstWindow();
@@ -124,18 +125,14 @@ private:
     Scene * Gscene;
     Scene * Gscene2;
 
-
     /* ��������� ����� */
 
     QTimer *ATimer; /*������ ��� ������  */
-
     QTimer *GTimer; /*������ ��� ������  */
-
     QTimer *Rnd;
-
+    QTimer *TimerAnimate;
 
     b2World*world;
-
 
     // QWidget interface
 protected:
@@ -151,18 +148,17 @@ protected:
 class BaseObj:public QGraphicsPixmapItem{
 
 public:
-
     BaseObj(b2World *world,qreal Radius,QPointF initPos);
    void qSleep(int ms);
     ~BaseObj();
 private:
     QTimer *DTimer;
-    b2Body*body;
+    b2Body *body;
 public:
     void advance(int phase);
-    int ballpos(BaseObj *obj);
     int YSP=2;
     int XSP=0;
+     b2Body *ball;
 
 protected:
 
@@ -172,15 +168,11 @@ protected:
 class Player: public QGraphicsPixmapItem{
 
 public:
-
     Player(b2World*world,QSizeF size,QPointF initPos,qreal angle,int PlFlag );
     ~Player();
     void advance(int phase);
-
 public:
-
     //���������� ������
-
 
 private :
 

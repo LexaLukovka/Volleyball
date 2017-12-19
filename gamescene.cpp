@@ -97,9 +97,6 @@ GameScene::GameScene(QWidget *parent) :
     connect(TimerAnimate,SIGNAL(timeout()),this,SLOT(animate()));
     TimerAnimate->start(250);
 
-    TimerDeletePlatform = new QTimer(this);
-    TimerDeletePlatform->start(200);
-
     setFocus();
     focusPolicy();
 }
@@ -108,21 +105,14 @@ GameScene::~GameScene()
 {
     delete ui;
 }
-BaseObj *ball;
 void GameScene::animate(){
     pl->setPixmap(QPixmap(":/images/images/player1.png"));
     pl2->setPixmap(QPixmap(":/images/images/player2.png"));
 }
 
-int GameScene::deletePlatform(){
-    return ball->ball->GetPosition().y;
-}
-
 void GameScene::Generation()
 {
-
-    // BaseObj* check = ( new BaseObj(world,0.4,QPointF(2,1)));
-
+    BaseObj *ball;
     Walls *platform;
     if(GoalFlag==1&&isCreated==false){
         ball = new BaseObj(world,0.25,QPointF(1.5,3));
@@ -131,10 +121,6 @@ void GameScene::Generation()
         Gscene->addItem(platform);
         isCreated = true;
         goal1++;
-        TimerDeletePlatform->setInterval(200);
-        int x = deletePlatform();
-        if(x<3)
-        delete platform;
     }
 
     if(GoalFlag==2&&isCreated==false){
@@ -255,7 +241,6 @@ void BaseObj::advance(int phase){
     if (phase){
         setPos(fromB2( body->GetPosition().x),fromB2(body->GetPosition().y));
         if (data(0).toBool()&&pos.y>=4.5){
-           // qSleep(500);
             if(pos.x>=3.5){GoalFlag=1;}
             else {GoalFlag=2;}
             isCreated=false;
@@ -449,7 +434,6 @@ void Player2::advance(int phase)
 
 void GameScene::keyPressEvent(QKeyEvent *event)
 {
-    //    setFocus();
     b2Vec2 pos = Userbody->GetPosition();
     b2Vec2 vel = Userbody->GetLinearVelocity();
     b2Vec2 pos2 = Userbody2->GetPosition();
@@ -578,10 +562,6 @@ Walls::Walls(b2World*world,QSizeF size,QPointF initPos,qreal angle ) : QGraphics
     shape.SetAsBox(size.width()/2,size.height()/2);
 
     body->CreateFixture(&shape,1.0f);
-}
-
-void Walls::deletewall(){
-    delete this;
 }
 
 Walls::~Walls()

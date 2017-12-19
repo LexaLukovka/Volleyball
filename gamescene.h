@@ -131,7 +131,6 @@ private:
     QTimer *GTimer; /*������ ��� ������  */
     QTimer *Rnd;
     QTimer *TimerAnimate;
-
     b2World*world;
 
     // QWidget interface
@@ -158,8 +157,6 @@ public:
     void advance(int phase);
     int YSP=2;
     int XSP=0;
-     b2Body *ball;
-
 protected:
 
 };
@@ -205,7 +202,6 @@ private:
 public:
     Walls(b2World*world,QSizeF size,QPointF initPos,qreal angle);
     void advance(int phase);
-    void deletewall();
     ~Walls();
 public:
 

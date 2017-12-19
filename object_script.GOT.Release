@@ -1,0 +1,14 @@
+INPUT(
+./release\main.o
+./release\mainwindow.o
+./release\gamescene.o
+./release\arf.o
+./release\authentication.o
+./release\record.o
+./release\qrc_res.o
+./release\moc_mainwindow.o
+./release\moc_gamescene.o
+./release\moc_arf.o
+./release\moc_authentication.o
+./release\moc_record.o
+);

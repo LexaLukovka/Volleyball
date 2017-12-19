@@ -19,16 +19,29 @@ MainWindow::MainWindow(QWidget *parent) :
 
     /////////////////////////////////
 
-    Gform=new GameScene();
+    //Gform=new GameScene();
+    //auth = new Authentication();
     Gform2=new ArF();
     ////////////////////////////////
 
-    connect(ui->pushButton,SIGNAL(clicked()),Gform,SLOT(show()));
+    //connect(ui->pushButton,SIGNAL(clicked()),auth,SLOT(on_pushButton_clicked()));
     connect(ui->pushButton_2,SIGNAL(clicked()),Gform2,SLOT(show()));
     connect(ui->pushButton_3,SIGNAL(clicked()),this,SLOT(close()));
-    connect(ui->pushButton_3,SIGNAL(clicked()),Gform,SLOT(close()));
+    //connect(ui->pushButton_3,SIGNAL(clicked()),Gform,SLOT(close()));
     connect(ui->pushButton_3,SIGNAL(clicked()),Gform2,SLOT(close()));
     connect(ui->volume,SIGNAL(clicked()),this,SLOT(volume()));
+
+
+    // »нициализаци€ рекордного окна
+    showRecord = new Record();
+    // получаем к слоту запуска главного окна по кнопке в рекодном окне
+    connect(showRecord, &Record::firstWindow, this, &MainWindow::show);
+
+    // »нициализаци€ рекордного окна
+    authWindow = new Authentication();
+    // получаем к слоту запуска главного окна по кнопке в рекодном окне
+    connect(authWindow, &Authentication::firstWindow, this, &MainWindow::show);
+
 }
 
 void MainWindow::volume(){
@@ -49,4 +62,16 @@ void MainWindow::volume(){
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::on_pushButton_4_clicked()
+{
+    showRecord->show();
+    this->close();
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    authWindow->show();
+    this->close();
 }

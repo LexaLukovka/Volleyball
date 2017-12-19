@@ -5,6 +5,8 @@
 #-------------------------------------------------
 
 
+QT       += core gui
+QT       += sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets multimedia
 
@@ -32,16 +34,22 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp\
         mainwindow.cpp \
     gamescene.cpp \
-    arf.cpp
+    arf.cpp \
+    authentication.cpp \
+    record.cpp
 
 HEADERS  += mainwindow.h \
     gamescene.h \
     arf.h \
-    Box2D/Box2D.h
+    Box2D/Box2D.h \
+    authentication.h \
+    record.h
 
 FORMS    += mainwindow.ui \
     gamescene.ui \
-    arf.ui
+    arf.ui \
+    authentication.ui \
+    record.ui
 
 RESOURCES += \
     res.qrc

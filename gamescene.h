@@ -6,6 +6,14 @@
 #include <QGraphicsScene>
 #include <QGraphicsItem>
 
+#include <QDebug>
+
+#include <QFile>
+#include <QFileDialog>
+
+#include <QStandardItem>
+#include <QMessageBox>
+
 #include <QKeyEvent>
 
 #include <QGraphicsPixmapItem>
@@ -22,6 +30,19 @@
 #include <QTimer>
 #include <QTime>
 #include <ctime>
+
+#include <QtSql/QSqlDatabase>//для хроанения связи с базой данных
+#include <QtSql/QSqlQueryModel> //для хранения данных с базы даных и передачи этих данных
+#include <QtSql/QSqlQuery> //с помощью которого можно создавать запросы на языке SQL
+#include <QSqlTableModel>//табличная модель
+#include <QtSql/QSqlError>
+
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonParseError>
+
+
+
 
 #include <Box2D/Box2D.h>
 
@@ -71,21 +92,34 @@ class GameScene : public QWidget
     Q_OBJECT
 
 public:
+    int PartGoal1=0, PartGoal2=0;
+    int Goal_1=0, Goal_2=0;
 
     explicit GameScene(QWidget *parent = 0);
+    void writeToSql();
+    void writeToJson();
     ~GameScene();
     void keyPressEvent(QKeyEvent *event);
     void keyReleaseEvent(QKeyEvent *event);
 
 private slots:
     void Generation();
+    void on_pushButton_clicked();
 
-
-
-
-
+signals:
+    void firstWindow();
+public slots:
+    void recieveData(QString str);
 private:
     Ui::GameScene *ui;
+
+    QSqlDatabase db;
+
+    QJsonDocument doc;
+    QJsonArray docArr;
+    QJsonParseError docError;
+    QString globPath;
+    QFile file;
 
     Scene * Gscene;
     Scene * Gscene2;
@@ -105,7 +139,6 @@ private:
 
     // QWidget interface
 protected:
-
 
     /*пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ  */
 };

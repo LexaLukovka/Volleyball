@@ -16,6 +16,7 @@
 #include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -27,6 +28,9 @@ public:
     QLabel *label;
     QLabel *player1;
     QLabel *player2;
+    QPushButton *pushButton;
+    QLabel *label_2;
+    QLabel *label_3;
 
     void setupUi(QWidget *GameScene)
     {
@@ -78,6 +82,19 @@ public:
         player2->setGeometry(QRect(570, 10, 101, 20));
         player2->setFont(font1);
         player2->setStyleSheet(QStringLiteral("color:  #ffffff"));
+        pushButton = new QPushButton(GameScene);
+        pushButton->setObjectName(QStringLiteral("pushButton"));
+        pushButton->setGeometry(QRect(0, 0, 75, 23));
+        label_2 = new QLabel(GameScene);
+        label_2->setObjectName(QStringLiteral("label_2"));
+        label_2->setGeometry(QRect(220, 10, 51, 16));
+        QFont font2;
+        font2.setPointSize(10);
+        label_2->setFont(font2);
+        label_3 = new QLabel(GameScene);
+        label_3->setObjectName(QStringLiteral("label_3"));
+        label_3->setGeometry(QRect(506, 10, 51, 20));
+        label_3->setFont(font2);
 
         retranslateUi(GameScene);
 
@@ -90,6 +107,9 @@ public:
         label->setText(QApplication::translate("GameScene", "0:0", 0));
         player1->setText(QApplication::translate("GameScene", "Player1", 0));
         player2->setText(QApplication::translate("GameScene", "Player2", 0));
+        pushButton->setText(QApplication::translate("GameScene", "Back", 0));
+        label_2->setText(QApplication::translate("GameScene", "TextLabel", 0));
+        label_3->setText(QApplication::translate("GameScene", "TextLabel", 0));
     } // retranslateUi
 
 };

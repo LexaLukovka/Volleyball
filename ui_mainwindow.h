@@ -30,6 +30,7 @@ public:
     QPushButton *pushButton_3;
     QGraphicsView *graphicsView;
     QPushButton *volume;
+    QPushButton *pushButton_4;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -83,12 +84,20 @@ public:
         volume->setStyleSheet(QLatin1String("background-image: url(\":/images/images/volume.png\");\n"
 "background-repeat: no-repeat;\n"
 "border: 0;"));
+        pushButton_4 = new QPushButton(centralWidget);
+        pushButton_4->setObjectName(QStringLiteral("pushButton_4"));
+        pushButton_4->setGeometry(QRect(310, 240, 181, 41));
+        pushButton_4->setCursor(QCursor(Qt::PointingHandCursor));
+        pushButton_4->setAutoFillBackground(false);
+        pushButton_4->setStyleSheet(QLatin1String("background-color: transparent;\n"
+"border: 0;"));
         MainWindow->setCentralWidget(centralWidget);
         graphicsView->raise();
         pushButton->raise();
         pushButton_2->raise();
         pushButton_3->raise();
         volume->raise();
+        pushButton_4->raise();
 
         retranslateUi(MainWindow);
 
@@ -102,6 +111,7 @@ public:
         pushButton_2->setText(QString());
         pushButton_3->setText(QString());
         volume->setText(QString());
+        pushButton_4->setText(QString());
     } // retranslateUi
 
 };

@@ -1,6 +1,7 @@
 #include "gamescene.h"
 #include "ui_gamescene.h"
 
+#include <QDebug>
 #include <QKeyEvent>
 #include <qkeysequence.h>
 #include <QGraphicsSceneMouseEvent>
@@ -9,10 +10,12 @@
 #include <QTime>
 #include <QTimer>
 #include <QMutex>
+#include <QStringList>
 #ifdef Q_OS_WIN
 #include <windows.h> // for Sleep
 #endif
 
+#include <authentication.h>
 
 
 #define  Platdorm_Move_SP 6;
@@ -20,7 +23,7 @@
 
 int GoalFlag = 1;
 static int goal1=-1,goal2 =0;
-static int PartGoal1=0,PartGoal2 =0;
+
 
 
 b2Body*Userbody;
@@ -40,14 +43,9 @@ qreal fromB2(qreal value){
     return value*SCALE;
 }
 
-
 qreal toB2(qreal value){
-
     return value/SCALE;
 }
-
-
-
 
 GameScene::GameScene(QWidget *parent) :
     QWidget(parent),
@@ -55,6 +53,8 @@ GameScene::GameScene(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
+
+
 
     world=new b2World(b2Vec2(0.00f,10.00f));
 
@@ -81,15 +81,8 @@ GameScene::GameScene(QWidget *parent) :
 
     //    Gscene->addItem(new Walls(world,QSizeF(4,0.1),QPointF(7,6),90));
 
-
-
-
     Player *pl = new Player(world,QSizeF(0.75,0.75),QPointF(1,4),0,1);
-
     Player2 *pl2 = new Player2(world,QSizeF(0.75,0.75),QPointF(6,4),0,2);
-
-
-
 
     //    QGraphicsItem::setFlag(QGraphicsItem::ItemIsFocusable);
 
@@ -101,23 +94,14 @@ GameScene::GameScene(QWidget *parent) :
     ATimer->start(1000/60);
 
 
-
-
-
-
     Rnd = new QTimer(this);
     connect(Rnd,SIGNAL(timeout()),this,SLOT(Generation()));
     Rnd->start(2000);
 
 
 
-
-
     setFocus();
     focusPolicy();
-
-
-
 }
 
 GameScene::~GameScene()
@@ -128,11 +112,9 @@ GameScene::~GameScene()
 void GameScene::Generation()
 {
 
-
     // BaseObj* check = ( new BaseObj(world,0.4,QPointF(2,1)));
     BaseObj *ball;
     Walls *platform;
-
     if(GoalFlag==1&&isCreated==false){
         ball = new BaseObj(world,0.25,QPointF(1.5,3));
         platform = new Walls(world,QSizeF(0,0),QPointF(1.5,3.5),0);
@@ -155,22 +137,40 @@ void GameScene::Generation()
     }
 
     if(goal1>=5){
+        Goal_1+=goal1;
+        Goal_2+=goal2;
         goal1=0;
         goal2=0;
         PartGoal2++;
-        ui->player1->setText(QString::number(PartGoal2));
+
+        ui->label_2->setText(QString::number(PartGoal2));
     }
     if(goal2>=5){
+        Goal_1+=goal1;
+        Goal_2+=goal2;
         goal1=0;
         goal2=0;
         PartGoal1++;
-        ui->player2->setText(QString::number(PartGoal1));
+        ui->label_3->setText(QString::number(PartGoal1));
     }
     QString sgoal1 = QString::number(goal1);
     QString sgoal2 = QString::number(goal2);
     ui->label->setText(sgoal1+":"+sgoal2);
 
 
+
+    if(PartGoal1==2||PartGoal2==2)
+    {
+        writeToSql();
+        writeToJson();
+        PartGoal1=0;
+        PartGoal2=0;
+        Goal_1=0;
+        Goal_2=0;
+        ui->label_2->setText(QString::number(PartGoal1));
+        ui->label_3->setText(QString::number(PartGoal2));
+
+    }
 }
 
 
@@ -674,4 +674,88 @@ void Scene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
+void GameScene::on_pushButton_clicked()
+{
+    this->close();
+    emit firstWindow();
+}
+
+
+void GameScene::recieveData(QString str)
+{
+    QStringList lst = str.split(" ");
+    this->ui->player1->setText(lst.at(0));
+    this->ui->player2->setText(lst.at(1));
+
+    if(lst.at(0)=="")
+        this->ui->player1->setText("Player1");
+
+    if(lst.at(1)=="")
+        this->ui->player2->setText("Player2");
+}
+
+
+
+void GameScene::writeToSql(){
+
+    db = QSqlDatabase::addDatabase("QMYSQL");
+    db.setUserName("root");
+    db.setDatabaseName("voleyball");
+    db.setPassword("root");
+    db.setHostName("localhost");
+    db.setPort(3306);
+
+    if(db.open()){
+        QSqlQuery query;
+        query.prepare("INSERT INTO volleyball (Player_1, Score_1, Score_2, Player_2) "
+                        "VALUE (:Player_1, :Score_1, :Score_2, :Player_2)");
+
+
+        query.bindValue(0, this->ui->player1->text());
+        query.bindValue(1, PartGoal2);
+        query.bindValue(2, PartGoal1);
+        query.bindValue(3, this->ui->player2->text());
+        query.exec();
+    }
+
+    else
+        QMessageBox::information(nullptr, "info", db.lastError().text());
+
+}
+
+
+
+
+void GameScene::writeToJson(){
+    file.setFileName("db.json");
+    if(file.open(QIODevice::ReadOnly|QFile::Text)){
+         doc = QJsonDocument::fromJson(QByteArray(file.readAll()),&docError);
+         file.close();
+    }
+
+    if(file.open(QIODevice::WriteOnly))
+    {
+        QVariantMap map;
+        map.insert("Player_1",this->ui->player1->text());
+        map.insert("Score_1",Goal_1);
+        map.insert("Score_2",Goal_2);
+        map.insert("Player_2",this->ui->player2->text());
+
+        QJsonObject json = QJsonObject::fromVariantMap(map);
+
+
+        QJsonArray docToWrite = doc.object().value("players").toArray();
+        docToWrite.append(json);
+        doc.setArray(docToWrite);
+
+
+
+       file.write("{\"players\":"+doc.toJson()+"}");
+        file.close();
+    }
+    else {
+        QMessageBox::information(nullptr, "info", "File is't open for write");
+    }
+}
+
+

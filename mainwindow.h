@@ -24,6 +24,19 @@
 #include <QString>
 #include "gamescene.h"
 #include "arf.h"
+#include "record.h"
+#include "authentication.h"
+
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonParseError>
+#include <QFile>
+#include <QFileDialog>
+#include <QStandardItem>
+#include <QMessageBox>
+
+#include <QtSql>
+
 
 
 namespace Ui {
@@ -33,8 +46,9 @@ class MainWindow;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-  GameScene * Gform;
+ // GameScene * Gform;
   ArF * Gform2;
+ // Authentication *auth;
   QMediaPlayer *music;
 public:
     explicit MainWindow(QWidget *parent = 0);
@@ -42,11 +56,18 @@ public:
 
 public slots:
   void volume();
+  void on_pushButton_clicked();
 
 private slots:
 
+  void on_pushButton_4_clicked();
+
+
+
 private:
     Ui::MainWindow *ui;
+    Record *showRecord;
+    Authentication *authWindow;
 };
 
 #endif // MAINWINDOW_H

@@ -88,7 +88,10 @@ public:
         player2->setStyleSheet(QStringLiteral("color:  #ffffff"));
         pushButton = new QPushButton(GameScene);
         pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(0, 0, 75, 23));
+        pushButton->setGeometry(QRect(10, 10, 30, 50));
+        pushButton->setStyleSheet(QLatin1String("background-image: url(\":/images/images/arrow-right.png\");\n"
+"background-repeat: no-repeat;\n"
+"border: 0;"));
         pl1_score_2 = new QLabel(GameScene);
         pl1_score_2->setObjectName(QStringLiteral("pl1_score_2"));
         pl1_score_2->setGeometry(QRect(280, 40, 50, 55));
@@ -131,7 +134,7 @@ public:
         label->setText(QApplication::translate("GameScene", "0:0", 0));
         player1->setText(QApplication::translate("GameScene", "Player1", 0));
         player2->setText(QApplication::translate("GameScene", "Player2", 0));
-        pushButton->setText(QApplication::translate("GameScene", "Back", 0));
+        pushButton->setText(QString());
         pl1_score_2->setText(QString());
         pl1_score_1->setText(QString());
         pl2_score_1->setText(QString());

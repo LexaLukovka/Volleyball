@@ -12,6 +12,15 @@
         <file>images/player2-2.png</file>
         <file>images/cocktail-empty.png</file>
         <file>images/cocktail-full.png</file>
+        <file>images/arrow-right.png</file>
+        <file>images/background-start.png</file>
+        <file>images/arrow-l.png</file>
+        <file>images/arrow-r.png</file>
+        <file>images/player3.png</file>
+        <file>images/player4.png</file>
+        <file>images/player3-2.png</file>
+        <file>images/player4-2.png</file>
+        <file>images/background-empty.png</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>font/7fonts.ru_sharkheavyabc.ttf</file>

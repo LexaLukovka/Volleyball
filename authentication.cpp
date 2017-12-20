@@ -5,6 +5,9 @@
 #include <gamescene.h>
 #include <mainwindow.h>
 
+QString player1Skin = "player1";
+QString player2Skin = "player2";
+
 Authentication::Authentication(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Authentication)
@@ -16,14 +19,19 @@ Authentication::Authentication(QWidget *parent) :
     // Инициализация рекордного окна
     gameScene = new GameScene();
     // получаем к слоту запуска главного окна по кнопке в рекодном окне
-    connect(ui->pushButton_2, SIGNAL(clicked()), gameScene, SLOT(show()));
+    connect(ui->startGame, SIGNAL(clicked()), gameScene, SLOT(show()));
+
+    connect(ui->pl1_l, SIGNAL(clicked()), this, SLOT(pl1_change()));
+    connect(ui->pl1_r, SIGNAL(clicked()), this, SLOT(pl1_change()));
+    connect(ui->pl2_l, SIGNAL(clicked()), this, SLOT(pl2_change()));
+    connect(ui->pl2_r, SIGNAL(clicked()), this, SLOT(pl2_change()));
+
 
     connect(gameScene, &GameScene::firstWindow, this, &MainWindow::show);
 
 
-    connect(ui->pushButton_2, SIGNAL(clicked()), this, SLOT(onButtonSend())); // подключаем клик по кнопке к определенному нами слоту
+    connect(ui->startGame, SIGNAL(clicked()), this, SLOT(onButtonSend())); // подключаем клик по кнопке к определенному нами слоту
     connect(this, SIGNAL(sendData(QString)), gameScene, SLOT(recieveData(QString))); // подключение сигнала к слоту нашей формы
-
 }
 
 Authentication::~Authentication()
@@ -50,5 +58,33 @@ void Authentication::on_pushButton_2_clicked()
     this->close();
 }
 void Authentication::onButtonSend(){
-     emit sendData(ui->lineEdit->text()+" "+ui->lineEdit_2->text()); // вызываем сигнал, в котором передаём введённые данные
+     emit sendData(ui->lineEdit->text()+"&"+ui->lineEdit_2->text()+"&"+player1Skin+"&"+player2Skin); // вызываем сигнал, в котором передаём введённые данные
+}
+
+void Authentication::pl1_change(){
+    if(player1Skin=="player1"){
+        ui->player1->setPixmap(QPixmap(":/images/images/player3.png"));
+        player1Skin="player3";
+    }
+    else if(player1Skin=="player3"){
+        ui->player1->setPixmap(QPixmap(":/images/images/player1.png"));
+        player1Skin="player1";
+    }
+
+}
+
+void Authentication::pl2_change(){
+    if(player2Skin=="player2"){
+        ui->player2->setPixmap(QPixmap(":/images/images/player4.png"));
+        player2Skin="player4";
+    }
+    else if(player2Skin=="player4"){
+        ui->player2->setPixmap(QPixmap(":/images/images/player2.png"));
+        player2Skin="player2";
+    }
+}
+
+void Authentication::on_startGame_clicked()
+{
+
 }

@@ -111,6 +111,7 @@ signals:
     void firstWindow();
 public slots:
     void recieveData(QString str);
+
 private:
     Ui::GameScene *ui;
 

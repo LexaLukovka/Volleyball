@@ -22,13 +22,18 @@ signals:
     void signal_varible(QString name_1, QString name_2);
     void sendData(QString str);
 
-
 private slots:
     void on_pushButton_clicked();
     void onButtonSend();
 
+    void on_startGame_clicked();
+
 public slots:
     void on_pushButton_2_clicked();
+    void pl1_change();
+    void pl2_change();
+
+
 
 private:
     Ui::Authentication *ui;

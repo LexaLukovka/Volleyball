@@ -31,10 +31,13 @@ b2Body*Userbody;
 b2BodyDef bdefff ;
 b2World*world2;
 QSizeF size2;
+
+QString pl1Skin;
+QString pl2Skin;
 bool HeigthFlag = false;
 bool HeigthFlag2 = false;
-
 bool isCreated = false;
+
 
 int PlayerFlag;
 b2Body*Userbody2;
@@ -106,8 +109,8 @@ GameScene::~GameScene()
     delete ui;
 }
 void GameScene::animate(){
-    pl->setPixmap(QPixmap(":/images/images/player1.png"));
-    pl2->setPixmap(QPixmap(":/images/images/player2.png"));
+   pl->setPixmap(QPixmap(":/images/images/"+pl1Skin));
+   pl2->setPixmap(QPixmap(":/images/images/"+pl2Skin));
 }
 
 void GameScene::Generation()
@@ -125,11 +128,11 @@ void GameScene::Generation()
 
     if(GoalFlag==2&&isCreated==false){
         ball = new BaseObj(world,0.25,QPointF(5.5,3));
-        platform = new Walls(world,QSizeF(0,0),QPointF(5.5,3.5),0);        
+        platform = new Walls(world,QSizeF(0,0),QPointF(5.5,3.5),0);
         Gscene->addItem(ball);
         Gscene->addItem(platform);
         isCreated = true;
-        goal2++;        
+        goal2++;
 
     }
 
@@ -255,8 +258,7 @@ Player::Player(b2World*world,QSizeF size,QPointF initPos,qreal angle,int PlFlag 
 {
     PlayerFlag=PlFlag;
     // setBrush(QBrush(Qt::red));
-    setPixmap(QPixmap(":/images/images/player1.png"));
-
+    setPixmap(QPixmap(":/images/images/"+pl1Skin));
     size2=size;
     //   setRect(-fromB2(size.width()/2 ),-fromB2(size.height()/2),fromB2(size.width()),fromB2(size.height()));
     world2=world;
@@ -287,7 +289,6 @@ Player2::Player2(b2World*world, QSizeF size, QPointF initPos, qreal angle, int P
 {
     PlayerFlag=PFlag;
     // setBrush(QBrush(Qt::red));
-    setPixmap(QPixmap(":/images/images/player2.png"));
 
     size2=size;
     //   setRect(-fromB2(size.width()/2 ),-fromB2(size.height()/2),fromB2(size.width()),fromB2(size.height()));
@@ -442,14 +443,14 @@ void GameScene::keyPressEvent(QKeyEvent *event)
     case Qt::Key_A:
         if(pos.x>=0){
             vel.x=-5;
-            pl->setPixmap(QPixmap(":/images/images/player1-2.png"));
+            pl->setPixmap(QPixmap(":/images/images/"+pl1Skin+"-2"));
         }
         break;
     case Qt::Key_D:
         if(pos.x<=7.3)
             if(pos.x<=3){
                 vel.x=5;
-                pl->setPixmap(QPixmap(":/images/images/player1-2.png"));
+                pl->setPixmap(QPixmap(":/images/images/"+pl1Skin+"-2"));
             }
         break;
     case Qt::Key_W:
@@ -457,7 +458,7 @@ void GameScene::keyPressEvent(QKeyEvent *event)
 
         if(HeigthFlag==false){
             HeigthFlag=true;
-            pl->setPixmap(QPixmap(":/images/images/player1.png"));
+            pl->setPixmap(QPixmap(":/images/images/"+pl1Skin));
             if(pos.y>2&&(pos.x>=0||pos.x<=7.3)){ vel.y=-6; pos.y=2;}
         }
         break;
@@ -465,13 +466,13 @@ void GameScene::keyPressEvent(QKeyEvent *event)
 
         if(pos2.x>=4.17){
             vel2.x=-5;
-            pl2->setPixmap(QPixmap(":/images/images/player2-2.png"));
+            pl2->setPixmap(QPixmap(":/images/images/"+pl2Skin+"-2"));
         }
         break;
     case Qt::Key_Right:
 
         if(pos2.x<=7.3){
-            pl2->setPixmap(QPixmap(":/images/images/player2-2.png"));
+            pl2->setPixmap(QPixmap(":/images/images/"+pl2Skin+"-2"));
             vel2.x=5;
         }
         break;
@@ -480,7 +481,7 @@ void GameScene::keyPressEvent(QKeyEvent *event)
 
         if(HeigthFlag2==false){
             HeigthFlag2=true;
-            pl2->setPixmap(QPixmap(":/images/images/player2.png"));
+            pl2->setPixmap(QPixmap(":/images/images/"+pl2Skin));
             if(pos2.y>2&&(pos2.x>=0||pos2.x<=7.3)){ vel2.y=-6; pos2.y=2;}
         }
         break;
@@ -500,15 +501,15 @@ void GameScene::keyReleaseEvent(QKeyEvent *event)
     switch (event->key()){
     case Qt::Key_A:
         vel.x=0;
-        pl->setPixmap(QPixmap(":/images/images/player1-2.png"));
+        pl->setPixmap(QPixmap(":/images/images/"+pl1Skin+"-2"));
         break;
     case Qt::Key_D:
         vel.x=0;
-        pl->setPixmap(QPixmap(":/images/images/player1-2.png"));
+        pl->setPixmap(QPixmap(":/images/images/"+pl1Skin+"-2"));
         break;
     case Qt::Key_W:
         //////Comment*
-        pl->setPixmap(QPixmap(":/images/images/player1.png"));
+        pl->setPixmap(QPixmap(":/images/images/"+pl1Skin));
         if(pos.y<4){
             pos.y=4;
             vel.y=4;
@@ -517,16 +518,15 @@ void GameScene::keyReleaseEvent(QKeyEvent *event)
         break;
     case Qt::Key_Left:
         vel2.x=0;
-        pl2->setPixmap(QPixmap(":/images/images/player2-2.png"));
-
+        pl2->setPixmap(QPixmap(":/images/images/"+pl2Skin+"-2"));
         break;
     case Qt::Key_Right:
-        pl2->setPixmap(QPixmap(":/images/images/player2-2.png"));
+        pl2->setPixmap(QPixmap(":/images/images/"+pl2Skin+"-2"));
         vel2.x=0;
         break;
     case Qt::Key_Up:
         //////Comment*
-        pl2->setPixmap(QPixmap(":/images/images/player2.png"));
+        pl2->setPixmap(QPixmap(":/images/images/"+pl2Skin));
         if(pos2.y<4){
             pos2.y=4;
             vel2.y=4;
@@ -624,7 +624,7 @@ void GameScene::on_pushButton_clicked()
 
 void GameScene::recieveData(QString str)
 {
-    QStringList lst = str.split(" ");
+    QStringList lst = str.split("&");
     this->ui->player1->setText(lst.at(0));
     this->ui->player2->setText(lst.at(1));
 
@@ -633,9 +633,11 @@ void GameScene::recieveData(QString str)
 
     if(lst.at(1)=="")
         this->ui->player2->setText("Player2");
+    pl1Skin = lst.at(2);
+    pl2Skin = lst.at(3);
+    pl->setPixmap(":/images/images/"+lst.at(2));
+    pl2->setPixmap(":/images/images/"+lst.at(3));
 }
-
-
 
 void GameScene::writeToSql(){
 
@@ -649,7 +651,7 @@ void GameScene::writeToSql(){
     if(db.open()){
         QSqlQuery query;
         query.prepare("INSERT INTO volleyball (Player_1, Score_1, Score_2, Player_2) "
-                        "VALUE (:Player_1, :Score_1, :Score_2, :Player_2)");
+                      "VALUE (:Player_1, :Score_1, :Score_2, :Player_2)");
 
 
         query.bindValue(0, this->ui->player1->text());
@@ -670,8 +672,8 @@ void GameScene::writeToSql(){
 void GameScene::writeToJson(){
     file.setFileName("db.json");
     if(file.open(QIODevice::ReadOnly|QFile::Text)){
-         doc = QJsonDocument::fromJson(QByteArray(file.readAll()),&docError);
-         file.close();
+        doc = QJsonDocument::fromJson(QByteArray(file.readAll()),&docError);
+        file.close();
     }
 
     if(file.open(QIODevice::WriteOnly))
@@ -691,7 +693,7 @@ void GameScene::writeToJson(){
 
 
 
-       file.write("{\"players\":"+doc.toJson()+"}");
+        file.write("{\"players\":"+doc.toJson()+"}");
         file.close();
     }
     else {

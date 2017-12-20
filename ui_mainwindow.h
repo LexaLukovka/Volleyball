@@ -25,12 +25,12 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralWidget;
-    QPushButton *pushButton;
-    QPushButton *pushButton_2;
-    QPushButton *pushButton_3;
+    QPushButton *Start_Game;
+    QPushButton *About;
+    QPushButton *Exit;
     QGraphicsView *graphicsView;
     QPushButton *volume;
-    QPushButton *pushButton_4;
+    QPushButton *Records;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -48,29 +48,29 @@ public:
         MainWindow->setTabShape(QTabWidget::Rounded);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        pushButton = new QPushButton(centralWidget);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(309, 190, 181, 41));
-        pushButton->setCursor(QCursor(Qt::PointingHandCursor));
-        pushButton->setAutoFillBackground(false);
-        pushButton->setStyleSheet(QLatin1String("background-color: transparent;\n"
+        Start_Game = new QPushButton(centralWidget);
+        Start_Game->setObjectName(QStringLiteral("Start_Game"));
+        Start_Game->setGeometry(QRect(309, 190, 181, 41));
+        Start_Game->setCursor(QCursor(Qt::PointingHandCursor));
+        Start_Game->setAutoFillBackground(false);
+        Start_Game->setStyleSheet(QLatin1String("background-color: transparent;\n"
 "border: 0;"));
-        pushButton_2 = new QPushButton(centralWidget);
-        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
-        pushButton_2->setGeometry(QRect(310, 300, 181, 41));
-        pushButton_2->setCursor(QCursor(Qt::PointingHandCursor));
-        pushButton_2->setStyleSheet(QLatin1String("background-color: transparent;\n"
+        About = new QPushButton(centralWidget);
+        About->setObjectName(QStringLiteral("About"));
+        About->setGeometry(QRect(310, 300, 181, 41));
+        About->setCursor(QCursor(Qt::PointingHandCursor));
+        About->setStyleSheet(QLatin1String("background-color: transparent;\n"
 "border: 0;"));
-        pushButton_3 = new QPushButton(centralWidget);
-        pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
-        pushButton_3->setGeometry(QRect(310, 340, 181, 41));
+        Exit = new QPushButton(centralWidget);
+        Exit->setObjectName(QStringLiteral("Exit"));
+        Exit->setGeometry(QRect(310, 340, 181, 41));
         QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(pushButton_3->sizePolicy().hasHeightForWidth());
-        pushButton_3->setSizePolicy(sizePolicy1);
-        pushButton_3->setCursor(QCursor(Qt::PointingHandCursor));
-        pushButton_3->setStyleSheet(QLatin1String("background-color: transparent;\n"
+        sizePolicy1.setHeightForWidth(Exit->sizePolicy().hasHeightForWidth());
+        Exit->setSizePolicy(sizePolicy1);
+        Exit->setCursor(QCursor(Qt::PointingHandCursor));
+        Exit->setStyleSheet(QLatin1String("background-color: transparent;\n"
 "border: 0;"));
         graphicsView = new QGraphicsView(centralWidget);
         graphicsView->setObjectName(QStringLiteral("graphicsView"));
@@ -84,20 +84,20 @@ public:
         volume->setStyleSheet(QLatin1String("background-image: url(\":/images/images/volume.png\");\n"
 "background-repeat: no-repeat;\n"
 "border: 0;"));
-        pushButton_4 = new QPushButton(centralWidget);
-        pushButton_4->setObjectName(QStringLiteral("pushButton_4"));
-        pushButton_4->setGeometry(QRect(310, 240, 181, 41));
-        pushButton_4->setCursor(QCursor(Qt::PointingHandCursor));
-        pushButton_4->setAutoFillBackground(false);
-        pushButton_4->setStyleSheet(QLatin1String("background-color: transparent;\n"
+        Records = new QPushButton(centralWidget);
+        Records->setObjectName(QStringLiteral("Records"));
+        Records->setGeometry(QRect(310, 240, 181, 41));
+        Records->setCursor(QCursor(Qt::PointingHandCursor));
+        Records->setAutoFillBackground(false);
+        Records->setStyleSheet(QLatin1String("background-color: transparent;\n"
 "border: 0;"));
         MainWindow->setCentralWidget(centralWidget);
         graphicsView->raise();
-        pushButton->raise();
-        pushButton_2->raise();
-        pushButton_3->raise();
+        Start_Game->raise();
+        About->raise();
+        Exit->raise();
         volume->raise();
-        pushButton_4->raise();
+        Records->raise();
 
         retranslateUi(MainWindow);
 
@@ -107,11 +107,11 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Welcome to Volleyball game", 0));
-        pushButton->setText(QString());
-        pushButton_2->setText(QString());
-        pushButton_3->setText(QString());
+        Start_Game->setText(QString());
+        About->setText(QString());
+        Exit->setText(QString());
         volume->setText(QString());
-        pushButton_4->setText(QString());
+        Records->setText(QString());
     } // retranslateUi
 
 };

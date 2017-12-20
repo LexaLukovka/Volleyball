@@ -14,35 +14,14 @@ Record::~Record()
     delete ui;
 }
 
-void Record::on_pushButton_clicked()
+void Record::on_back_clicked()
 {
     this->close();
-    emit firstWindow();// ???????? ?????? ?? ???????? ???????? ????
+    emit firstWindow();
 }
 
-void Record::on_pushButton_2_clicked()
+void Record::on_show_json_clicked()
 {
-    db = QSqlDatabase::addDatabase("QMYSQL");
-    db.setUserName("root");
-    db.setDatabaseName("voleyball");
-    db.setPassword("root");
-    db.setHostName("localhost");
-    db.setPort(3306);
-
-    if(db.open()){
-        model = new QSqlTableModel(this, db);
-        model->setTable("volleyball");//??? ???????
-        model->select();//???????? ???????? ?? ????
-        ui->tableView->setModel(model);
-    }
-
-    else
-        QMessageBox::information(nullptr, "info", db.lastError().text());
-}
-
-void Record::on_pushButton_3_clicked()
-{
-//    globPath = QFileDialog::getOpenFileName(nullptr,"","D:\\Institut\\Kod\\2 Kurs\\Kursova\\Testdb\\testdb", "*.json");
     globPath = "./db.json";
     file.setFileName(globPath);
 
@@ -65,11 +44,30 @@ void Record::on_pushButton_3_clicked()
                 model->appendRow(QList<QStandardItem*>()<<item_col_1<<item_col_2<<item_col_3<<item_col_4);
 
                 ui->tableView->setModel(model);
-//                ui->tableView->resizeColumnsToContents();
             }
         }
     }
     else
         QMessageBox::information(nullptr, "info", "File is't open for read");
 
+}
+
+void Record::on_show_mysql_clicked()
+{
+    db = QSqlDatabase::addDatabase("QMYSQL");
+    db.setUserName("root");
+    db.setDatabaseName("voleyball");
+    db.setPassword("root");
+    db.setHostName("localhost");
+    db.setPort(3306);
+
+    if(db.open()){
+        model = new QSqlTableModel(this, db);
+        model->setTable("volleyball");
+        model->select();
+        ui->tableView->setModel(model);
+    }
+
+    else
+        QMessageBox::information(nullptr, "info", db.lastError().text());
 }

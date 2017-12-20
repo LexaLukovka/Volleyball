@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_Authentication_t {
-    QByteArrayData data[14];
-    char stringdata0[172];
+    QByteArrayData data[13];
+    char stringdata0[142];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -37,19 +37,17 @@ QT_MOC_LITERAL(4, 43, 6), // "name_1"
 QT_MOC_LITERAL(5, 50, 6), // "name_2"
 QT_MOC_LITERAL(6, 57, 8), // "sendData"
 QT_MOC_LITERAL(7, 66, 3), // "str"
-QT_MOC_LITERAL(8, 70, 21), // "on_pushButton_clicked"
-QT_MOC_LITERAL(9, 92, 12), // "onButtonSend"
-QT_MOC_LITERAL(10, 105, 20), // "on_startGame_clicked"
-QT_MOC_LITERAL(11, 126, 23), // "on_pushButton_2_clicked"
-QT_MOC_LITERAL(12, 150, 10), // "pl1_change"
-QT_MOC_LITERAL(13, 161, 10) // "pl2_change"
+QT_MOC_LITERAL(8, 70, 20), // "on_startGame_clicked"
+QT_MOC_LITERAL(9, 91, 15), // "on_back_clicked"
+QT_MOC_LITERAL(10, 107, 12), // "onButtonSend"
+QT_MOC_LITERAL(11, 120, 10), // "pl1_change"
+QT_MOC_LITERAL(12, 131, 10) // "pl2_change"
 
     },
     "Authentication\0firstWindow\0\0signal_varible\0"
     "name_1\0name_2\0sendData\0str\0"
-    "on_pushButton_clicked\0onButtonSend\0"
-    "on_startGame_clicked\0on_pushButton_2_clicked\0"
-    "pl1_change\0pl2_change"
+    "on_startGame_clicked\0on_back_clicked\0"
+    "onButtonSend\0pl1_change\0pl2_change"
 };
 #undef QT_MOC_LITERAL
 
@@ -59,7 +57,7 @@ static const uint qt_meta_data_Authentication[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       9,   14, // methods
+       8,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -67,17 +65,16 @@ static const uint qt_meta_data_Authentication[] = {
        3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   59,    2, 0x06 /* Public */,
-       3,    2,   60,    2, 0x06 /* Public */,
-       6,    1,   65,    2, 0x06 /* Public */,
+       1,    0,   54,    2, 0x06 /* Public */,
+       3,    2,   55,    2, 0x06 /* Public */,
+       6,    1,   60,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       8,    0,   68,    2, 0x08 /* Private */,
-       9,    0,   69,    2, 0x08 /* Private */,
-      10,    0,   70,    2, 0x08 /* Private */,
-      11,    0,   71,    2, 0x0a /* Public */,
-      12,    0,   72,    2, 0x0a /* Public */,
-      13,    0,   73,    2, 0x0a /* Public */,
+       8,    0,   63,    2, 0x08 /* Private */,
+       9,    0,   64,    2, 0x08 /* Private */,
+      10,    0,   65,    2, 0x08 /* Private */,
+      11,    0,   66,    2, 0x0a /* Public */,
+      12,    0,   67,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void,
@@ -85,7 +82,6 @@ static const uint qt_meta_data_Authentication[] = {
     QMetaType::Void, QMetaType::QString,    7,
 
  // slots: parameters
-    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -104,12 +100,11 @@ void Authentication::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
         case 0: _t->firstWindow(); break;
         case 1: _t->signal_varible((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
         case 2: _t->sendData((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 3: _t->on_pushButton_clicked(); break;
-        case 4: _t->onButtonSend(); break;
-        case 5: _t->on_startGame_clicked(); break;
-        case 6: _t->on_pushButton_2_clicked(); break;
-        case 7: _t->pl1_change(); break;
-        case 8: _t->pl2_change(); break;
+        case 3: _t->on_startGame_clicked(); break;
+        case 4: _t->on_back_clicked(); break;
+        case 5: _t->onButtonSend(); break;
+        case 6: _t->pl1_change(); break;
+        case 7: _t->pl2_change(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -164,13 +159,13 @@ int Authentication::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 9)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 9;
+        _id -= 8;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 9)
+        if (_id < 8)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 9;
+        _id -= 8;
     }
     return _id;
 }

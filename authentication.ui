@@ -116,7 +116,7 @@ border: 0;</string>
     <string/>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="back">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -153,9 +153,7 @@ border: 0;</string>
     </size>
    </property>
    <property name="font">
-    <font>
-     <pointsize>9</pointsize>
-    </font>
+    <font/>
    </property>
    <property name="styleSheet">
     <string notr="true">background-image:  url(&quot;:/images/images/background-start.png&quot;);
@@ -279,7 +277,7 @@ background-image: url(&quot;:/images/images/arrow-l.png&quot;);</string>
   <zorder>lineEdit</zorder>
   <zorder>lineEdit_2</zorder>
   <zorder>startGame</zorder>
-  <zorder>pushButton</zorder>
+  <zorder>back</zorder>
   <zorder>player1</zorder>
   <zorder>player2</zorder>
   <zorder>pl1_r</zorder>

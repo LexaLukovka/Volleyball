@@ -20,7 +20,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_Record_t {
     QByteArrayData data[6];
-    char stringdata0[90];
+    char stringdata0[79];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,13 +32,13 @@ static const qt_meta_stringdata_Record_t qt_meta_stringdata_Record = {
 QT_MOC_LITERAL(0, 0, 6), // "Record"
 QT_MOC_LITERAL(1, 7, 11), // "firstWindow"
 QT_MOC_LITERAL(2, 19, 0), // ""
-QT_MOC_LITERAL(3, 20, 21), // "on_pushButton_clicked"
-QT_MOC_LITERAL(4, 42, 23), // "on_pushButton_2_clicked"
-QT_MOC_LITERAL(5, 66, 23) // "on_pushButton_3_clicked"
+QT_MOC_LITERAL(3, 20, 15), // "on_back_clicked"
+QT_MOC_LITERAL(4, 36, 20), // "on_show_json_clicked"
+QT_MOC_LITERAL(5, 57, 21) // "on_show_mysql_clicked"
 
     },
-    "Record\0firstWindow\0\0on_pushButton_clicked\0"
-    "on_pushButton_2_clicked\0on_pushButton_3_clicked"
+    "Record\0firstWindow\0\0on_back_clicked\0"
+    "on_show_json_clicked\0on_show_mysql_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -81,9 +81,9 @@ void Record::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->firstWindow(); break;
-        case 1: _t->on_pushButton_clicked(); break;
-        case 2: _t->on_pushButton_2_clicked(); break;
-        case 3: _t->on_pushButton_3_clicked(); break;
+        case 1: _t->on_back_clicked(); break;
+        case 2: _t->on_show_json_clicked(); break;
+        case 3: _t->on_show_mysql_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {

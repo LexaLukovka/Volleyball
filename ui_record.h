@@ -24,9 +24,9 @@ QT_BEGIN_NAMESPACE
 class Ui_Record
 {
 public:
-    QPushButton *pushButton;
-    QPushButton *pushButton_2;
-    QPushButton *pushButton_3;
+    QPushButton *back;
+    QPushButton *show_mysql;
+    QPushButton *show_json;
     QTableView *tableView;
     QGraphicsView *graphicsView;
 
@@ -36,37 +36,38 @@ public:
             Record->setObjectName(QStringLiteral("Record"));
         Record->resize(800, 600);
         Record->setMaximumSize(QSize(800, 600));
-        pushButton = new QPushButton(Record);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(10, 10, 30, 50));
-        pushButton->setCursor(QCursor(Qt::PointingHandCursor));
-        pushButton->setStyleSheet(QLatin1String("background-image: url(\":/images/images/arrow-right.png\");\n"
+        back = new QPushButton(Record);
+        back->setObjectName(QStringLiteral("back"));
+        back->setGeometry(QRect(10, 10, 30, 50));
+        back->setCursor(QCursor(Qt::PointingHandCursor));
+        back->setStyleSheet(QLatin1String("background-image: url(\":/images/images/arrow-right.png\");\n"
 "background-repeat: no-repeat;\n"
 "border: 0;"));
-        pushButton_2 = new QPushButton(Record);
-        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
-        pushButton_2->setGeometry(QRect(90, 60, 151, 23));
+        show_mysql = new QPushButton(Record);
+        show_mysql->setObjectName(QStringLiteral("show_mysql"));
+        show_mysql->setGeometry(QRect(90, 60, 151, 23));
         QFont font;
         font.setPointSize(10);
-        pushButton_2->setFont(font);
-        pushButton_3 = new QPushButton(Record);
-        pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
-        pushButton_3->setGeometry(QRect(580, 60, 131, 23));
-        pushButton_3->setFont(font);
+        show_mysql->setFont(font);
+        show_json = new QPushButton(Record);
+        show_json->setObjectName(QStringLiteral("show_json"));
+        show_json->setGeometry(QRect(580, 60, 131, 23));
+        show_json->setFont(font);
         tableView = new QTableView(Record);
         tableView->setObjectName(QStringLiteral("tableView"));
         tableView->setGeometry(QRect(170, 110, 443, 431));
         tableView->setLayoutDirection(Qt::LeftToRight);
         tableView->setFrameShape(QFrame::VLine);
+        tableView->setFrameShadow(QFrame::Sunken);
         graphicsView = new QGraphicsView(Record);
         graphicsView->setObjectName(QStringLiteral("graphicsView"));
         graphicsView->setGeometry(QRect(0, 0, 800, 600));
         graphicsView->setMaximumSize(QSize(800, 600));
         graphicsView->setStyleSheet(QStringLiteral("background-image: url(\":/images/images/background-empty.png\") ;"));
         graphicsView->raise();
-        pushButton->raise();
-        pushButton_2->raise();
-        pushButton_3->raise();
+        back->raise();
+        show_mysql->raise();
+        show_json->raise();
         tableView->raise();
 
         retranslateUi(Record);
@@ -77,9 +78,9 @@ public:
     void retranslateUi(QWidget *Record)
     {
         Record->setWindowTitle(QApplication::translate("Record", "Form", 0));
-        pushButton->setText(QString());
-        pushButton_2->setText(QApplication::translate("Record", "Show parties (MYSQL)", 0));
-        pushButton_3->setText(QApplication::translate("Record", "Show Scors (JSON)", 0));
+        back->setText(QString());
+        show_mysql->setText(QApplication::translate("Record", "Show parties (MYSQL)", 0));
+        show_json->setText(QApplication::translate("Record", "Show Scors (JSON)", 0));
     } // retranslateUi
 
 };

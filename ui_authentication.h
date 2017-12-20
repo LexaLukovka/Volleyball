@@ -28,7 +28,7 @@ public:
     QLineEdit *lineEdit;
     QLineEdit *lineEdit_2;
     QPushButton *startGame;
-    QPushButton *pushButton;
+    QPushButton *back;
     QGraphicsView *graphicsView;
     QLabel *player1;
     QLabel *player2;
@@ -74,11 +74,11 @@ public:
         startGame->setCursor(QCursor(Qt::PointingHandCursor));
         startGame->setStyleSheet(QLatin1String("background-color: transparent;\n"
 "border: 0;"));
-        pushButton = new QPushButton(Authentication);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(10, 10, 31, 51));
-        pushButton->setCursor(QCursor(Qt::PointingHandCursor));
-        pushButton->setStyleSheet(QLatin1String("background-image: url(\":/images/images/arrow-right.png\");\n"
+        back = new QPushButton(Authentication);
+        back->setObjectName(QStringLiteral("back"));
+        back->setGeometry(QRect(10, 10, 31, 51));
+        back->setCursor(QCursor(Qt::PointingHandCursor));
+        back->setStyleSheet(QLatin1String("background-image: url(\":/images/images/arrow-right.png\");\n"
 "background-repeat: no-repeat;\n"
 "border: 0;"));
         graphicsView = new QGraphicsView(Authentication);
@@ -86,7 +86,6 @@ public:
         graphicsView->setGeometry(QRect(0, 0, 800, 600));
         graphicsView->setMaximumSize(QSize(800, 600));
         QFont font2;
-        font2.setPointSize(9);
         graphicsView->setFont(font2);
         graphicsView->setStyleSheet(QLatin1String("background-image:  url(\":/images/images/background-start.png\");\n"
 "background-repeat: no-repeat;\n"
@@ -127,7 +126,7 @@ public:
         lineEdit->raise();
         lineEdit_2->raise();
         startGame->raise();
-        pushButton->raise();
+        back->raise();
         player1->raise();
         player2->raise();
         pl1_r->raise();
@@ -150,7 +149,7 @@ public:
         lineEdit_2->setText(QString());
         lineEdit_2->setPlaceholderText(QApplication::translate("Authentication", "Player2", 0));
         startGame->setText(QString());
-        pushButton->setText(QString());
+        back->setText(QString());
         player1->setText(QString());
         player2->setText(QString());
         pl1_r->setText(QString());

@@ -110,7 +110,7 @@ int Scene::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 struct qt_meta_stringdata_GameScene_t {
     QByteArrayData data[8];
-    char stringdata0[80];
+    char stringdata0[74];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -123,14 +123,14 @@ QT_MOC_LITERAL(0, 0, 9), // "GameScene"
 QT_MOC_LITERAL(1, 10, 11), // "firstWindow"
 QT_MOC_LITERAL(2, 22, 0), // ""
 QT_MOC_LITERAL(3, 23, 10), // "Generation"
-QT_MOC_LITERAL(4, 34, 21), // "on_pushButton_clicked"
-QT_MOC_LITERAL(5, 56, 7), // "animate"
-QT_MOC_LITERAL(6, 64, 11), // "recieveData"
-QT_MOC_LITERAL(7, 76, 3) // "str"
+QT_MOC_LITERAL(4, 34, 15), // "on_back_clicked"
+QT_MOC_LITERAL(5, 50, 7), // "animate"
+QT_MOC_LITERAL(6, 58, 11), // "recieveData"
+QT_MOC_LITERAL(7, 70, 3) // "str"
 
     },
     "GameScene\0firstWindow\0\0Generation\0"
-    "on_pushButton_clicked\0animate\0recieveData\0"
+    "on_back_clicked\0animate\0recieveData\0"
     "str"
 };
 #undef QT_MOC_LITERAL
@@ -177,7 +177,7 @@ void GameScene::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         switch (_id) {
         case 0: _t->firstWindow(); break;
         case 1: _t->Generation(); break;
-        case 2: _t->on_pushButton_clicked(); break;
+        case 2: _t->on_back_clicked(); break;
         case 3: _t->animate(); break;
         case 4: _t->recieveData((*reinterpret_cast< QString(*)>(_a[1]))); break;
         default: ;

@@ -19,7 +19,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="back">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -40,7 +40,7 @@ border: 0;</string>
     <string/>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="show_mysql">
    <property name="geometry">
     <rect>
      <x>90</x>
@@ -58,7 +58,7 @@ border: 0;</string>
     <string>Show parties (MYSQL)</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_3">
+  <widget class="QPushButton" name="show_json">
    <property name="geometry">
     <rect>
      <x>580</x>
@@ -91,6 +91,9 @@ border: 0;</string>
    <property name="frameShape">
     <enum>QFrame::VLine</enum>
    </property>
+   <property name="frameShadow">
+    <enum>QFrame::Sunken</enum>
+   </property>
   </widget>
   <widget class="QGraphicsView" name="graphicsView">
    <property name="geometry">
@@ -112,9 +115,9 @@ border: 0;</string>
    </property>
   </widget>
   <zorder>graphicsView</zorder>
-  <zorder>pushButton</zorder>
-  <zorder>pushButton_2</zorder>
-  <zorder>pushButton_3</zorder>
+  <zorder>back</zorder>
+  <zorder>show_mysql</zorder>
+  <zorder>show_json</zorder>
   <zorder>tableView</zorder>
  </widget>
  <resources/>

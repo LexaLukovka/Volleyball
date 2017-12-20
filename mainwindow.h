@@ -6,36 +6,28 @@
 #include <QGraphicsScene>
 #include <QGraphicsItem>
 
-#include <QtMultimedia/QAudioOutput>
 #include <QMediaPlayer>
-#include <QDir>
 #include <QUrl>
 
 #include <QGraphicsPixmapItem>
 #include <QGraphicsRectItem>
 
-#include <QMainWindow>
-#include <QToolBar>
-#include <QMenuBar>
-#include <QAction>
 #include <QLabel>
 #include <QImage>
 #include <QObject>
 #include <QString>
-#include "gamescene.h"
-#include "arf.h"
-#include "record.h"
-#include "authentication.h"
 
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QJsonParseError>
+
 #include <QFile>
-#include <QFileDialog>
-#include <QStandardItem>
 #include <QMessageBox>
 
-#include <QtSql>
+#include "gamescene.h"
+#include "about.h"
+#include "record.h"
+#include "authentication.h"
 
 
 
@@ -46,28 +38,23 @@ class MainWindow;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
- // GameScene * Gform;
-  ArF * Gform2;
- // Authentication *auth;
-  QMediaPlayer *music;
+    QMediaPlayer *music;
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
 public slots:
-  void volume();
-  void on_pushButton_clicked();
+    void volume();
 
 private slots:
-
-  void on_pushButton_4_clicked();
-
-
+    void on_Records_clicked();
+    void on_Start_Game_clicked();
 
 private:
     Ui::MainWindow *ui;
     Record *showRecord;
     Authentication *authWindow;
+    About *aboutWindow;
 };
 
 #endif // MAINWINDOW_H

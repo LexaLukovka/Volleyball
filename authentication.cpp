@@ -40,23 +40,6 @@ Authentication::~Authentication()
 }
 
 
-void Authentication::on_pushButton_clicked()
-{
-    this->close();
-    emit firstWindow();// вызываем сигнал на открытие главного окна
-}
-
-
-void Authentication::on_pushButton_2_clicked()
-{
-    QString name_1=ui->lineEdit->text();
-    QString name_2=ui->lineEdit_2->text();
-
-    emit signal_varible(name_1, name_2);
-
-    gameScene->show();
-    this->close();
-}
 void Authentication::onButtonSend(){
      emit sendData(ui->lineEdit->text()+"&"+ui->lineEdit_2->text()+"&"+player1Skin+"&"+player2Skin); // вызываем сигнал, в котором передаём введённые данные
 }
@@ -86,5 +69,17 @@ void Authentication::pl2_change(){
 
 void Authentication::on_startGame_clicked()
 {
+    QString name_1=ui->lineEdit->text();
+    QString name_2=ui->lineEdit_2->text();
 
+    emit signal_varible(name_1, name_2);
+
+    gameScene->show();
+    this->close();
+}
+
+void Authentication::on_back_clicked()
+{
+        this->close();
+        emit firstWindow();// вызываем сигнал на открытие главного окна
 }

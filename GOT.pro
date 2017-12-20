@@ -34,22 +34,22 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp\
         mainwindow.cpp \
     gamescene.cpp \
-    arf.cpp \
     authentication.cpp \
-    record.cpp
+    record.cpp \
+    about.cpp
 
 HEADERS  += mainwindow.h \
     gamescene.h \
-    arf.h \
     Box2D/Box2D.h \
     authentication.h \
-    record.h
+    record.h \
+    about.h
 
 FORMS    += mainwindow.ui \
     gamescene.ui \
-    arf.ui \
     authentication.ui \
-    record.ui
+    record.ui \
+    about.ui
 
 RESOURCES += \
     res.qrc

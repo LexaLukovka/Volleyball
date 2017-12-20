@@ -2,13 +2,13 @@ INPUT(
 ./debug\main.o
 ./debug\mainwindow.o
 ./debug\gamescene.o
-./debug\arf.o
 ./debug\authentication.o
 ./debug\record.o
+./debug\about.o
 ./debug\qrc_res.o
 ./debug\moc_mainwindow.o
 ./debug\moc_gamescene.o
-./debug\moc_arf.o
 ./debug\moc_authentication.o
 ./debug\moc_record.o
+./debug\moc_about.o
 );

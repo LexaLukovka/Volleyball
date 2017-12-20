@@ -17,18 +17,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 
-    /////////////////////////////////
+    aboutWindow=new About();
 
-    //Gform=new GameScene();
-    //auth = new Authentication();
-    Gform2=new ArF();
-    ////////////////////////////////
-
-    //connect(ui->pushButton,SIGNAL(clicked()),auth,SLOT(on_pushButton_clicked()));
-    connect(ui->pushButton_2,SIGNAL(clicked()),Gform2,SLOT(show()));
-    connect(ui->pushButton_3,SIGNAL(clicked()),this,SLOT(close()));
-    //connect(ui->pushButton_3,SIGNAL(clicked()),Gform,SLOT(close()));
-    connect(ui->pushButton_3,SIGNAL(clicked()),Gform2,SLOT(close()));
+    connect(ui->About,SIGNAL(clicked()),aboutWindow,SLOT(show()));
+    connect(ui->Exit,SIGNAL(clicked()),this,SLOT(close()));
     connect(ui->volume,SIGNAL(clicked()),this,SLOT(volume()));
 
 
@@ -64,13 +56,13 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_pushButton_4_clicked()
+void MainWindow::on_Records_clicked()
 {
     showRecord->show();
     this->close();
 }
 
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_Start_Game_clicked()
 {
     authWindow->show();
     this->close();

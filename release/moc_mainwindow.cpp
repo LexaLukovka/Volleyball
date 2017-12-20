@@ -20,7 +20,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_MainWindow_t {
     QByteArrayData data[5];
-    char stringdata0[65];
+    char stringdata0[60];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,12 +32,12 @@ static const qt_meta_stringdata_MainWindow_t qt_meta_stringdata_MainWindow = {
 QT_MOC_LITERAL(0, 0, 10), // "MainWindow"
 QT_MOC_LITERAL(1, 11, 6), // "volume"
 QT_MOC_LITERAL(2, 18, 0), // ""
-QT_MOC_LITERAL(3, 19, 21), // "on_pushButton_clicked"
-QT_MOC_LITERAL(4, 41, 23) // "on_pushButton_4_clicked"
+QT_MOC_LITERAL(3, 19, 18), // "on_Records_clicked"
+QT_MOC_LITERAL(4, 38, 21) // "on_Start_Game_clicked"
 
     },
-    "MainWindow\0volume\0\0on_pushButton_clicked\0"
-    "on_pushButton_4_clicked"
+    "MainWindow\0volume\0\0on_Records_clicked\0"
+    "on_Start_Game_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -56,7 +56,7 @@ static const uint qt_meta_data_MainWindow[] = {
 
  // slots: name, argc, parameters, tag, flags
        1,    0,   29,    2, 0x0a /* Public */,
-       3,    0,   30,    2, 0x0a /* Public */,
+       3,    0,   30,    2, 0x08 /* Private */,
        4,    0,   31,    2, 0x08 /* Private */,
 
  // slots: parameters
@@ -74,8 +74,8 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->volume(); break;
-        case 1: _t->on_pushButton_clicked(); break;
-        case 2: _t->on_pushButton_4_clicked(); break;
+        case 1: _t->on_Records_clicked(); break;
+        case 2: _t->on_Start_Game_clicked(); break;
         default: ;
         }
     }

@@ -188,14 +188,14 @@ void GameScene::keyPressEvent(QKeyEvent *event)
             }
         break;
     case Qt::Key_W:
+        if (PointDeleted==false){
+            delete platform;
+             PointDeleted=true;
+        }
         if(HeigthFlag==false){
-            if (PointDeleted==false){
-                delete platform;
-                 PointDeleted=true;
-            }
+
             HeigthFlag=true;
-//            if(GoalFlag==1)
-//                delete platform;
+//
             pl1->setPixmap(QPixmap(":/images/images/"+pl1Skin));
             if(pos.y>2&&(pos.x>=0||pos.x<=7.3)){ vel.y=-6; pos.y=2;}
         }
@@ -207,19 +207,20 @@ void GameScene::keyPressEvent(QKeyEvent *event)
         }
         break;
     case Qt::Key_Right:
-        if(pos2.x<=7.3){ PointDeleted=true;
+        if(pos2.x<=7.3){
             pl2->setPixmap(QPixmap(":/images/images/"+pl2Skin+"-2"));
             vel2.x=5;
         }
         break;
     case Qt::Key_Up:
+        if (PointDeleted==false){
+        delete platform;
+             PointDeleted=true;
+    }
         if(HeigthFlag2==false){
 
             HeigthFlag2=true;
-            if (PointDeleted==false){
-            delete platform;
 
-        }
             pl2->setPixmap(QPixmap(":/images/images/"+pl2Skin));
             if(pos2.y>2&&(pos2.x>=0||pos2.x<=7.3)){ vel2.y=-6; pos2.y=2;}
         }

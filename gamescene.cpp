@@ -41,6 +41,7 @@ QString pl2Skin;
 bool HeigthFlag = false; //на земле ли игрок
 bool HeigthFlag2 = false;
 bool isCreated = false; //флаг, чтобы м€ч создавалс€ только у одного игрока
+bool PointDeleted=false;
 
 //координатна€ конвертаци€
 qreal fromB2(qreal value){
@@ -105,6 +106,7 @@ void GameScene::Generation() //√енераци€ м€ча, голы
     if(GoalFlag==1&&isCreated==false){
         ball = new Ball_obj(world,0.25,QPointF(1.5,3));
         platform = new Walls(world,QSizeF(0,0),QPointF(1.5,3.5),0);
+        PointDeleted=false;
         Gscene->addItem(ball);
         Gscene->addItem(platform);
         isCreated = true;
@@ -114,6 +116,7 @@ void GameScene::Generation() //√енераци€ м€ча, голы
     if(GoalFlag==2&&isCreated==false){
         ball = new Ball_obj(world,0.25,QPointF(5.5,3));
         platform = new Walls(world,QSizeF(0,0),QPointF(5.5,3.5),0);
+        PointDeleted=false;
         Gscene->addItem(ball);
         Gscene->addItem(platform);
         isCreated = true;
@@ -186,6 +189,10 @@ void GameScene::keyPressEvent(QKeyEvent *event)
         break;
     case Qt::Key_W:
         if(HeigthFlag==false){
+            if (PointDeleted==false){
+                delete platform;
+                 PointDeleted=true;
+            }
             HeigthFlag=true;
 //            if(GoalFlag==1)
 //                delete platform;
@@ -200,16 +207,19 @@ void GameScene::keyPressEvent(QKeyEvent *event)
         }
         break;
     case Qt::Key_Right:
-        if(pos2.x<=7.3){
+        if(pos2.x<=7.3){ PointDeleted=true;
             pl2->setPixmap(QPixmap(":/images/images/"+pl2Skin+"-2"));
             vel2.x=5;
         }
         break;
     case Qt::Key_Up:
         if(HeigthFlag2==false){
+
             HeigthFlag2=true;
-//            if(GoalFlag==2)
-//                delete platform;
+            if (PointDeleted==false){
+            delete platform;
+
+        }
             pl2->setPixmap(QPixmap(":/images/images/"+pl2Skin));
             if(pos2.y>2&&(pos2.x>=0||pos2.x<=7.3)){ vel2.y=-6; pos2.y=2;}
         }
@@ -236,6 +246,8 @@ void GameScene::keyReleaseEvent(QKeyEvent *event)
         pl1->setPixmap(QPixmap(":/images/images/"+pl1Skin+"-2"));
         break;
     case Qt::Key_W:
+
+
         pl1->setPixmap(QPixmap(":/images/images/"+pl1Skin));
         if(pos.y<4){
             pos.y=4;
@@ -252,6 +264,7 @@ void GameScene::keyReleaseEvent(QKeyEvent *event)
         vel2.x=0;
         break;
     case Qt::Key_Up:
+
         pl2->setPixmap(QPixmap(":/images/images/"+pl2Skin));
         if(pos2.y<4){
             pos2.y=4;
@@ -269,6 +282,64 @@ void GameScene::keyReleaseEvent(QKeyEvent *event)
 GameScene::~GameScene()
 {
     delete ui;
+}
+///////////////////////////////////////######## * Ball * #########/////////////////////////////////////
+
+//ќбъект-м€ч
+Ball_obj::Ball_obj(b2World *world,qreal Radius,QPointF initPos):QGraphicsPixmapItem(0)
+{
+    setPixmap(QPixmap(":/images/images/ball1.png"));
+    setPos(fromB2(initPos.x()/2),fromB2(initPos.y()/2));
+    b2BodyDef bodyDef;
+    bodyDef.type = b2_dynamicBody;
+    bodyDef.position.Set(initPos.x(),initPos.y());
+    bodyDef.linearDamping = 1;
+
+
+    body = world->CreateBody(&bodyDef);
+
+    b2CircleShape shape;
+    shape.m_radius=Radius;
+    b2FixtureDef fixture ;
+    fixture.shape=&shape;
+    fixture.restitution=0.5;
+    fixture.density=0.2;
+    body->CreateFixture(&fixture);
+
+    b2Vec2 vel = body->GetLinearVelocity();
+    vel = body->GetLinearVelocity();
+
+    if (vel.Length()>7) body->SetLinearVelocity(7/vel.Length() * vel );
+}
+
+void Ball_obj::qSleep(int ms){
+#ifdef Q_OS_WIN
+    Sleep(uint(ms));
+#else
+    struct timespec ts = { ms / 1000, (ms % 1000) * 1000 * 1000 };
+    nanosleep(&ts, NULL);
+#endif
+}
+
+//”даление м€ча у игрока, которому забили гол
+void Ball_obj::advance(int phase){
+    b2Vec2 pos = body->GetPosition();
+    b2Vec2 vel = body->GetLinearVelocity();
+
+    if (phase){
+        setPos(fromB2( body->GetPosition().x),fromB2(body->GetPosition().y));
+        if (data(0).toBool()&&pos.y>=4.5){
+            if(pos.x>=3.5){GoalFlag=1;}
+            else {GoalFlag=2;}
+            isCreated=false;
+            delete this;
+        }
+    }
+}
+
+Ball_obj::~Ball_obj()
+{
+    body->GetWorld()->DestroyBody(body);
 }
 
 ///////////////////////////////////////######## * Players * #########/////////////////////////////////////
@@ -399,64 +470,7 @@ Player_2::~Player_2()
     Userbody2->GetWorld()->DestroyBody(Userbody2);
 }
 
-///////////////////////////////////////######## * Ball * #########/////////////////////////////////////
 
-//ќбъект-м€ч
-Ball_obj::Ball_obj(b2World *world,qreal Radius,QPointF initPos):QGraphicsPixmapItem(0)
-{
-    setPixmap(QPixmap(":/images/images/ball1.png"));
-    setPos(fromB2(initPos.x()/2),fromB2(initPos.y()/2));
-    b2BodyDef bodyDef;
-    bodyDef.type = b2_dynamicBody;
-    bodyDef.position.Set(initPos.x(),initPos.y());
-    bodyDef.linearDamping = 1;
-
-
-    body = world->CreateBody(&bodyDef);
-
-    b2CircleShape shape;
-    shape.m_radius=Radius;
-    b2FixtureDef fixture ;
-    fixture.shape=&shape;
-    fixture.restitution=0.5;
-    fixture.density=0.2;
-    body->CreateFixture(&fixture);
-
-    b2Vec2 vel = body->GetLinearVelocity();
-    vel = body->GetLinearVelocity();
-
-    if (vel.Length()>7) body->SetLinearVelocity(7/vel.Length() * vel );
-}
-
-void Ball_obj::qSleep(int ms){
-#ifdef Q_OS_WIN
-    Sleep(uint(ms));
-#else
-    struct timespec ts = { ms / 1000, (ms % 1000) * 1000 * 1000 };
-    nanosleep(&ts, NULL);
-#endif
-}
-
-//”даление м€ча у игрока, которому забили гол
-void Ball_obj::advance(int phase){
-    b2Vec2 pos = body->GetPosition();
-    b2Vec2 vel = body->GetLinearVelocity();
-
-    if (phase){
-        setPos(fromB2( body->GetPosition().x),fromB2(body->GetPosition().y));
-        if (data(0).toBool()&&pos.y>=4.5){
-            if(pos.x>=3.5){GoalFlag=1;}
-            else {GoalFlag=2;}
-            isCreated=false;
-            delete this;
-        }
-    }
-}
-
-Ball_obj::~Ball_obj()
-{
-    body->GetWorld()->DestroyBody(body);
-}
 
 ///////////////////////////////////////######## * Walls* #########/////////////////////////////////////
 

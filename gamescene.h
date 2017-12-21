@@ -88,6 +88,8 @@ private slots:
     void Generation();
     void on_back_clicked();
     void animate();
+    void on_question_clicked();
+
 public slots:
     void recieveData(QString str);
 signals:

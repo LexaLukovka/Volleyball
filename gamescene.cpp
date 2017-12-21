@@ -62,7 +62,6 @@ GameScene::GameScene(QWidget *parent) :
     ui(new Ui::GameScene)
 {
     ui->setupUi(this);
-    setWindowFlags(windowFlags() | Qt::WindowMinimizeButtonHint | Qt::WindowContextHelpButtonHint );
 
     world=new b2World(b2Vec2(0.00f,10.00f));
 
@@ -145,7 +144,7 @@ void GameScene::Generation() //√енераци€ м€ча, голы
     if(PartGoal2==1)  ui->pl1_score_1->setPixmap(QPixmap(":/images/images/cocktail-full.png"));
     if(PartGoal2==2)  ui->pl1_score_2->setPixmap(QPixmap(":/images/images/cocktail-full.png"));
 
-    if(PartGoal1==1||PartGoal2==1)
+    if(PartGoal1==2||PartGoal2==2)
     {
         writeToSql();
         writeToJson();
@@ -154,9 +153,9 @@ void GameScene::Generation() //√енераци€ м€ча, голы
                           "QMessageBox{background-image: url(\":/images/images/winner.png\"); min-width: 145px; min-height: 110px; background-repeat: no-repeat;}");
         mb1.setWindowTitle("Congratulations!");
         mb1.setWindowIcon(QPixmap(":/images/images/crown.ico"));
-        if(PartGoal2==1)
+        if(PartGoal2==2)
             mb1.setText(ui->player1->text());
-        else if(PartGoal1==1)
+        else if(PartGoal1==2)
             mb1.setText(ui->player2->text());
         mb1.setStandardButtons(QMessageBox::Ok);
         mb1.exec();
@@ -610,3 +609,8 @@ void GameScene::writeToJson(){
 }
 
 
+
+void GameScene::on_question_clicked()
+{
+    QMessageBox::information(nullptr, "Help", "Players only move on English keymap" "<br>" "Game continues for 2 matches");
+}

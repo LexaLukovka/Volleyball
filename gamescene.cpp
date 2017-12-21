@@ -78,8 +78,8 @@ GameScene::GameScene(QWidget *parent) :
 
 
 
-    pl1 = new Player_1(world,QSizeF(0.75,0.75),QPointF(1,4),0,1);
-    pl2 = new Player_2(world,QSizeF(0.75,0.75),QPointF(6,4),0,2);
+    pl1 = new Player_1(world,QSizeF(0.75,0.75),QPointF(1,4),0);
+    pl2 = new Player_2(world,QSizeF(0.75,0.75),QPointF(6,4),0);
 
 
     Gscene->addItem(pl1);
@@ -154,9 +154,9 @@ void GameScene::Generation() //√енераци€ м€ча, голы
         QMessageBox mb1;
         mb1.setStyleSheet("QLabel{color: #fff; font-size: 14px; min-width: 145px; font-weight: bold; margin: 0; qproperty-alignment:AlignCenter; padding-top: 90px;}"
                           "QMessageBox{background-image: url(\":/images/images/winner2.png\"); min-width: 145px; min-height: 110px; background-repeat: no-repeat;}");
-        if(PartGoal1==2)
+        if(PartGoal2==2)
             mb1.setText(ui->player1->text());
-        else if(PartGoal2==2)
+        else if(PartGoal1==2)
             mb1.setText(ui->player2->text());
         mb1.setStandardButtons(QMessageBox::Ok);
         mb1.exec();
@@ -331,7 +331,6 @@ void Ball_obj::qSleep(int ms){
 //”даление м€ча у игрока, которому забили гол
 void Ball_obj::advance(int phase){
     b2Vec2 pos = body->GetPosition();
-    b2Vec2 vel = body->GetLinearVelocity();
 
     if (phase){
         setPos(fromB2( body->GetPosition().x),fromB2(body->GetPosition().y));
@@ -352,7 +351,7 @@ Ball_obj::~Ball_obj()
 ///////////////////////////////////////######## * Players * #########/////////////////////////////////////
 
 //»грок1
-Player_1::Player_1(b2World*world,QSizeF size,QPointF initPos,qreal angle,int PlFlag ) : QGraphicsPixmapItem(0)
+Player_1::Player_1(b2World*world, QSizeF size, QPointF initPos, qreal angle) : QGraphicsPixmapItem(0)
 {
     setPixmap(QPixmap(":/images/images/"+pl1Skin));
     world2=world;
@@ -415,7 +414,7 @@ Player_1::~Player_1()
 }
 
 //»грок2
-Player_2::Player_2(b2World*world, QSizeF size, QPointF initPos, qreal angle, int PFlag):QGraphicsPixmapItem(0)
+Player_2::Player_2(b2World*world, QSizeF size, QPointF initPos, qreal angle):QGraphicsPixmapItem(0)
 {
     world2=world;
     setPos(fromB2(initPos.x()),fromB2(initPos.y()));

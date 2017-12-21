@@ -29,7 +29,6 @@
 #include <QJsonArray>
 #include <QJsonParseError>
 #include <QMessageBox>
-#include "winner.h"
 
 #include <Box2D/Box2D.h>
 #define SCALE 100;
@@ -65,8 +64,6 @@ public:
     ~GameScene();
 private:
     Ui::GameScene *ui;
-
-    Winner *winnerWindow;
 
     QSqlDatabase db;
 
@@ -113,14 +110,14 @@ private:
 
 class Player_1: public QGraphicsPixmapItem{
 public:
-    Player_1(b2World*world,QSizeF size,QPointF initPos,qreal angle,int PlFlag );
+    Player_1(b2World*world,QSizeF size,QPointF initPos,qreal angle);
     ~Player_1();
     void advance(int phase);
 };
 
 class Player_2:public QGraphicsPixmapItem{
 public:
-    Player_2(b2World*world,QSizeF size,QPointF initPos,qreal angle, int PFlag);
+    Player_2(b2World*world, QSizeF size, QPointF initPos, qreal angle);
     ~Player_2();
     void advance(int phase);
 };

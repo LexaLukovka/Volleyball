@@ -5,12 +5,10 @@ INPUT(
 ./debug\authentication.o
 ./debug\record.o
 ./debug\about.o
-./debug\winner.o
 ./debug\qrc_res.o
 ./debug\moc_mainwindow.o
 ./debug\moc_gamescene.o
 ./debug\moc_authentication.o
 ./debug\moc_record.o
 ./debug\moc_about.o
-./debug\moc_winner.o
 );

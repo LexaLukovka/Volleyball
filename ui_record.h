@@ -69,14 +69,14 @@ public:
         tableView = new QTableView(Record);
         tableView->setObjectName(QStringLiteral("tableView"));
         tableView->setEnabled(true);
-        tableView->setGeometry(QRect(220, 190, 800, 600));
+        tableView->setGeometry(QRect(220, 199, 370, 310));
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(tableView->sizePolicy().hasHeightForWidth());
         tableView->setSizePolicy(sizePolicy);
-        tableView->setMinimumSize(QSize(800, 600));
-        tableView->setMaximumSize(QSize(800, 600));
+        tableView->setMinimumSize(QSize(0, 0));
+        tableView->setMaximumSize(QSize(370, 310));
         QFont font1;
         font1.setFamily(QStringLiteral("Segoe UI"));
         font1.setPointSize(11);

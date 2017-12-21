@@ -64,14 +64,6 @@ GameScene::GameScene(QWidget *parent) :
     ui->setupUi(this);
     setWindowFlags(windowFlags() | Qt::WindowMinimizeButtonHint | Qt::WindowContextHelpButtonHint );
 
-    QMessageBox help;
-
-    help.setWindowTitle("Help");
-//    mb1.setWindowIcon(QPixmap(":/images/images/crown.ico"));
-    help.setText("Lorem");
-    help.setStandardButtons(QMessageBox::Ok);
-//        help.exec();
-
     world=new b2World(b2Vec2(0.00f,10.00f));
 
     Gscene = new Scene(0,0,8,6,world);

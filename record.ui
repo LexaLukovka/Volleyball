@@ -107,9 +107,9 @@ color: #fff;</string>
    <property name="geometry">
     <rect>
      <x>220</x>
-     <y>190</y>
-     <width>800</width>
-     <height>600</height>
+     <y>199</y>
+     <width>370</width>
+     <height>310</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -120,14 +120,14 @@ color: #fff;</string>
    </property>
    <property name="minimumSize">
     <size>
-     <width>800</width>
-     <height>600</height>
+     <width>0</width>
+     <height>0</height>
     </size>
    </property>
    <property name="maximumSize">
     <size>
-     <width>800</width>
-     <height>600</height>
+     <width>370</width>
+     <height>310</height>
     </size>
    </property>
    <property name="font">

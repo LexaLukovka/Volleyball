@@ -33,7 +33,7 @@ public:
     QLabel *pl1_score_1;
     QLabel *pl2_score_1;
     QLabel *pl2_score_2;
-    QPushButton *back_2;
+    QPushButton *question;
 
     void setupUi(QWidget *GameScene)
     {
@@ -121,11 +121,11 @@ public:
         pl2_score_2->setGeometry(QRect(530, 40, 50, 55));
         pl2_score_2->setFont(font2);
         pl2_score_2->setPixmap(QPixmap(QString::fromUtf8(":/images/images/cocktail-empty.png")));
-        back_2 = new QPushButton(GameScene);
-        back_2->setObjectName(QStringLiteral("back_2"));
-        back_2->setGeometry(QRect(750, 10, 32, 32));
-        back_2->setCursor(QCursor(Qt::PointingHandCursor));
-        back_2->setStyleSheet(QLatin1String("background-image: url(\":/images/images/arrow-right.png\");\n"
+        question = new QPushButton(GameScene);
+        question->setObjectName(QStringLiteral("question"));
+        question->setGeometry(QRect(760, 10, 32, 32));
+        question->setCursor(QCursor(Qt::PointingHandCursor));
+        question->setStyleSheet(QLatin1String("background-image: url(\":/images/images/question.png\");\n"
 "background-repeat: no-repeat;\n"
 "border: 0;"));
 
@@ -145,7 +145,7 @@ public:
         pl1_score_1->setText(QString());
         pl2_score_1->setText(QString());
         pl2_score_2->setText(QString());
-        back_2->setText(QString());
+        question->setText(QString());
     } // retranslateUi
 
 };

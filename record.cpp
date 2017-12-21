@@ -6,8 +6,10 @@ Record::Record(QWidget *parent) :
     ui(new Ui::Record)
 {
     ui->setupUi(this);
-}
 
+    ui->tableView->setStyleSheet("QHeaderView::section:horizontal { color: #fff; border: 0; background-color: white; color: #000; height: 30px; font-weight: bold; }"
+                                 "QTableView { background-color: transparent; color: #fff; text-align: center}");
+}
 
 Record::~Record()
 {
@@ -31,7 +33,7 @@ void Record::on_show_json_clicked()
         if(docError.errorString().toInt()==QJsonParseError::NoError)
         {
             QStandardItemModel *model = new QStandardItemModel(nullptr);
-            model->setHorizontalHeaderLabels(QStringList()<<"Player_1"<<"Score_1"<<"Score_2"<<"Player_2");
+            model->setHorizontalHeaderLabels(QStringList()<<"Player1"<<"Score1"<<"Score2"<<"Player2");
 
             docArr = QJsonValue(doc.object().value("players")).toArray();
             for(int i=0;i<docArr.count();i++){
@@ -39,7 +41,6 @@ void Record::on_show_json_clicked()
                 QStandardItem *item_col_2= new QStandardItem(QString::number(docArr.at(i).toObject().value("Score_1").toInt()));
                 QStandardItem *item_col_3= new QStandardItem(QString::number(docArr.at(i).toObject().value("Score_2").toInt()));
                 QStandardItem *item_col_4 = new QStandardItem(docArr.at(i).toObject().value("Player_2").toString());
-
 
                 model->appendRow(QList<QStandardItem*>()<<item_col_1<<item_col_2<<item_col_3<<item_col_4);
 

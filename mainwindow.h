@@ -29,8 +29,6 @@
 #include "record.h"
 #include "authentication.h"
 
-
-
 namespace Ui {
 class MainWindow;
 }
@@ -49,7 +47,6 @@ public slots:
 private slots:
     void on_Records_clicked();
     void on_Start_Game_clicked();
-
 private:
     Ui::MainWindow *ui;
     Record *showRecord;

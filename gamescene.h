@@ -28,6 +28,8 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QJsonParseError>
+#include <QMessageBox>
+#include "winner.h"
 
 #include <Box2D/Box2D.h>
 #define SCALE 100;
@@ -63,6 +65,8 @@ public:
     ~GameScene();
 private:
     Ui::GameScene *ui;
+
+    Winner *winnerWindow;
 
     QSqlDatabase db;
 

@@ -20,7 +20,9 @@
         <file>images/player4.png</file>
         <file>images/player3-2.png</file>
         <file>images/player4-2.png</file>
-        <file>images/background-empty.png</file>
+        <file>images/background-records.png</file>
+        <file>images/about.png</file>
+        <file>images/winner2.png</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>font/7fonts.ru_sharkheavyabc.ttf</file>
@@ -28,4 +30,5 @@
     <qresource prefix="/music">
         <file>music.mp3</file>
     </qresource>
+    <qresource prefix="/images_game2"/>
 </RCC>

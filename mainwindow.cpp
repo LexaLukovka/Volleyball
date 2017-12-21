@@ -23,7 +23,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->Exit,SIGNAL(clicked()),this,SLOT(close()));
     connect(ui->volume,SIGNAL(clicked()),this,SLOT(volume()));
 
-
     // »нициализаци€ рекордного окна
     showRecord = new Record();
     // получаем к слоту запуска главного окна по кнопке в рекодном окне

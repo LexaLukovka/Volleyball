@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Winner</class>
+ <widget class="QWidget" name="Winner">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <widget class="QPushButton" name="YES">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>260</y>
+     <width>80</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font-weight: bold;
+font-size: 12px;
+color: #fff;
+background-color: #ffb204;
+
+</string>
+   </property>
+   <property name="text">
+    <string>ДА</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="winner">
+   <property name="geometry">
+    <rect>
+     <x>136</x>
+     <y>178</y>
+     <width>125</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: transparent;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="NO">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>260</y>
+     <width>80</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font-weight: bold;
+font-size: 12px;
+color: #fff;
+background-color: #ffb204;
+</string>
+   </property>
+   <property name="text">
+    <string>НЕТ</string>
+   </property>
+  </widget>
+  <widget class="QGraphicsView" name="graphicsView">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>400</width>
+     <height>300</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(&quot;:/images/images/winner.png&quot;);</string>
+   </property>
+  </widget>
+  <zorder>graphicsView</zorder>
+  <zorder>YES</zorder>
+  <zorder>winner</zorder>
+  <zorder>NO</zorder>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

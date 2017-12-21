@@ -43,57 +43,174 @@ border: 0;</string>
   <widget class="QPushButton" name="show_mysql">
    <property name="geometry">
     <rect>
-     <x>90</x>
-     <y>60</y>
-     <width>151</width>
-     <height>23</height>
+     <x>200</x>
+     <y>130</y>
+     <width>180</width>
+     <height>30</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
     </font>
    </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: #cb5555;
+border: 2px solid white;
+color: #fff;</string>
+   </property>
    <property name="text">
-    <string>Show parties (MYSQL)</string>
+    <string>Показать партии (MYSQL)</string>
    </property>
   </widget>
   <widget class="QPushButton" name="show_json">
    <property name="geometry">
     <rect>
-     <x>580</x>
-     <y>60</y>
-     <width>131</width>
-     <height>23</height>
+     <x>430</x>
+     <y>130</y>
+     <width>180</width>
+     <height>30</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
     </font>
    </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: #cb5555;
+border: 2px solid white;
+color: #fff;</string>
+   </property>
    <property name="text">
-    <string>Show Scors (JSON)</string>
+    <string>Показать очки (JSON)</string>
    </property>
   </widget>
   <widget class="QTableView" name="tableView">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="geometry">
     <rect>
-     <x>170</x>
-     <y>110</y>
-     <width>443</width>
-     <height>431</height>
+     <x>200</x>
+     <y>190</y>
+     <width>411</width>
+     <height>321</height>
     </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="font">
+    <font>
+     <family>Segoe UI</family>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
    </property>
    <property name="layoutDirection">
     <enum>Qt::LeftToRight</enum>
    </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: transparent;
+color: #fff;
+border: 0;</string>
+   </property>
    <property name="frameShape">
-    <enum>QFrame::VLine</enum>
+    <enum>QFrame::NoFrame</enum>
    </property>
    <property name="frameShadow">
-    <enum>QFrame::Sunken</enum>
+    <enum>QFrame::Plain</enum>
    </property>
+   <property name="lineWidth">
+    <number>0</number>
+   </property>
+   <property name="verticalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
+   </property>
+   <property name="autoScroll">
+    <bool>false</bool>
+   </property>
+   <property name="autoScrollMargin">
+    <number>0</number>
+   </property>
+   <property name="editTriggers">
+    <set>QAbstractItemView::NoEditTriggers</set>
+   </property>
+   <property name="tabKeyNavigation">
+    <bool>false</bool>
+   </property>
+   <property name="showDropIndicator" stdset="0">
+    <bool>false</bool>
+   </property>
+   <property name="dragEnabled">
+    <bool>false</bool>
+   </property>
+   <property name="dragDropOverwriteMode">
+    <bool>false</bool>
+   </property>
+   <property name="alternatingRowColors">
+    <bool>false</bool>
+   </property>
+   <property name="selectionMode">
+    <enum>QAbstractItemView::NoSelection</enum>
+   </property>
+   <property name="textElideMode">
+    <enum>Qt::ElideNone</enum>
+   </property>
+   <property name="showGrid">
+    <bool>false</bool>
+   </property>
+   <property name="gridStyle">
+    <enum>Qt::NoPen</enum>
+   </property>
+   <property name="sortingEnabled">
+    <bool>false</bool>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+   <property name="cornerButtonEnabled">
+    <bool>false</bool>
+   </property>
+   <attribute name="horizontalHeaderCascadingSectionResizes">
+    <bool>false</bool>
+   </attribute>
+   <attribute name="horizontalHeaderHighlightSections">
+    <bool>false</bool>
+   </attribute>
+   <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+    <bool>false</bool>
+   </attribute>
+   <attribute name="horizontalHeaderStretchLastSection">
+    <bool>false</bool>
+   </attribute>
+   <attribute name="verticalHeaderVisible">
+    <bool>false</bool>
+   </attribute>
+   <attribute name="verticalHeaderHighlightSections">
+    <bool>false</bool>
+   </attribute>
+   <attribute name="verticalHeaderMinimumSectionSize">
+    <number>5</number>
+   </attribute>
   </widget>
   <widget class="QGraphicsView" name="graphicsView">
    <property name="geometry">
@@ -111,7 +228,7 @@ border: 0;</string>
     </size>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-image: url(&quot;:/images/images/background-empty.png&quot;) ;</string>
+    <string notr="true">background-image: url(&quot;:/images/images/background-records.png&quot;);</string>
    </property>
   </widget>
   <zorder>graphicsView</zorder>

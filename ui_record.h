@@ -45,25 +45,75 @@ public:
 "border: 0;"));
         show_mysql = new QPushButton(Record);
         show_mysql->setObjectName(QStringLiteral("show_mysql"));
-        show_mysql->setGeometry(QRect(90, 60, 151, 23));
+        show_mysql->setGeometry(QRect(200, 130, 180, 30));
         QFont font;
         font.setPointSize(10);
+        font.setBold(true);
+        font.setWeight(75);
         show_mysql->setFont(font);
+        show_mysql->setCursor(QCursor(Qt::PointingHandCursor));
+        show_mysql->setStyleSheet(QLatin1String("background-color: #cb5555;\n"
+"border: 2px solid white;\n"
+"color: #fff;"));
         show_json = new QPushButton(Record);
         show_json->setObjectName(QStringLiteral("show_json"));
-        show_json->setGeometry(QRect(580, 60, 131, 23));
+        show_json->setGeometry(QRect(430, 130, 180, 30));
         show_json->setFont(font);
+        show_json->setCursor(QCursor(Qt::PointingHandCursor));
+        show_json->setStyleSheet(QLatin1String("background-color: #cb5555;\n"
+"border: 2px solid white;\n"
+"color: #fff;"));
         tableView = new QTableView(Record);
         tableView->setObjectName(QStringLiteral("tableView"));
-        tableView->setGeometry(QRect(170, 110, 443, 431));
+        tableView->setEnabled(true);
+        tableView->setGeometry(QRect(200, 190, 411, 321));
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(tableView->sizePolicy().hasHeightForWidth());
+        tableView->setSizePolicy(sizePolicy);
+        QFont font1;
+        font1.setFamily(QStringLiteral("Segoe UI"));
+        font1.setPointSize(10);
+        font1.setBold(true);
+        font1.setWeight(75);
+        tableView->setFont(font1);
         tableView->setLayoutDirection(Qt::LeftToRight);
-        tableView->setFrameShape(QFrame::VLine);
-        tableView->setFrameShadow(QFrame::Sunken);
+        tableView->setAutoFillBackground(false);
+        tableView->setStyleSheet(QLatin1String("background-color: transparent;\n"
+"color: #fff;\n"
+"border: 0;"));
+        tableView->setFrameShape(QFrame::NoFrame);
+        tableView->setFrameShadow(QFrame::Plain);
+        tableView->setLineWidth(0);
+        tableView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        tableView->setAutoScroll(false);
+        tableView->setAutoScrollMargin(0);
+        tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        tableView->setTabKeyNavigation(false);
+        tableView->setProperty("showDropIndicator", QVariant(false));
+        tableView->setDragEnabled(false);
+        tableView->setDragDropOverwriteMode(false);
+        tableView->setAlternatingRowColors(false);
+        tableView->setSelectionMode(QAbstractItemView::NoSelection);
+        tableView->setTextElideMode(Qt::ElideNone);
+        tableView->setShowGrid(false);
+        tableView->setGridStyle(Qt::NoPen);
+        tableView->setSortingEnabled(false);
+        tableView->setWordWrap(true);
+        tableView->setCornerButtonEnabled(false);
+        tableView->horizontalHeader()->setCascadingSectionResizes(false);
+        tableView->horizontalHeader()->setHighlightSections(false);
+        tableView->horizontalHeader()->setProperty("showSortIndicator", QVariant(false));
+        tableView->horizontalHeader()->setStretchLastSection(false);
+        tableView->verticalHeader()->setVisible(false);
+        tableView->verticalHeader()->setHighlightSections(false);
+        tableView->verticalHeader()->setMinimumSectionSize(5);
         graphicsView = new QGraphicsView(Record);
         graphicsView->setObjectName(QStringLiteral("graphicsView"));
         graphicsView->setGeometry(QRect(0, 0, 800, 600));
         graphicsView->setMaximumSize(QSize(800, 600));
-        graphicsView->setStyleSheet(QStringLiteral("background-image: url(\":/images/images/background-empty.png\") ;"));
+        graphicsView->setStyleSheet(QStringLiteral("background-image: url(\":/images/images/background-records.png\");"));
         graphicsView->raise();
         back->raise();
         show_mysql->raise();
@@ -79,8 +129,8 @@ public:
     {
         Record->setWindowTitle(QApplication::translate("Record", "Form", 0));
         back->setText(QString());
-        show_mysql->setText(QApplication::translate("Record", "Show parties (MYSQL)", 0));
-        show_json->setText(QApplication::translate("Record", "Show Scors (JSON)", 0));
+        show_mysql->setText(QApplication::translate("Record", "\320\237\320\276\320\272\320\260\320\267\320\260\321\202\321\214 \320\277\320\260\321\200\321\202\320\270\320\270 (MYSQL)", 0));
+        show_json->setText(QApplication::translate("Record", "\320\237\320\276\320\272\320\260\320\267\320\260\321\202\321\214 \320\276\321\207\320\272\320\270 (JSON)", 0));
     } // retranslateUi
 
 };

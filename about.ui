@@ -26,6 +26,21 @@
     <set>QDialogButtonBox::Ok</set>
    </property>
   </widget>
+  <widget class="QGraphicsView" name="graphicsView">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>400</width>
+     <height>300</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(&quot;:/images/images/about.png&quot;);</string>
+   </property>
+  </widget>
+  <zorder>graphicsView</zorder>
+  <zorder>buttonBox</zorder>
  </widget>
  <resources/>
  <connections/>

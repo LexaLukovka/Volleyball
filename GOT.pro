@@ -36,20 +36,23 @@ SOURCES += main.cpp\
     gamescene.cpp \
     authentication.cpp \
     record.cpp \
-    about.cpp
+    about.cpp \
+    winner.cpp
 
 HEADERS  += mainwindow.h \
     gamescene.h \
     Box2D/Box2D.h \
     authentication.h \
     record.h \
-    about.h
+    about.h \
+    winner.h
 
 FORMS    += mainwindow.ui \
     gamescene.ui \
     authentication.ui \
     record.ui \
-    about.ui
+    about.ui \
+    winner.ui
 
 RESOURCES += \
     res.qrc

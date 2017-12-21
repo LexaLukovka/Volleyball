@@ -41,7 +41,9 @@ QString pl2Skin;
 bool HeigthFlag = false; //на земле ли игрок
 bool HeigthFlag2 = false;
 bool isCreated = false; //флаг, чтобы м€ч создавалс€ только у одного игрока
-bool PointDeleted=false;
+bool PointDeleted1=false;
+bool PointDeleted2=true;
+
 
 //координатна€ конвертаци€
 qreal fromB2(qreal value){
@@ -61,8 +63,6 @@ GameScene::GameScene(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
-
-
 
     world=new b2World(b2Vec2(0.00f,10.00f));
 
@@ -106,7 +106,7 @@ void GameScene::Generation() //√енераци€ м€ча, голы
     if(GoalFlag==1&&isCreated==false){
         ball = new Ball_obj(world,0.25,QPointF(1.5,3));
         platform = new Walls(world,QSizeF(0,0),QPointF(1.5,3.5),0);
-        PointDeleted=false;
+        PointDeleted1=false;
         Gscene->addItem(ball);
         Gscene->addItem(platform);
         isCreated = true;
@@ -116,7 +116,7 @@ void GameScene::Generation() //√енераци€ м€ча, голы
     if(GoalFlag==2&&isCreated==false){
         ball = new Ball_obj(world,0.25,QPointF(5.5,3));
         platform = new Walls(world,QSizeF(0,0),QPointF(5.5,3.5),0);
-        PointDeleted=false;
+        PointDeleted2=false;
         Gscene->addItem(ball);
         Gscene->addItem(platform);
         isCreated = true;
@@ -150,6 +150,15 @@ void GameScene::Generation() //√енераци€ м€ча, голы
     {
         writeToSql();
         writeToJson();
+        QMessageBox mb1;
+        mb1.setStyleSheet("QLabel{width: 180px; height: 180px; color: #fff; font-size: 12px; font-weight: bold; margin: 0; padding: 90px 45px 0 0;}"
+                          "QMessageBox{background-image: url(\":/images/images/winner2.png\"); width: 180px; height: 180px;}");
+        if(PartGoal1==2)
+            mb1.setText(ui->player1->text());
+        else if(PartGoal2==2)
+            mb1.setText(ui->player2->text());
+        mb1.setStandardButtons(QMessageBox::Ok);
+        mb1.exec();
         PartGoal1=0;
         PartGoal2=0;
         Goal_1=0;
@@ -188,14 +197,12 @@ void GameScene::keyPressEvent(QKeyEvent *event)
             }
         break;
     case Qt::Key_W:
-        if (PointDeleted==false){
+        if (PointDeleted1==false){
             delete platform;
-             PointDeleted=true;
+            PointDeleted1=true;
         }
         if(HeigthFlag==false){
-
             HeigthFlag=true;
-//
             pl1->setPixmap(QPixmap(":/images/images/"+pl1Skin));
             if(pos.y>2&&(pos.x>=0||pos.x<=7.3)){ vel.y=-6; pos.y=2;}
         }
@@ -213,14 +220,12 @@ void GameScene::keyPressEvent(QKeyEvent *event)
         }
         break;
     case Qt::Key_Up:
-        if (PointDeleted==false){
+        if (PointDeleted2==false){
         delete platform;
-             PointDeleted=true;
+             PointDeleted2=true;
     }
         if(HeigthFlag2==false){
-
             HeigthFlag2=true;
-
             pl2->setPixmap(QPixmap(":/images/images/"+pl2Skin));
             if(pos2.y>2&&(pos2.x>=0||pos2.x<=7.3)){ vel2.y=-6; pos2.y=2;}
         }
@@ -359,7 +364,7 @@ Player_1::Player_1(b2World*world,QSizeF size,QPointF initPos,qreal angle,int PlF
 
     shape.SetAsBox(size.width()/2,size.height()/2);
     Userbody1 = world2->CreateBody(&bdefff);
-    Userbody1->CreateFixture(&shape,1.0f);
+    Userbody1->CreateFixture(&shape,5);
     Userbody1->CreateFixture(&c,1.0f);
     Userbody1->SetFixedRotation(true);
 }
@@ -422,7 +427,7 @@ Player_2::Player_2(b2World*world, QSizeF size, QPointF initPos, qreal angle, int
     shape.SetAsBox(size.width()/2,size.height()/2);
 
     Userbody2 = world2->CreateBody(&bdefff2);
-    Userbody2->CreateFixture(&shape,1.0f);
+    Userbody2->CreateFixture(&shape,5);
     Userbody2->CreateFixture(&c,1.0f);
     Userbody2->SetFixedRotation(true);
 }
@@ -495,7 +500,7 @@ Walls::Walls(b2World*world,QSizeF size,QPointF initPos,qreal angle ) : QGraphics
     b2PolygonShape shape;
     shape.SetAsBox(size.width()/2,size.height()/2);
 
-    body->CreateFixture(&shape,1.0f);
+    body->CreateFixture(&shape,5);
 }
 
 void Walls::advance(int phase)

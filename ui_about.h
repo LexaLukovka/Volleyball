@@ -15,6 +15,7 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDialogButtonBox>
+#include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QHeaderView>
 
 QT_BEGIN_NAMESPACE
@@ -23,6 +24,7 @@ class Ui_About
 {
 public:
     QDialogButtonBox *buttonBox;
+    QGraphicsView *graphicsView;
 
     void setupUi(QDialog *About)
     {
@@ -33,6 +35,12 @@ public:
         buttonBox->setObjectName(QStringLiteral("buttonBox"));
         buttonBox->setGeometry(QRect(160, 250, 71, 23));
         buttonBox->setStandardButtons(QDialogButtonBox::Ok);
+        graphicsView = new QGraphicsView(About);
+        graphicsView->setObjectName(QStringLiteral("graphicsView"));
+        graphicsView->setGeometry(QRect(0, 0, 400, 300));
+        graphicsView->setStyleSheet(QStringLiteral("background-image: url(\":/images/images/about.png\");"));
+        graphicsView->raise();
+        buttonBox->raise();
 
         retranslateUi(About);
 

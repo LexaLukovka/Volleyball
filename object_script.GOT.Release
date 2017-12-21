@@ -5,10 +5,12 @@ INPUT(
 ./release\authentication.o
 ./release\record.o
 ./release\about.o
+./release\winner.o
 ./release\qrc_res.o
 ./release\moc_mainwindow.o
 ./release\moc_gamescene.o
 ./release\moc_authentication.o
 ./release\moc_record.o
 ./release\moc_about.o
+./release\moc_winner.o
 );

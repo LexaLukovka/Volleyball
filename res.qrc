@@ -1,34 +1,30 @@
 <RCC>
-    <qresource prefix="/images">
-        <file>images/background.PNG</file>
-        <file>images/ball1.png</file>
-        <file>images/player1.png</file>
-        <file>images/background.png</file>
-        <file>images/background-menu3.png</file>
-        <file>images/no-volume.png</file>
-        <file>images/player2.png</file>
-        <file>images/volume.png</file>
-        <file>images/player1-2.png</file>
-        <file>images/player2-2.png</file>
-        <file>images/cocktail-empty.png</file>
-        <file>images/cocktail-full.png</file>
-        <file>images/arrow-right.png</file>
-        <file>images/background-start.png</file>
-        <file>images/arrow-l.png</file>
-        <file>images/arrow-r.png</file>
-        <file>images/player3.png</file>
-        <file>images/player4.png</file>
-        <file>images/player3-2.png</file>
-        <file>images/player4-2.png</file>
-        <file>images/background-records.png</file>
-        <file>images/about.png</file>
-        <file>images/winner2.png</file>
-    </qresource>
-    <qresource prefix="/fonts">
-        <file>font/7fonts.ru_sharkheavyabc.ttf</file>
-    </qresource>
     <qresource prefix="/music">
         <file>music.mp3</file>
     </qresource>
-    <qresource prefix="/images_game2"/>
+    <qresource prefix="/images">
+        <file>images/about.png</file>
+        <file>images/arrow-l.png</file>
+        <file>images/arrow-r.png</file>
+        <file>images/arrow-right.png</file>
+        <file>images/background-empty.png</file>
+        <file>images/background-menu.png</file>
+        <file>images/background-records.png</file>
+        <file>images/background-start.png</file>
+        <file>images/cocktail-empty.png</file>
+        <file>images/cocktail-full.png</file>
+        <file>images/no-volume.png</file>
+        <file>images/player1.png</file>
+        <file>images/player1-2.png</file>
+        <file>images/player2.png</file>
+        <file>images/player2-2.png</file>
+        <file>images/player3.png</file>
+        <file>images/player3-2.png</file>
+        <file>images/player4.png</file>
+        <file>images/player4-2.png</file>
+        <file>images/volume.png</file>
+        <file>images/winner.png</file>
+        <file>images/ball.png</file>
+        <file>images/background.png</file>
+    </qresource>
 </RCC>

@@ -75,7 +75,7 @@ public:
         graphicsView = new QGraphicsView(centralWidget);
         graphicsView->setObjectName(QStringLiteral("graphicsView"));
         graphicsView->setGeometry(QRect(0, 0, 800, 600));
-        graphicsView->setStyleSheet(QLatin1String("background-image: url(\":/images/images/background-menu3.png\");\n"
+        graphicsView->setStyleSheet(QLatin1String("background-image: url(\":/images/images/background-menu.png\");\n"
 "background-repeat: no-repeat;"));
         volume = new QPushButton(centralWidget);
         volume->setObjectName(QStringLiteral("volume"));

@@ -76,8 +76,6 @@ GameScene::GameScene(QWidget *parent) :
     /*Top*/   Gscene->addItem(new Walls(world,QSizeF(20,0),QPointF(4,0),0));
     /*Center*/ Gscene->addItem(new Walls(world,QSizeF(4,0.15),QPointF(3.6,4.5),90));
 
-
-
     pl1 = new Player_1(world,QSizeF(0.75,0.75),QPointF(1,4),0);
     pl2 = new Player_2(world,QSizeF(0.75,0.75),QPointF(6,4),0);
 
@@ -105,7 +103,7 @@ void GameScene::Generation() //√енераци€ м€ча, голы
 {
     Ball_obj *ball;
     if(GoalFlag==1&&isCreated==false){
-        ball = new Ball_obj(world,0.25,QPointF(1.5,3));
+        ball = new Ball_obj(world,0.25,QPointF(1.5,1));
         platform = new Walls(world,QSizeF(0,0),QPointF(1.5,3.5),0);
         PointDeleted1=false;
         Gscene->addItem(ball);
@@ -115,7 +113,7 @@ void GameScene::Generation() //√енераци€ м€ча, голы
     }
 
     if(GoalFlag==2&&isCreated==false){
-        ball = new Ball_obj(world,0.25,QPointF(5.5,3));
+        ball = new Ball_obj(world,0.25,QPointF(5.5,1));
         platform = new Walls(world,QSizeF(0,0),QPointF(5.5,3.5),0);
         PointDeleted2=false;
         Gscene->addItem(ball);
@@ -153,7 +151,7 @@ void GameScene::Generation() //√енераци€ м€ча, голы
         writeToJson();
         QMessageBox mb1;
         mb1.setStyleSheet("QLabel{color: #fff; font-size: 14px; min-width: 145px; font-weight: bold; margin: 0; qproperty-alignment:AlignCenter; padding-top: 90px;}"
-                          "QMessageBox{background-image: url(\":/images/images/winner2.png\"); min-width: 145px; min-height: 110px; background-repeat: no-repeat;}");
+                          "QMessageBox{background-image: url(\":/images/images/winner.png\"); min-width: 145px; min-height: 110px; background-repeat: no-repeat;}");
         if(PartGoal2==2)
             mb1.setText(ui->player1->text());
         else if(PartGoal1==2)
@@ -295,7 +293,7 @@ GameScene::~GameScene()
 //ќбъект-м€ч
 Ball_obj::Ball_obj(b2World *world,qreal Radius,QPointF initPos):QGraphicsPixmapItem(0)
 {
-    setPixmap(QPixmap(":/images/images/ball1.png"));
+    setPixmap(QPixmap(":/images/images/ball.png"));
     setPos(fromB2(initPos.x()/2),fromB2(initPos.y()/2));
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;

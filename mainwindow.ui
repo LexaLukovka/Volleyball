@@ -117,7 +117,7 @@ border: 0;</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-image: url(&quot;:/images/images/background-menu3.png&quot;);
+     <string notr="true">background-image: url(&quot;:/images/images/background-menu.png&quot;);
 background-repeat: no-repeat;</string>
     </property>
    </widget>

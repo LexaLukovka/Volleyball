@@ -29,6 +29,7 @@
 #include <QJsonArray>
 #include <QJsonParseError>
 #include <QMessageBox>
+#include <QEvent>
 
 #include <Box2D/Box2D.h>
 #define SCALE 100;
@@ -81,6 +82,8 @@ private:
     QTimer *Rnd;
     QTimer *TimerAnimate;
     b2World*world;
+
+    QMenu *helpMenu;
 private slots:
     void Generation();
     void on_back_clicked();

@@ -3,7 +3,6 @@
         <file>music.mp3</file>
     </qresource>
     <qresource prefix="/images">
-        <file>images/about.png</file>
         <file>images/arrow-l.png</file>
         <file>images/arrow-r.png</file>
         <file>images/arrow-right.png</file>
@@ -26,5 +25,9 @@
         <file>images/winner.png</file>
         <file>images/ball.png</file>
         <file>images/background.png</file>
+        <file>images/icon.ico</file>
+        <file>images/crown.ico</file>
+        <file>images/about.png</file>
+        <file>images/question.png</file>
     </qresource>
 </RCC>

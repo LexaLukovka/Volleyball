@@ -33,12 +33,20 @@ public:
     QLabel *pl1_score_1;
     QLabel *pl2_score_1;
     QLabel *pl2_score_2;
+    QPushButton *back_2;
 
     void setupUi(QWidget *GameScene)
     {
         if (GameScene->objectName().isEmpty())
             GameScene->setObjectName(QStringLiteral("GameScene"));
+        GameScene->setWindowModality(Qt::NonModal);
         GameScene->resize(800, 600);
+        GameScene->setMinimumSize(QSize(800, 600));
+        GameScene->setMaximumSize(QSize(800, 600));
+        GameScene->setContextMenuPolicy(Qt::DefaultContextMenu);
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/images/images/icon.ico"), QSize(), QIcon::Normal, QIcon::Off);
+        GameScene->setWindowIcon(icon);
         graphicsView = new QGraphicsView(GameScene);
         graphicsView->setObjectName(QStringLiteral("graphicsView"));
         graphicsView->setGeometry(QRect(0, 0, 800, 600));
@@ -113,6 +121,13 @@ public:
         pl2_score_2->setGeometry(QRect(530, 40, 50, 55));
         pl2_score_2->setFont(font2);
         pl2_score_2->setPixmap(QPixmap(QString::fromUtf8(":/images/images/cocktail-empty.png")));
+        back_2 = new QPushButton(GameScene);
+        back_2->setObjectName(QStringLiteral("back_2"));
+        back_2->setGeometry(QRect(750, 10, 32, 32));
+        back_2->setCursor(QCursor(Qt::PointingHandCursor));
+        back_2->setStyleSheet(QLatin1String("background-image: url(\":/images/images/arrow-right.png\");\n"
+"background-repeat: no-repeat;\n"
+"border: 0;"));
 
         retranslateUi(GameScene);
 
@@ -121,7 +136,7 @@ public:
 
     void retranslateUi(QWidget *GameScene)
     {
-        GameScene->setWindowTitle(QApplication::translate("GameScene", "Game", 0));
+        GameScene->setWindowTitle(QApplication::translate("GameScene", "Volleyball Game", 0));
         score->setText(QApplication::translate("GameScene", "0:0", 0));
         player1->setText(QApplication::translate("GameScene", "Player1", 0));
         player2->setText(QApplication::translate("GameScene", "Player2", 0));
@@ -130,6 +145,7 @@ public:
         pl1_score_1->setText(QString());
         pl2_score_1->setText(QString());
         pl2_score_2->setText(QString());
+        back_2->setText(QString());
     } // retranslateUi
 
 };

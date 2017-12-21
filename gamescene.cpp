@@ -62,7 +62,15 @@ GameScene::GameScene(QWidget *parent) :
     ui(new Ui::GameScene)
 {
     ui->setupUi(this);
-    setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
+    setWindowFlags(windowFlags() | Qt::WindowMinimizeButtonHint | Qt::WindowContextHelpButtonHint );
+
+    QMessageBox help;
+
+    help.setWindowTitle("Help");
+//    mb1.setWindowIcon(QPixmap(":/images/images/crown.ico"));
+    help.setText("Lorem");
+    help.setStandardButtons(QMessageBox::Ok);
+//        help.exec();
 
     world=new b2World(b2Vec2(0.00f,10.00f));
 
@@ -145,16 +153,18 @@ void GameScene::Generation() //√енераци€ м€ча, голы
     if(PartGoal2==1)  ui->pl1_score_1->setPixmap(QPixmap(":/images/images/cocktail-full.png"));
     if(PartGoal2==2)  ui->pl1_score_2->setPixmap(QPixmap(":/images/images/cocktail-full.png"));
 
-    if(PartGoal1==2||PartGoal2==2)
+    if(PartGoal1==1||PartGoal2==1)
     {
         writeToSql();
         writeToJson();
         QMessageBox mb1;
         mb1.setStyleSheet("QLabel{color: #fff; font-size: 14px; min-width: 145px; font-weight: bold; margin: 0; qproperty-alignment:AlignCenter; padding-top: 90px;}"
                           "QMessageBox{background-image: url(\":/images/images/winner.png\"); min-width: 145px; min-height: 110px; background-repeat: no-repeat;}");
-        if(PartGoal2==2)
+        mb1.setWindowTitle("Congratulations!");
+        mb1.setWindowIcon(QPixmap(":/images/images/crown.ico"));
+        if(PartGoal2==1)
             mb1.setText(ui->player1->text());
-        else if(PartGoal1==2)
+        else if(PartGoal1==1)
             mb1.setText(ui->player2->text());
         mb1.setStandardButtons(QMessageBox::Ok);
         mb1.exec();
@@ -251,8 +261,6 @@ void GameScene::keyReleaseEvent(QKeyEvent *event)
         pl1->setPixmap(QPixmap(":/images/images/"+pl1Skin+"-2"));
         break;
     case Qt::Key_W:
-
-
         pl1->setPixmap(QPixmap(":/images/images/"+pl1Skin));
         if(pos.y<4){
             pos.y=4;
@@ -565,8 +573,8 @@ void GameScene::writeToSql(){
 
     if(db.open()){
         QSqlQuery query;
-        query.prepare("INSERT INTO volleyball (Player_1, Score_1, Score_2, Player_2) "
-                      "VALUE (:Player_1, :Score_1, :Score_2, :Player_2)");
+        query.prepare("INSERT INTO volleyball (Player1, Score1, Score2, Player2) "
+                      "VALUE (:Player1, :Score1, :Score2, :Player2)");
 
         query.bindValue(0, this->ui->player1->text());
         query.bindValue(1, PartGoal2);

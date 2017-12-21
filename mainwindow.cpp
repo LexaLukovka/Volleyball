@@ -15,8 +15,6 @@ MainWindow::MainWindow(QWidget *parent) :
     music->setVolume(50);
     music->play();
 
-
-
     aboutWindow=new About();
 
     connect(ui->About,SIGNAL(clicked()),aboutWindow,SLOT(show()));

@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>GameScene</class>
  <widget class="QWidget" name="GameScene">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -10,8 +13,27 @@
     <height>600</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>800</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="contextMenuPolicy">
+   <enum>Qt::DefaultContextMenu</enum>
+  </property>
   <property name="windowTitle">
-   <string>Game</string>
+   <string>Volleyball Game</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="res.qrc">
+    <normaloff>:/images/images/icon.ico</normaloff>:/images/images/icon.ico</iconset>
   </property>
   <widget class="QGraphicsView" name="graphicsView">
    <property name="geometry">
@@ -251,6 +273,27 @@ border: 0;</string>
    </property>
    <property name="pixmap">
     <pixmap resource="res.qrc">:/images/images/cocktail-empty.png</pixmap>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="back_2">
+   <property name="geometry">
+    <rect>
+     <x>750</x>
+     <y>10</y>
+     <width>32</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(&quot;:/images/images/arrow-right.png&quot;);
+background-repeat: no-repeat;
+border: 0;</string>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>

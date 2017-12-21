@@ -36,6 +36,9 @@ public:
             Record->setObjectName(QStringLiteral("Record"));
         Record->resize(800, 600);
         Record->setMaximumSize(QSize(800, 600));
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/images/images/icon.ico"), QSize(), QIcon::Normal, QIcon::Off);
+        Record->setWindowIcon(icon);
         back = new QPushButton(Record);
         back->setObjectName(QStringLiteral("back"));
         back->setGeometry(QRect(10, 10, 30, 50));
@@ -66,15 +69,17 @@ public:
         tableView = new QTableView(Record);
         tableView->setObjectName(QStringLiteral("tableView"));
         tableView->setEnabled(true);
-        tableView->setGeometry(QRect(200, 190, 411, 321));
+        tableView->setGeometry(QRect(220, 190, 800, 600));
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(tableView->sizePolicy().hasHeightForWidth());
         tableView->setSizePolicy(sizePolicy);
+        tableView->setMinimumSize(QSize(800, 600));
+        tableView->setMaximumSize(QSize(800, 600));
         QFont font1;
         font1.setFamily(QStringLiteral("Segoe UI"));
-        font1.setPointSize(10);
+        font1.setPointSize(11);
         font1.setBold(true);
         font1.setWeight(75);
         tableView->setFont(font1);
@@ -127,7 +132,7 @@ public:
 
     void retranslateUi(QWidget *Record)
     {
-        Record->setWindowTitle(QApplication::translate("Record", "Form", 0));
+        Record->setWindowTitle(QApplication::translate("Record", "Records", 0));
         back->setText(QString());
         show_mysql->setText(QApplication::translate("Record", "\320\237\320\276\320\272\320\260\320\267\320\260\321\202\321\214 \320\277\320\260\321\200\321\202\320\270\320\270 (MYSQL)", 0));
         show_json->setText(QApplication::translate("Record", "\320\237\320\276\320\272\320\260\320\267\320\260\321\202\321\214 \320\276\321\207\320\272\320\270 (JSON)", 0));

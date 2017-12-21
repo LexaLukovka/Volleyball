@@ -10,16 +10,32 @@
     <height>300</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>400</width>
+    <height>300</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>400</width>
+    <height>300</height>
+   </size>
+  </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Developers</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="res.qrc">
+    <normaloff>:/images/images/icon.ico</normaloff>:/images/images/icon.ico</iconset>
   </property>
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
-     <x>175</x>
-     <y>125</y>
-     <width>50</width>
-     <height>23</height>
+     <x>160</x>
+     <y>250</y>
+     <width>80</width>
+     <height>25</height>
     </rect>
    </property>
    <property name="standardButtons">
@@ -42,6 +58,8 @@
   <zorder>graphicsView</zorder>
   <zorder>buttonBox</zorder>
  </widget>
- <resources/>
+ <resources>
+  <include location="res.qrc"/>
+ </resources>
  <connections/>
 </ui>

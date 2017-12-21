@@ -7,8 +7,10 @@ Record::Record(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ui->tableView->setStyleSheet("QHeaderView::section:horizontal { color: #fff; border: 0; background-color: white; color: #000; height: 30px; font-weight: bold; }"
-                                 "QTableView { background-color: transparent; color: #fff; text-align: center}");
+    ui->tableView->setStyleSheet("QHeaderView::section {background-color: transparent; color: #fff; solid; height: 40px; font-weight: bold; font-size: 16px;}"
+                                 "QHeaderView {background-color: transparent; border-bottom-width: 2px; border-bottom-color: #fff; border-bottom-style: solid; margin-bottom: 10px;}"
+                                 "QTableView {background-color: transparent; color: #fff;}");
+    ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
 Record::~Record()

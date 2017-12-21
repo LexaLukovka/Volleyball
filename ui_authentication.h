@@ -42,10 +42,14 @@ public:
         if (Authentication->objectName().isEmpty())
             Authentication->setObjectName(QStringLiteral("Authentication"));
         Authentication->resize(800, 600);
+        Authentication->setMinimumSize(QSize(800, 600));
         Authentication->setMaximumSize(QSize(800, 600));
         QFont font;
         font.setPointSize(10);
         Authentication->setFont(font);
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/images/images/icon.ico"), QSize(), QIcon::Normal, QIcon::Off);
+        Authentication->setWindowIcon(icon);
         Authentication->setStyleSheet(QStringLiteral(""));
         lineEdit = new QLineEdit(Authentication);
         lineEdit->setObjectName(QStringLiteral("lineEdit"));
@@ -141,7 +145,7 @@ public:
 
     void retranslateUi(QWidget *Authentication)
     {
-        Authentication->setWindowTitle(QApplication::translate("Authentication", "Form", 0));
+        Authentication->setWindowTitle(QApplication::translate("Authentication", "Start new Game", 0));
         lineEdit->setInputMask(QString());
         lineEdit->setText(QString());
         lineEdit->setPlaceholderText(QApplication::translate("Authentication", "Player1", 0));

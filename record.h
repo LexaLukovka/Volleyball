@@ -19,7 +19,6 @@
 #include <QJsonArray>
 #include <QJsonParseError>
 
-
 namespace Ui {
 class Record;
 }

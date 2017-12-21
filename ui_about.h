@@ -31,9 +31,14 @@ public:
         if (About->objectName().isEmpty())
             About->setObjectName(QStringLiteral("About"));
         About->resize(400, 300);
+        About->setMinimumSize(QSize(400, 300));
+        About->setMaximumSize(QSize(400, 300));
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/images/images/icon.ico"), QSize(), QIcon::Normal, QIcon::Off);
+        About->setWindowIcon(icon);
         buttonBox = new QDialogButtonBox(About);
         buttonBox->setObjectName(QStringLiteral("buttonBox"));
-        buttonBox->setGeometry(QRect(175, 125, 50, 23));
+        buttonBox->setGeometry(QRect(160, 250, 80, 25));
         buttonBox->setStandardButtons(QDialogButtonBox::Ok);
         graphicsView = new QGraphicsView(About);
         graphicsView->setObjectName(QStringLiteral("graphicsView"));
@@ -49,7 +54,7 @@ public:
 
     void retranslateUi(QDialog *About)
     {
-        About->setWindowTitle(QApplication::translate("About", "Dialog", 0));
+        About->setWindowTitle(QApplication::translate("About", "Developers", 0));
     } // retranslateUi
 
 };

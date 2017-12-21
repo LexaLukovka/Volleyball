@@ -33,7 +33,7 @@ public:
         About->resize(400, 300);
         buttonBox = new QDialogButtonBox(About);
         buttonBox->setObjectName(QStringLiteral("buttonBox"));
-        buttonBox->setGeometry(QRect(160, 250, 71, 23));
+        buttonBox->setGeometry(QRect(175, 125, 50, 23));
         buttonBox->setStandardButtons(QDialogButtonBox::Ok);
         graphicsView = new QGraphicsView(About);
         graphicsView->setObjectName(QStringLiteral("graphicsView"));

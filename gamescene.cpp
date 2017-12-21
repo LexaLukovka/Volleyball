@@ -74,7 +74,8 @@ GameScene::GameScene(QWidget *parent) :
     /*Right*/ Gscene->addItem(new Walls(world,QSizeF(20, 0),QPointF(7.5,3),90));
     /*Bottom*/  Gscene->addItem(new Walls(world,QSizeF(20,0),QPointF(4,5),0));
     /*Top*/   Gscene->addItem(new Walls(world,QSizeF(20,0),QPointF(4,0),0));
-    /*Center*/ Gscene->addItem(new Walls(world,QSizeF(4,0.15),QPointF(3.6,4.35),90));
+    /*Center*/ Gscene->addItem(new Walls(world,QSizeF(4,0.15),QPointF(3.6,4.5),90));
+
 
 
     pl1 = new Player_1(world,QSizeF(0.75,0.75),QPointF(1,4),0,1);
@@ -151,8 +152,8 @@ void GameScene::Generation() //√енераци€ м€ча, голы
         writeToSql();
         writeToJson();
         QMessageBox mb1;
-        mb1.setStyleSheet("QLabel{width: 180px; height: 180px; color: #fff; font-size: 12px; font-weight: bold; margin: 0; padding: 90px 45px 0 0;}"
-                          "QMessageBox{background-image: url(\":/images/images/winner2.png\"); width: 180px; height: 180px;}");
+        mb1.setStyleSheet("QLabel{color: #fff; font-size: 14px; min-width: 145px; font-weight: bold; margin: 0; qproperty-alignment:AlignCenter; padding-top: 90px;}"
+                          "QMessageBox{background-image: url(\":/images/images/winner2.png\"); min-width: 145px; min-height: 110px; background-repeat: no-repeat;}");
         if(PartGoal1==2)
             mb1.setText(ui->player1->text());
         else if(PartGoal2==2)

@@ -24,7 +24,7 @@ void Record::on_back_clicked()
 
 void Record::on_show_json_clicked()
 {
-    globPath = "./db.json";
+    globPath = "db.json";
     file.setFileName(globPath);
 
     if(file.open(QIODevice::ReadOnly|QFile::Text)){
